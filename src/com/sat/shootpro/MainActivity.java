@@ -50,8 +50,6 @@ public class MainActivity extends Activity implements InitializerPerClass,OnClic
    Point scopeCoord  = new Point(0,0);  // Real coordinates
    Point moveCoord   = new Point(0,0);  // While moving scroll windows
    Point centerCoord = new Point(0,0);  // Coordinates only within 800x480 windows size 
-   Point startSlide  = new Point(0,0);  // RAT: For scrolling issue
-   Point stopSlide   = new Point(0,0);  // RAT: For scrolling issue
    
    /** Background polygon picture */
    public  static BitmapWorkerTask     task     = null;
@@ -113,7 +111,7 @@ public class MainActivity extends Activity implements InitializerPerClass,OnClic
 		setSavedParameters();
 		
 		/** Target ************************/
-		/* TODO Generate scenario for target placement - some function with predefined params, or random*/
+/* TODO Generate scenario for target placement - some function with predefined params, or random*/
 		targetCoord =  StartMenuActivity.Interf.getImageCenterCoordinates(imageTargetScoped,null);
 		
 	   /** Initialize image font **************************************************************/
@@ -146,8 +144,7 @@ public class MainActivity extends Activity implements InitializerPerClass,OnClic
                return false;
             }
 		});
-		 
-	    /** Shoot or fire button *******************************************************/
+		/** Shoot or fire button *******************************************************/
 		shootButton.setOnClickListener(this);
 		/** Sniper note book **********************************************************/
 		sniperNotebookButton.setOnClickListener(this); 
@@ -185,8 +182,9 @@ public class MainActivity extends Activity implements InitializerPerClass,OnClic
    }
    
    /**************************************************************************
-    * Function: performZoomShootPreparation 
-    * @param 
+    * Function: performZoomShootPreparation - compare coordinates of target
+    * and scope. Send this coordinates to Zoomed View.  And start Zoomed view.
+    * @param myIntent - Intent
     * @return None.
     *************************************************************************/
    private void performZoomShootPreparation(Intent myIntent)
@@ -196,41 +194,36 @@ public class MainActivity extends Activity implements InitializerPerClass,OnClic
       {
          centerCoord = setScopeCenterCoordinate();
       }
-      /*-----------------------------------------------------------------*/
       moveCoord.x    = scrollMainHorizontalImage.getScrollCoordinates();
       moveCoord.y    = scrollMainVerticalImage.getScrollCoordinates();
+      
       targetCoord    =  StartMenuActivity.Interf.getImageCenterCoordinates(imageTargetScoped,null);
       targetCoord.x  =  targetCoord.x - (moveCoord.x + UICustom.scopeAdaptMainActX); 
       targetCoord.y  =  targetCoord.y - (moveCoord.y + UICustom.scopeAdaptMainActY); 
-      /*-----------------------------------------------------------------*/
+      
+      
+      //TODO
+      /*Here I need to fix this issue*/
+      
+      //TODO
+      
+      
       if( isTargetAndScopeOverlap(centerCoord,targetCoord) )
       {
          selectedImageSliceId = detectImageSliceIdDependence(targetCoord);
       }
       myIntent = new Intent(getApplicationContext(), MainZoomShoot.class);
       myIntent.putExtra("imageLocation", selectedImageSliceId );
-      /*-----------------------------------------------------------------*/
+
       if( (selectedImageSliceId != DEADBEAF) )
       {
          myIntent.putExtra(strLocation_x,  targetCoord.x);
          myIntent.putExtra(strLocation_y,  targetCoord.y);
-         
-         Log.e(LOG,String.format("XY target[%d][%d] scope[%d][%d] \n " +
-                                 "targetId[%d] ",
-                                 targetCoord.x,targetCoord.y,
-                                 centerCoord.x,centerCoord.y,
-                                 selectedImageSliceId));
       }
       else
       {
          myIntent.putExtra(strLocation_x,  0);
          myIntent.putExtra(strLocation_y,  0);
-         
-         Log.e(LOG,String.format("XY target[%d][%d] scope[%d][%d] \n " +
-                                 "targetId[%d] NO Target visible",
-                                 targetCoord.x,targetCoord.y,
-                                 centerCoord.x,centerCoord.y,
-                                 selectedImageSliceId));
       }
 
       startActivity(myIntent);
@@ -295,7 +288,6 @@ public class MainActivity extends Activity implements InitializerPerClass,OnClic
                  params.topMargin  = Math.abs( (MoveStop.y - MoveStart.y)) 
                                             - UICustom.scopeMarginMainActTop;
                  sniperScope.setLayoutParams(params);
-                 
                  centerCoord = setScopeCenterCoordinate();
                  break;
                  
@@ -398,7 +390,7 @@ public class MainActivity extends Activity implements InitializerPerClass,OnClic
    	                                res, 
    	                                windowGabarites.x, 
    	                                windowGabarites.y,
-   	                                setBackground);
+   	                                setBackground );
 	   imgTask.execute( resId );
 	   //Log.d(LOG, "Free memory left>>:    " + getFreeMemmory() + " bytes");
 	}
@@ -427,7 +419,7 @@ public class MainActivity extends Activity implements InitializerPerClass,OnClic
      * ***********************************************************************/
     private boolean isTargetAndScopeOverlap(Point scopeCenter, Point targetCenter)
     {
-       boolean bRet     = false;
+       boolean bRet = false;
 
        if( (targetCenter.x >= (scopeCenter.x - sniperScope.getWidth()/2))   && 
            (targetCenter.y >= (scopeCenter.y - sniperScope.getWidth()/2))   &&
@@ -439,7 +431,7 @@ public class MainActivity extends Activity implements InitializerPerClass,OnClic
        return bRet;
     }
     /**************************************************************************
-     * Function: detectImageTargetId
+     * Function: detectImageTargetId - TODO
      * @param () x,y. - this is stupid and it must be reworked. Only to prove general concept!
      * @return None.
      * ***********************************************************************/
@@ -448,12 +440,11 @@ public class MainActivity extends Activity implements InitializerPerClass,OnClic
        int result     = DEADBEAF;
        int step_hight = UICustom.sliceDetectionHightMainAct;   // size of slice
        int step_width = UICustom.sliceDetectionWidtgMainActTop;
+       int start_x    = imageTargetScoped.getWidth()/2; 
+       int start_y    = imageTargetScoped.getHeight()/2;
+       int end_x      = windowGabarites.x - imageTargetScoped.getWidth()/2;  
+       int end_y      = windowGabarites.y - imageTargetScoped.getHeight()/2; 
 
-       int start_x = imageTargetScoped.getWidth()/2; 
-       int start_y = imageTargetScoped.getHeight()/2;
-       int end_x   = windowGabarites.x - imageTargetScoped.getWidth()/2;  
-       int end_y   = windowGabarites.y - imageTargetScoped.getHeight()/2; 
-       
        if ((detectCoordinate.x >= start_x) && 
            (detectCoordinate.y >= start_y) && 
            (detectCoordinate.x <= end_x)   && 
@@ -477,8 +468,8 @@ public class MainActivity extends Activity implements InitializerPerClass,OnClic
           }
           result = (y_counter * UICustom.AmountOfSlicesMainAct) + (x_counter);
           
-Log.e( LOG, "F:[detectImageSliceIdDependence] Params: [" + detectCoordinate.x + "][" + detectCoordinate.y + "]" );
-       
+Log.e( LOG, "F:[detectImageSliceIdDependence]>> Params: [" + detectCoordinate.x + "][" + detectCoordinate.y + "]" );
+Log.e( LOG, "F:[detectImageSliceIdDependence]>> result: " + result);       
        }
        else
        {

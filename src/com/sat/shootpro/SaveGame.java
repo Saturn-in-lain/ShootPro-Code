@@ -32,12 +32,12 @@ public class SaveGame
    
    /**************************************************************************
    * Function: Constructor for class
-   * @param  
-   * @return 
+   * @param  ctx - Context
+   * @return None.
    * ***********************************************************************/
-   public SaveGame(Context ctx)
+   public SaveGame (Context ctx)
    {
-     //TODO - Initialization on new file. 
+     //TODO - Initialization on new file. - Error still present.
       //File sdcard = Environment.getExternalStorageDirectory();
       //sdcard.canRead();
       
@@ -47,6 +47,7 @@ public class SaveGame
       if(!saveGameParamFile.exists())
       {
          saveGameParamFile = new File(filePath);
+         
          Log.e(LOG," File didn't existed! I've created it :) ");
       }
    }

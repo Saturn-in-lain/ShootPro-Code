@@ -22,8 +22,8 @@ public class UIHardCode
    public int centerCoordMarginMainActLeft   = (45);
    public int centerCoordMarginMainActTop    = (60);
 //---------------------------------------------------------------//   
-   public int sliceDetectionHightMainAct     = (75);
-   public int sliceDetectionWidtgMainActTop  = (140);
+   public int sliceDetectionHightMainAct     = (200);//(75);
+   public int sliceDetectionWidtgMainActTop  = (500);//(140);
 //-------------------------------------------------------------//   
    public int AmountOfSlicesMainAct          = (5);
 //---------------------------------------------------------------//   
