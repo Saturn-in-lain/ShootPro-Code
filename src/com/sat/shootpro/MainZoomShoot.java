@@ -31,7 +31,13 @@ import android.content.res.Resources;
 import android.graphics.Color;
 import android.graphics.Point;
 import android.graphics.drawable.AnimationDrawable;
-
+/******************************************************************
+ * 
+ * @author stas.savinov
+ * @Name: MainZoomShoot - Activity for zoomed view of the trainer.
+ * @category UI Business Logic
+ * @version 1.0.0
+ *****************************************************************/
 public class MainZoomShoot extends Activity implements InitializerPerClass, OnClickListener
 {
    private static String LOG = "MainZoomShoot";
