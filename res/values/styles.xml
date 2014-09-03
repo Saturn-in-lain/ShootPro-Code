@@ -1,0 +1,128 @@
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+<style name="AppTheme" parent="android:Theme.Light" />
+<!--  ##########################################################################################  -->
+    <style name="text_main_menu">
+        <item name="android:textSize">20sp</item>
+        <item name="android:textColor">@color/Orange</item>
+        <item name="android:gravity">center_vertical|center</item>
+    </style>
+    <style name="text_main_menu_large">
+        <item name="android:textSize">35sp</item>
+        <item name="android:textColor">@color/Orange</item>
+        <item name="android:gravity">center_vertical|center</item>
+    </style>
+<!--  ##########################################################################################  -->    
+    <style name="text_header">
+        <item name="android:layout_gravity">center_vertical|center_horizontal</item>
+        <item name="android:textSize">22sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/CornflowerBlue</item>
+        <item name="android:textAppearance">?android:attr/textAppearanceMedium</item>
+    </style>
+<!--  ##########################################################################################  -->
+    <style name="text_information">
+        <item name="android:layout_gravity">center_vertical|center_horizontal</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:textColor">@color/Bisque</item>
+        <item name="android:textAppearance">?android:attr/textAppearanceMedium</item>
+    </style>
+    <style name="text_information_large">
+        <item name="android:textSize">22sp</item>
+        <item name="android:textColor">@color/DarkSeaGreen</item>
+        <item name="android:textAppearance">?android:attr/textAppearanceLarge</item>
+    </style>
+<!--  ##########################################################################################  -->    
+    <style name="text_ammo">
+        <item name="android:layout_centerVertical">true</item>
+        <item name="android:layout_marginLeft">10dp</item>
+        <item name="android:textColor">@color/Bisque</item>
+        <item name="android:textAppearance">?android:attr/textAppearanceMedium</item>
+    </style>
+<!--  ##########################################################################################  -->                
+    <style name="edit_ammo">
+        <item name="android:layout_gravity">center_vertical|center_horizontal</item>
+        <item name="android:layout_alignParentRight">true</item>
+        <item name="android:layout_marginRight">20dp</item>
+        <item name="android:inputType">numberDecimal</item>
+        <item name="android:ems">10</item> 
+        <item name="android:textColor">@color/Azure</item>
+        <item name="android:textAppearance">?android:attr/textAppearanceSmall</item>
+    </style>
+<!--  ##########################################################################################  -->    
+	<style name="edit_standart">
+        <item name="android:inputType">numberDecimal</item>
+        <item name="android:ems">10</item> 
+        <item name="android:textColor">@color/Azure</item>
+        <item name="android:textAppearance">?android:attr/textAppearanceSmall</item>
+    </style>
+<!--  ##########################################################################################  -->
+    <style name="text_info">
+        <item name="android:textColor">@color/Bisque</item>
+        <item name="android:textAppearance">?android:attr/textAppearanceMedium</item>
+        <item name="android:layout_marginLeft">10dp</item>
+    </style>
+<!--  ##########################################################################################  -->
+    <style name="text_info_encyclopedia">
+        <item name="android:textColor">@color/Bisque</item>
+        <item name="android:layout_marginLeft">5dp</item>
+        <item name="android:textAppearance">?android:attr/textAppearanceSmall</item>
+    </style>
+<!--  ##########################################################################################  -->    
+    <style name="text_info_param">
+        <item name="android:layout_alignParentRight">true</item>
+        <item name="android:layout_alignParentTop">true</item>
+        <item name="android:layout_marginRight">20dp</item>
+        <item name="android:textColor">@color/Bisque</item>
+        <item name="android:textAppearance">?android:attr/textAppearanceMedium</item>
+    </style>
+<!--  ##########################################################################################  -->    
+     <style name="edit_info">
+        <item name="android:layout_alignParentRight">true</item>
+        <item name="android:layout_marginRight">20dp</item>
+        <item name="android:layout_marginTop">5dp</item>
+        <item name="android:ems">10</item>
+        <item name="android:inputType">numberDecimal</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:textAppearance">?android:attr/textAppearanceSmall</item>
+        <item name="android:textColor">@color/Azure</item>
+    </style>
+<!--  ##########################################################################################  -->
+    <style name="table_row_field">
+     	<item name="android:textColor">@color/Bisque</item>
+   		<item name="android:layout_marginBottom">1dp</item>
+   		<item name="android:paddingLeft">10dp</item>
+   		<item name="android:paddingTop">10dp</item>
+   		<item name="android:paddingRight">40dp</item>
+   		<item name="android:paddingBottom">3dp</item>
+   		<item name="android:lines">1</item>
+    </style>
+<!--  ##########################################################################################  -->    
+	<style name="checkbox_style">
+		<item name="android:layout_width">42dp</item>
+	    <item name="android:layout_height">42dp</item>
+	    <item name="android:button">@layout/checkbox_custom</item> 
+    </style>
+<!--  ##########################################################################################  -->
+	<style name="checkbox_style_text">
+		<item name="android:textSize">13sp</item>
+        <item name="android:layout_centerHorizontal">true</item>
+     	<item name="android:textColor">@color/Bisque</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textAppearance">?android:attr/textAppearanceMedium</item>
+	</style>
+<!--  ##########################################################################################  -->	
+  	<style name="button_text" >
+	    <item name="android:layout_width" >fill_parent</item>
+	    <item name="android:layout_height" >wrap_content</item>
+	    <item name="android:textColor" >#FFE4C4</item>
+	    <item name="android:gravity" >center</item>
+	    <item name="android:layout_margin" >3dp</item>
+	    <item name="android:textSize" >15sp</item>
+	    <item name="android:textStyle" >bold</item>
+	    <item name="android:shadowColor" >#CC8735</item>
+	    <item name="android:shadowDx" >2</item>
+	    <item name="android:shadowDy" >2</item>
+	    <item name="android:shadowRadius" >2</item>
+  	</style>
+	
+</resources>

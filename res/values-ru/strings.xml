@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    
+    <string name="btnCalculate">Расчет</string>
+    
+    <!-- Menu  -->
+    <string name="start">Старт</string>
+    <string name="option">Настройки</string>
+    <string name="encyclopedia">Энциклопедия</string>
+    <string name="exit">Выход</string>
+    
+    <!-- Tabs  -->
+    <string name="fragment_main">Главная</string>
+    <string name="fragment_weapon">Оружие</string>
+    <string name="fragment_ammo">Боеприпасы</string>
+    <string name="fragment_info">Дополнительно</string>
+
+    <!-- Options -->
+    <string name="newGame">Старт</string>
+    <string name="soundSwitch">Звук вкл/выкл</string>
+    <string name="languages">Выберите язык</string>
+    <string name="English">Английский</string>
+    <string name="Russian">Русский</string>
+    
+    <!-- Zoomed View Activity -->
+    <string name="defHorizontParam">Горизонтальная поправка: </string>
+    <string name="defVerticalParam">  Вертикальная поправка: </string>
+    <string name="defWindParam">                 Сила ветра: </string>
+    
+    <!-- Main Tab  -->
+    <string name="txtTargetSize">Размер цели:</string>
+    <string name="txtTargetWidth">Ширина</string>
+    <string name="txtTargetHight">Высота</string>
+    <string name="txtTableCalculations">Настройка таблицы</string>
+    <string name="txtInches">Дюймы</string>
+    <string name="txtMeters">Метры</string>
+    <string name="txtWeaponType">Оружие: </string>
+    <string name="txtAmmoType">Патрон: </string>
+    <string name="txtDistancePick">Задать дистанцию?</string>
+    <string name="txtScopeType">Оптика: </string>
+    
+    <!-- Weapon Tab  -->
+    <string name="rifles">Винтовки</string>
+    <string name="scopes">Оптика</string>
+    
+    <!-- Ammo Tab  -->
+     <string name="txtBullets">Боеприпасы</string>
+     <string name="txtBerger7mm168grain">Бергер 7mm 168 гран</string>
+     <string name="txtBerger7mm180grain">Бергер 7mm 180 гран</string>
+     <string name="txtBulletPersonalParamsShort">Основные параметры</string>
+     <string name="txtBulletDefault">Стандартная пуля</string>
+     <string name="txtBulletPersonalParams">Задать свои настройки пули</string>
+     <string name="rdBtnGrains">Гран</string>
+     <string name="rdBtnGramms">Грамм</string>
+     
+     <string name="txtDiameter">Диаметр (D)</string>  		   									
+     <string name="txtOAL">Общая длинна (OAL)</string>
+     <string name="txtBulletWeight">Вес (WGT)</string> 									
+     <string name="txtRadiusOgive">Радиус оживала (R)</string> 							
+     <string name="txtDiameterOfFlatNose">Диаметр плоской части носика (D_e)</string> 					
+     <string name="txtDiameterOfNoseOnShoulder">Диаметр носика на уровне плеча пули \n (D_sh)</string> 
+     <string name="txtDiameterOverCircumferentialStep">Диаметр носика на уровне шага \n окружности (D_n)</string> 
+     <string name="txtRadiusOfRoundedTip">Радиус закругленного наконечника (r_RN)</string> 					
+     <string name="txtDiameterOfBluntTip">Диаметр тупого кончика (d_MP)</string> 					
+     <string name="txtDistanceCenterOgiveCurve">Расстояние до центра на оживальной \n кривой (L_r)</string> 					
+     <string name="txtNoselength">Длина носика (L_n)</string> 												
+     <string name="txtBevelAngleOfNose">Угол скоса носика (β)</string>  									
+     <string name="txtAngleSecantOgiveCurve">Угол секущей оживальной кривой (λ)</string>  							
+     <string name="txtLengthBearingSurface">Длина опорной поверхности (L_b)</string> 									
+     <string name="txtDiameterBoatTail">Диаметр хвостовой части (D_bt)</string> 										
+     <string name="txtLengthBulletBoatTail">Длина хвостовой части (L_bt)</string> 								
+     <string name="txtBevelAngleBulletBoatTail">Угол скоса хвостовой части (γ)</string> 							
+     <string name="txtDiameterCannelure">Диаметр выемки (d_c)</string> 									
+     <string name="txtDistanceCannelureToBullet">Дистанция от выемки к конечной \n части (L_c)</string> 					
+     <string name="txtCannelureWidth">Ширина выемки (l_c)</string> 											
+     <string name="txtDistanceBetweenTwoCannelures">Дистанция между двумя выемками (L_ic)</string> 							
+     <string name="txtDiameterCircumferentialStep">Диаметр шага окружности (d_ST)</string> 							
+     <string name="txtDistanceCircumferentialStepToBulletBase">Дистанция от шага окружности \n к основанию (L_ST)</string> 		
+     <string name="txtWidthCircumferencialStep">Ширина шага окружности (I_ST)</string> 								
+     <string name="txtBevelAngleCircumferentialStep">Угол скоса на шаге окружности(φ)</string> 						
+     <string name="txtDistanceCircumferentialKnurlingBulletbase">Расстояние от окружной накатки \n до основания пули(L_K)</string> 	
+     <string name="txtDistancePunchingPToBBase">Дистанция от ударной точки \n к основанию(L_p)</string>
+     <string name="txtBWeight">Вес пули (kg)</string> 	
+     <string name="txtStartSpeed">Начальная скорость (м\с)</string>
+     <string name="txtBKoef">Баллистический коэффициент</string>
+     <string name="txtW1Const">константа W1</string>
+     <string name="txtBarrelStep">Шаг нарезов ствола</string>
+     <string name="txtBullet_K_param">K параметр пули</string>
+     <string name="txtDistanceMax">Максимальная дальности расчета (м)</string>
+	
+     <!-- Info Tab  -->
+     <string name="latitude">Широта</string>
+	 <string name="azimuth">Долгота</string>
+     <string name="coordAngle">Угол </string>
+     <string name="altitude">Высота (м)</string>
+     <string name="temperature">Температура</string>
+     <string name="celcium">Цельсий</string>
+     <string name="farenheit">Фаренгейт</string>
+     <string name="density">Плотность (кг/м^3)</string>
+     <string name="pressure">Давление (kPa)</string>
+     <string name="humidity">Влажность (%)</string>
+     
+     <string name="currentSoundSpeed">Расчетная скорость звука (m/sec)</string>
+     <string name="currentG">Скорость свободного падения (m/sec^2)</string>
+     <string name="densityDryAir">Плотность при сухом воздухе (kg/m^3)</string>
+     
+     <string name="weatherInformation">Дополнительные данные</string>
+     <string name="constantInformation">Константные параметры</string>
+     <string name="calculatedInformation">Расчетные параметры</string>
+     <string name="airPressureOnSeaLevel">Давление воздуха на уровне \n мирового океана</string>
+     <string name="gravitaion">Ускорение свободного падения</string>
+     <string name="molalAirMass">Молярная масса воздуха</string>
+     <string name="universalGasConst">Универсальная газовая \n константа</string>
+     <string name="constSoundSpeed">Константная скорость звука</string>
+     <string name="kinematicAirViscosity">Кинематическая вязкость \n воздуха</string>
+     <string name="tglBtnConstParamsShow">Показать</string>
+     <string name="tglBtnConstParamsHide">Спрятать</string>
+     
+     <!-- Table settings  -->
+     <string name="tableRows">Настройки таблицы статистики:</string>   
+     <string name="tableRow1">Скрыть скорость</string>   
+     <string name="tableRow2">Скрыть отклонение</string>
+     <string name="tableRow3">Скрыть Ветер + скорость</string>
+     <string name="tableRow4">Скрыть Ускорение</string>
+     <string name="tableRow5">Скрыть Общую скорость</string>
+     <string name="tableRow6">Скрыть MAX</string>
+     <string name="tableRow7">Скрыть R функцию</string>
+     <string name="tableRow8">Скрыть Энергию</string>
+     <string name="txtTableStep">Шаг таблицы</string>
+      
+</resources>

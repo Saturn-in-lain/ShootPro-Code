@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/RelativeLayoutDialog"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical" 
+    style="@android:style/Theme.NoTitleBar">
+
+	    <com.sat.resourses.TouchImageView
+	        android:id="@+id/imgScaleImgT"
+	        android:layout_width="300dp"
+	        android:layout_height="300dp" />
+	    
+	    <ScrollView
+	        android:id="@+id/scrollViewTextDialog"
+	        android:layout_width="wrap_content"
+	        android:layout_height="match_parent"
+	        android:layout_alignParentRight="true"
+	        android:layout_toRightOf="@+id/imgScaleImgT" >
+	
+		    <TextView
+		        android:id="@+id/dialogText"
+		        android:layout_width="fill_parent"
+		        android:layout_height="wrap_content"
+		        android:text="@string/defString"
+		        android:visibility="gone" />
+		</ScrollView>
+
+</RelativeLayout>

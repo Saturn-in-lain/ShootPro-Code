@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/scrollWeapon"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/paper_texture_small" >
+
+	<LinearLayout 
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:orientation="vertical" >
+	    
+	    <TextView
+	     android:id="@+id/txtViewRifles"
+	     android:layout_width="wrap_content"
+	     android:layout_height="wrap_content"
+	     android:layout_marginTop="10dp"
+	     android:text="@string/rifles"
+	     android:visibility="visible"
+	     style="@style/text_header" />
+	   
+	   <View
+	       android:id="@+id/line1"
+	       android:layout_width="fill_parent"
+	       android:layout_height="1dp"
+	       android:layout_marginTop="10dp"
+	       android:background="@color/bluelight"/>
+	   
+		<!--  THIS IS ************************************************************************** -->
+
+	       
+	   <LinearLayout
+	       android:layout_width="match_parent"
+	       android:layout_height="wrap_content"
+	       android:orientation="horizontal" >
+	
+	       <ImageView
+	           android:id="@+id/imgViewL96"
+	           android:layout_width="0dip"
+	           android:layout_height="50dp"
+	           android:layout_weight="0.99"
+	           android:contentDescription="@string/contentDesciption"
+	           android:src="@drawable/l96" />
+	
+	       <CheckBox
+	           android:id="@+id/chkBoxWpnL96"
+			   style="@style/checkbox_style" 
+			   android:layout_marginLeft="5dp"
+	           android:layout_marginRight="20dp"
+	           android:layout_gravity="center" />
+	   </LinearLayout>
+	
+	   <TextView
+	       android:id="@+id/txtViewL96"
+	       android:layout_width="wrap_content"
+	       android:layout_height="wrap_content"
+	       android:text="@string/L96_short"
+	  	   style="@style/text_info_param"
+	       android:visibility="gone" />
+	   
+	   <View
+	       android:id="@+id/line2"
+	       android:layout_width="fill_parent"
+	       android:layout_height="1dp"
+	       android:background="@color/bluelight"/>
+	   
+	   <!--  THIS IS ************************************************************************** -->
+	   
+	   <LinearLayout
+	       android:layout_width="match_parent"
+	       android:layout_height="wrap_content"
+	       android:orientation="horizontal" >
+	
+	       <ImageView
+	           android:id="@+id/imgViewSVD"
+	           android:layout_width="0dip"
+	           android:layout_height="50dp"
+	           android:layout_weight="0.99"
+	           android:contentDescription="@string/contentDesciption"
+	           android:src="@drawable/svd" />
+	
+	       <CheckBox
+	           android:id="@+id/chkBoxWpnSVD"
+			   style="@style/checkbox_style" 
+			   android:layout_marginLeft="5dp"
+	           android:layout_marginRight="20dp"
+	           android:layout_gravity="center" />
+	   </LinearLayout>
+	
+	   <TextView
+	       android:id="@+id/txtViewSVD"
+	       android:layout_width="wrap_content"
+	       android:layout_height="wrap_content"
+	       android:text="@string/SVD_short"
+	  	   style="@style/text_info_param"
+	       android:visibility="gone" />
+	   
+	   <View
+	       android:id="@+id/line3"
+	       android:layout_width="fill_parent"
+	       android:layout_height="1dp"
+	       android:background="@color/bluelight"/>
+	   
+	  <!--  THIS IS ************************************************************************** --> 
+	  
+	  <TextView
+	     android:id="@+id/txtViewScopes"
+	     android:layout_width="wrap_content"
+	     android:layout_height="wrap_content"
+	     android:layout_marginTop="10dp"
+	     android:text="@string/scopes"
+	     android:visibility="visible"
+	     style="@style/text_header" />
+	   
+	   <View
+	       android:id="@+id/line4"
+	       android:layout_width="fill_parent"
+	       android:layout_height="1dp"
+	       android:layout_marginTop="10dp"
+	       android:background="@color/bluelight"/>
+	   
+	  <!--  THIS IS ************************************************************************** -->
+	    
+	     <LinearLayout
+	       android:layout_width="match_parent"
+	       android:layout_height="wrap_content"
+	       android:orientation="horizontal" >
+	
+	       <ImageView
+	           android:id="@+id/imgViewPSO"
+	           android:layout_width="0dip"
+	           android:layout_height="50dp"
+	           android:layout_weight="0.99"
+	           android:contentDescription="@string/contentDesciption"
+	           android:src="@drawable/pso_scope" />
+	
+	       <CheckBox
+	           android:id="@+id/chkBoxPSO"
+	           style="@style/checkbox_style" 
+	           android:layout_marginLeft="5dp"
+	           android:layout_marginRight="20dp"
+	           android:layout_gravity="center" />
+	   </LinearLayout>
+	   
+	  <TextView
+	     android:id="@+id/txtViewScopePSO"
+	     android:layout_width="wrap_content"
+	     android:layout_height="wrap_content"
+	     android:layout_marginTop="10dp"
+	     android:text="@string/PSO_short"
+	  	 style="@style/text_info_param"
+	     android:visibility="gone" />   
+	   
+	  <View
+	       android:id="@+id/line5"
+	       android:layout_width="fill_parent"
+	       android:layout_height="1dp"
+	       android:layout_marginTop="10dp"
+	       android:background="@color/bluelight"/>
+	         
+	  <!--  THIS IS ************************************************************************** --> 
+	  
+	  <LinearLayout
+	       android:layout_width="match_parent"
+	       android:layout_height="wrap_content"
+	       android:orientation="horizontal" >
+	
+	       <ImageView
+	           android:id="@+id/imgViewBender"
+	           android:layout_width="0dip"
+	           android:layout_height="50dp"
+	           android:layout_weight="0.99"
+	           android:contentDescription="@string/contentDesciption"
+	           android:src="@drawable/schmidt_bender_scope" />
+	
+	       <CheckBox
+	           android:id="@+id/chkBoxBender"
+			   style="@style/checkbox_style" 
+			   android:layout_marginLeft="5dp"
+	           android:layout_marginRight="20dp"
+	           android:layout_gravity="center"
+	           android:checked="true" />
+	   </LinearLayout>
+	   
+	  <TextView
+	     android:id="@+id/txtViewScopeBender"
+	     android:layout_width="wrap_content"
+	     android:layout_height="wrap_content"
+	     android:layout_marginTop="10dp"
+	     android:text="@string/BENDER_short"
+	  	 style="@style/text_info_param"
+	     android:visibility="gone" />   
+	   
+	  <View
+	       android:id="@+id/line6"
+	       android:layout_width="fill_parent"
+	       android:layout_height="1dp"
+	       android:layout_marginTop="10dp"
+	       android:background="@color/bluelight"/>     
+    <!--  THIS IS ************************************************************************** -->      
+	</LinearLayout>
+</ScrollView>

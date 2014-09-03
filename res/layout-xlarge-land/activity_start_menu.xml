@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/wallpaper_menu"
+    android:orientation="vertical" >
+
+    <Button
+        android:id="@+id/btnStart"
+        android:layout_width="450dp"
+        android:layout_height="100dp"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:background="@drawable/menu_bullet"
+        android:scaleType="fitXY" />
+
+    <Button
+        android:id="@+id/btnOptions"
+        style="@style/text_main_menu_large"
+        android:layout_width="450dp"
+        android:layout_height="100dp"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/btnStart"
+        android:background="@drawable/menu_bullet"
+        android:contentDescription="@string/option"
+        android:scaleType="fitXY" />
+
+    <Button
+        android:id="@+id/btnInformation"
+        style="@style/text_main_menu_large"
+        android:layout_width="450dp"
+        android:layout_height="100dp"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/txtInfo"
+        android:background="@drawable/menu_bullet"
+        android:contentDescription="@string/encyclopedia"
+        android:scaleType="fitXY" />
+
+    <Button
+        android:id="@+id/btnExit"
+        style="@style/text_main_menu_large"
+        android:layout_width="450dp"
+        android:layout_height="100dp"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/btnInformation"
+        android:layout_marginTop="155dp"
+        android:background="@drawable/menu_bullet"
+        android:contentDescription="@string/exit"
+        android:scaleType="fitXY" />
+	
+	<TextView
+        android:id="@+id/txtInfo"
+        style="@style/text_main_menu_large"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/btnOptions"
+        android:layout_alignBottom="@+id/btnOptions"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="31dp"
+        android:text="@string/encyclopedia" />
+
+    <TextView
+        android:id="@+id/txtOption"
+        style="@style/text_main_menu_large"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/btnInformation"
+        android:layout_alignBottom="@+id/btnInformation"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="68dp"
+        android:text="@string/option" />
+
+    <TextView
+        android:id="@+id/txtExit"
+        style="@style/text_main_menu_large"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/btnExit"
+        android:layout_alignBottom="@+id/btnExit"
+        android:layout_alignRight="@+id/txtOption"
+        android:layout_marginRight="24dp"
+        android:text="@string/exit" />
+
+    <TextView
+        android:id="@+id/txtStart"
+        style="@style/text_main_menu_large"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/btnStart"
+        android:layout_marginTop="45dp"
+        android:layout_alignRight="@+id/txtExit"
+        android:text="@string/start" />
+        
+</RelativeLayout>

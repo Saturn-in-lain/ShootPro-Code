@@ -1,0 +1,233 @@
+<resources>
+    <string name="app_name">ShootPro</string>
+    <string name="menu_settings">Settings</string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="saveDirPath">ShootPro</string>
+    <string name="saveFilePath">\sdcard\database.txt</string>
+
+    <string name="btnCalculate">Calculate and Save</string>
+    
+    <!-- Menu  -->
+    <string name="start">Start</string>
+    <string name="option">Options</string>
+    <string name="encyclopedia">Encyclopedia</string>
+    <string name="exit">Exit</string>
+    
+    <!-- Tabs  -->
+    <string name="fragment_main">Main</string>
+    <string name="fragment_weapon">Weapon</string>
+    <string name="fragment_ammo">Ammo</string>
+    <string name="fragment_info">Additional</string> 
+    
+    <!-- Options -->
+    <string name="newGame">New Game</string>
+    <string name="soundSwitch">Sound on/off</string>
+    <string name="languages">Select language</string>
+    <string name="English">English</string>
+    <string name="Russian">Russian</string>
+
+    <!-- Zoomed View Activity -->
+    <string name="defHorizontParam">Horizontal Click: </string>
+    <string name="defVerticalParam">  Vertical Click: </string>
+    <string name="defWindParam">       Wind Strength: </string>
+        
+    <!-- Main Tab  -->
+    <string name="txtTargetSize">Target parameters:</string>
+    <string name="txtTargetWidth">Target Width</string>
+    <string name="txtTargetHight">Target Height</string>
+    <string name="txtTableCalculations">Table presentation parameters</string>
+    <string name="txtInches">Inches</string>
+    <string name="txtMeters">Meters</string>
+    <string name="txtWeaponType">Current weapon: </string>
+    <string name="txtAmmoType">Current bullet: </string>
+    <string name="txtDistancePick">Select distance?</string>
+    <string name="txtScopeType">Current scope: </string>
+    
+    <!-- Weapon Tab  -->
+    <string name="rifles">Rifles</string>
+    <string name="scopes">Scopes</string>
+    
+    <!-- Ammo Tab  -->
+    <string name="txtBullets">Bullets</string>
+    <string name="txtBerger7mm168grain">Berger 7mm 168 grain</string>
+    <string name="txtBerger7mm180grain">Berger 7mm 180 grain</string>
+    <string name="txtBulletPersonalParamsShort">Set main bullet parameters</string>
+    <string name="txtBulletDefault">Standard bullet</string>
+    <string name="txtBulletPersonalParams">Personal Parameters of bullet</string>
+    <string name="rdBtnGrains">Grains</string>
+    <string name="rdBtnGramms">Gram</string>
+    
+    <string name="txtDiameter">Diameter (D)</string>  		   									
+    <string name="txtOAL">Overall Length (OAL)</string>
+    <string name="txtBulletWeight">Bullet weight (WGT)</string> 									
+    <string name="txtRadiusOgive">Radius of ogive curve (R)</string> 							
+    <string name="txtDiameterOfFlatNose">Diameter of flat nose (D_e)</string> 					
+    <string name="txtDiameterOfNoseOnShoulder">Diameter of nose on shoulder level (D_sh)</string> 
+    <string name="txtDiameterOverCircumferentialStep">Diameter of nose over level of \n circumferential step (D_n)</string> 
+    <string name="txtRadiusOfRoundedTip">Radius of a rounded tip (r_RN)</string> 					
+    <string name="txtDiameterOfBluntTip">Diameter of blunt tip (d_MP)</string> 					
+    <string name="txtDistanceCenterOgiveCurve">Distance to a center of  an ogive curve (L_r)</string> 					
+    <string name="txtNoselength">Nose length (L_n)</string> 												
+    <string name="txtBevelAngleOfNose">Bevel angle of a nose (β)</string>  									
+    <string name="txtAngleSecantOgiveCurve">Angle of a secant ogive curve (λ)</string>  							
+    <string name="txtLengthBearingSurface">Length of bearing surface (L_b)</string> 									
+    <string name="txtDiameterBoatTail">Diameter of boat tail (D_bt)</string> 										
+    <string name="txtLengthBulletBoatTail">Length of a bullet boat tail (L_bt)</string> 								
+    <string name="txtBevelAngleBulletBoatTail">Bevel angle of a bullet boat tail (γ)</string> 							
+    <string name="txtDiameterCannelure">Diameter of a cannelure (d_c)</string> 									
+    <string name="txtDistanceCannelureToBullet">Distance from cannelure to \n a bullet base (L_c)</string> 					
+    <string name="txtCannelureWidth">Cannelure width (l_c)</string> 											
+    <string name="txtDistanceBetweenTwoCannelures">Distance between two cannelures (L_ic)</string> 							
+    <string name="txtDiameterCircumferentialStep">Diameter of circumferential step (d_ST)</string> 							
+    <string name="txtDistanceCircumferentialStepToBulletBase">Distance from a circumferential step \n to a bullet base (L_ST)</string> 		
+    <string name="txtWidthCircumferencialStep">Width of circumferencial step (I_ST)</string> 								
+    <string name="txtBevelAngleCircumferentialStep">Bevel angle of a circumferential step (φ)</string> 						
+    <string name="txtDistanceCircumferentialKnurlingBulletbase">Distance from a circumferential \n knurling to a bullet base (L_K)</string> 	
+    <string name="txtDistancePunchingPToBBase">Distance from a punching point to a bullet base (L_p)</string>
+    <string name="txtBWeight">Bullet weight (kg)</string> 	
+    <string name="txtStartSpeed">Speed at start</string>
+    <string name="txtBKoef">Ballistic koef.</string>
+    <string name="txtW1Const">W1 Const</string>
+    <string name="txtBarrelStep">Barrel Step</string>
+    <string name="txtBullet_K_param">Bullet K parameter</string>
+    <string name="txtDistanceMax">Maximum distance calculation</string>
+    
+    <!-- Info Tab  -->
+    <string name="latitude">Latitude</string>
+    <string name="azimuth">Azimuth</string>
+    <string name="coordAngle">Angle</string>
+    <string name="altitude">Altitude (m)</string>
+    <string name="temperature">Temperature</string>
+    <string name="celcium">Celsius</string>
+    <string name="farenheit">Fahrenheit</string>
+    <string name="density">Density (kg/m^3)</string>
+    <string name="pressure">Pressure (kPa)</string>
+    <string name="humidity">Humidity (%)</string> 
+    
+    <string name="currentSoundSpeed">Calculated sound speed (m/sec)</string>
+    <string name="currentG">Calculated acceleration of gravity (m/sec^2)</string>
+    <string name="densityDryAir">Density in dry air (kg/m^3)</string>
+    
+    <string name="weatherInformation">Parameters</string>
+    <string name="constantInformation">Constant parameters</string>
+    <string name="calculatedInformation">Calculated parameters</string>
+    <string name="airPressureOnSeaLevel">Air pressure on sea level</string>
+    <string name="gravitaion">Acceleration of gravity</string>
+    <string name="molalAirMass">Molal air mass</string>
+    <string name="universalGasConst">Universal gas constant</string>
+    <string name="constSoundSpeed">Constant sound speed</string>
+    <string name="kinematicAirViscosity">Kinematic Air Viscosity</string>
+    <string name="tglBtnConstParamsShow">Show</string>
+    <string name="tglBtnConstParamsHide">Hide</string>
+    
+    <!-- Table settings  -->
+    <string name="tableRows">Table settings</string>   
+    <string name="tableRow1">Show/Hide Velocity</string>   
+    <string name="tableRow2">Show/Hide Deviation</string>
+    <string name="tableRow3">Show/Hide Wind + Velocity</string>
+    <string name="tableRow4">Show/Hide Accelerations</string>
+    <string name="tableRow5">Show/Hide Main Velocity</string>
+    <string name="tableRow6">Show/Hide MAX</string>
+    <string name="tableRow7">Show/Hide R function</string>
+    <string name="tableRow8">Show/Hide Energy</string>
+    <string name="txtTableStep">Step for table</string>
+    
+    
+    
+    <!-- ####################### No need in translation  ####################################### -->
+    
+    <!-- Default/general  values -->
+    <string name="contentDesciption">img</string>
+    <string name="defString">none</string>
+    <string name="defEmpty"> </string>
+
+    
+     <!-- Table statistic information  -->    
+    <string name="rowX">x</string> <string name="rowVx">Vx</string> <string name="rowVwx">Vwx</string>
+    <string name="rowY">y</string> <string name="rowVy">Vy</string> <string name="rowVwy">Vwy</string>
+    <string name="rowZ">z</string> <string name="rowVz">Vz</string> <string name="rowVwz">Vwz</string>
+    
+    <string name="rowVPx">VPx</string> <string name="rowAx">Ax</string>
+    <string name="rowVPy">VPy</string> <string name="rowAy">Ay</string>
+    <string name="rowVPz">VPz</string> <string name="rowAz">Az</string>
+
+    <string name="rowMainVelocity">Vlct</string>
+    <string name="rowMAX">MAX</string>
+    <string name="rowRfunction">Rfunction</string>
+    <string name="rowAcceleration">Aclrtn</string>
+    <string name="rowTime">T</string>
+    <string name="rowEnergy">E</string>
+    <string name="rowMOA">MOA:</string>
+    <string name="rowMils">mils:</string>
+    <string name="rowMeters">(m):</string>
+    <string name="rowInches">(inch):</string>
+    
+    <!-- Info Tab  -->
+    <string name="defVal1">101325 (kPa)</string>
+    <string name="defVal2">9.80665 (m/sec^2)</string>
+    <string name="defVal3">0.028096 (kg/mol)</string>
+    <string name="defVal4">8.3143 (Djoul/mol*K)</string>
+    <string name="defVal5">341.5 (m/sec)</string>
+    <string name="defVal6">0.0000146 (m^2/sec)</string>
+    
+    
+    <!-- ####################### No need in translation  ####################################### -->
+    
+    <!-- Additional information not to forgot  -->
+    <string name="angleToTarger">Angle target point</string>
+    <string name="windDirection">Wind direction</string>
+    <string name="startBulletSpeed">Start bullet speed</string>
+    <string name="timeFly">Time fly to target</string>
+    <string name="clickVal">Value of click</string>
+    <string name="energyOnStart">Bullet energy after shot</string>
+    <string name="energyOnFinish">Bullet energy near target</string>
+
+    <!-- Info  for rifles========================================================================  -->
+
+    <string name="L96_short">
+        \nЭффективная дальность, м:		800
+        \nНарезы:						4 правых
+        \nПрименяемый боеприпас:  		.308Win
+	</string>
+	
+	<string name="SVD_short">
+	    \nЭффективная дальность, м:		1300
+        \nНарезы шаг, мм:				240
+	    \nПрименяемый боеприпас:  7,62×54 мм R	
+	</string>
+	
+	<string name="PSO_short">
+	    \n Видимое увеличение — 4 крат;
+		\n Угловое поле зрения — 6°;
+		\n Диаметр выходного зрачка — 6 мм;
+		\n Диаметр объектива - 24 мм;
+		\n Удаление выходного зрачка — 68 мм;
+		\n Предел разрешения — 12 угл./сек;
+	</string>
+	
+	<string name="BENDER_short">
+	    \n Видимое увеличение — 3-12 крат;
+		\n Угловое поле зрения — 33.3°;
+		\n Диаметр выходного зрачка — xx;
+		\n Диаметр объектива - 50мм;
+		\n Удаление выходного зрачка — xx; 
+		\n Предел разрешения — xx;
+	</string>
+
+    <string name="txtBerger_168_short_description">
+        \n Вес: 				168 грейн
+        \n Начальная скорость: 885 м/с
+        \n Шаг нарезов: 		0,2633
+        \n Баллистический к.:  0,320
+        \n K параметр:         0,005
+    </string>
+    
+    <string name="txtBerger_180_short_description">
+        \n Вес: 				180 грейн
+        \n Начальная скорость: 885 м/с
+        \n Шаг нарезов: 		0,2633
+        \n Баллистический к.:  0,320
+        \n K параметр:         0,005
+    </string>
+     
+</resources>

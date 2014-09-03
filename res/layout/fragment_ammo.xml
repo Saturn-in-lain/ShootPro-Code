@@ -1,0 +1,964 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/scrollBullets"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/paper_texture_small"  >
+
+    <!-- THIS IS START FOR BULLET PART ******************************************************** -->
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <TextView
+            android:id="@+id/txtBullets"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="@string/txtBullets"
+            android:visibility="visible"
+            style="@style/text_header"/>
+        
+		<!-- THIS IS DEFAULT ******************************************************************* -->
+        <View
+            android:id="@+id/line1"
+            android:layout_width="fill_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="10dp"
+            android:background="@color/bluelight" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
+
+            <ImageView
+                android:id="@+id/imgViewDefaultABullet"
+                android:layout_width="269dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.30"
+                android:contentDescription="@string/contentDesciption"
+                android:src="@drawable/default_bullet" />
+
+            <TextView
+                android:id="@+id/txtBulletDefault"
+                style="@style/text_information"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.40"
+                android:text="@string/txtBulletDefault" />
+
+            <CheckBox
+                android:id="@+id/chkBoxBulletDefault"
+                android:layout_gravity="center"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="20dp"
+				style="@style/checkbox_style" 
+                android:checked="true"/>
+        </LinearLayout>
+        
+        <!-- THIS IS ************************************************************************** -->
+		
+		<View
+            android:id="@+id/line1.1"
+            android:layout_width="fill_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="10dp"
+            android:background="@color/bluelight" />
+		
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
+
+            <ImageView
+                android:id="@+id/imgViewBerger168"
+                android:layout_width="0dip"
+                android:layout_height="50dp"
+                android:layout_weight="1.00"
+                android:contentDescription="@string/contentDesciption"
+                android:src="@drawable/berger7mm168grain" />
+
+            <TextView
+                android:id="@+id/txtBerger168description"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/txtBerger7mm168grain"
+    			style="@style/text_information" />
+
+            <CheckBox
+                android:id="@+id/chkBoxBulletBerger168"
+                android:layout_marginRight="20dp"
+                android:layout_marginLeft="5dp"
+                android:layout_gravity="center"
+				style="@style/checkbox_style" />
+        </LinearLayout>
+
+        <!-- Information part of bullet description invisible -->
+
+        <TextView
+            android:id="@+id/txtBerger168Information"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/txtBerger_168_short_description"
+            android:visibility="gone" 
+			style="@style/text_information"/>
+
+        <View
+            android:id="@+id/line2"
+            android:layout_width="fill_parent"
+            android:layout_height="1dp"
+            android:background="@color/bluelight" />
+
+        <!-- THIS IS ************************************************************************** -->
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
+
+            <ImageView
+                android:id="@+id/imgViewBerger180"
+                android:layout_width="0dip"
+                android:layout_height="50dp"
+                android:layout_weight="0.99"
+                android:contentDescription="@string/contentDesciption"
+                android:src="@drawable/berger7mm180gran" />
+
+            <TextView
+                android:id="@+id/txtBerger168"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/txtBerger7mm180grain"
+    			style="@style/text_information" />
+
+            <CheckBox
+                android:id="@+id/chkBoxBulletBerger180"
+				style="@style/checkbox_style" 
+                android:layout_marginRight="20dp"
+                android:layout_marginLeft="5dp"
+                android:layout_gravity="center"/>
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/txtBerger180Information"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/txtBerger_180_short_description"
+            android:visibility="gone"
+            style="@style/text_information" />
+
+        <View
+            android:id="@+id/line3"
+            android:layout_width="fill_parent"
+            android:layout_height="2dp"
+            android:background="@color/bluelight" />
+
+        <!-- THIS IS PERSONAL BULLET SETTINGS ***************************************************************** -->
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center">
+            <TextView
+                android:id="@+id/txtBulletPersonal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/txtBulletPersonalParams"
+    			style="@style/text_information" />
+            <CheckBox
+                android:id="@+id/chkBoxBulletPersonal"
+                style="@style/checkbox_style"
+                android:layout_marginLeft="5dp" />
+        </LinearLayout>
+		
+		<View
+            android:id="@+id/line4.5"
+            android:layout_width="fill_parent"
+            android:layout_height="1dp"
+            android:background="@color/bluelight" />
+		
+        <LinearLayout
+            android:id="@+id/LLPersonal"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:visibility="visible" >
+
+            <ImageView
+                android:id="@+id/imgViewBulletTips"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_marginTop="10dp"
+                android:layout_gravity="center"
+                android:contentDescription="@string/contentDesciption"
+                android:src="@drawable/schema" />
+            
+	        <!-- Value 1 -->
+	        <RelativeLayout
+	            android:layout_width="fill_parent"
+	            android:layout_height="wrap_content"
+	            android:orientation="horizontal" >
+	            
+	             <TextView
+		            android:id="@+id/txtParam1"
+		            android:layout_width="wrap_content"
+		            android:layout_height="wrap_content"
+		            android:text="@string/txtDiameter"
+		            style="@style/text_ammo"/>
+
+	             <EditText
+	                 android:id="@+id/edtTxtParam1"
+	                 android:layout_width="75dp"
+	                 android:layout_height="35dp"
+				     style="@style/edit_ammo"
+				     android:background="@layout/edit_text">
+	                 <requestFocus />
+	             </EditText>
+	        </RelativeLayout>
+	        <!-- Value 2-->
+	        <RelativeLayout
+	            android:layout_width="fill_parent"
+	            android:layout_height="wrap_content"
+	            android:orientation="horizontal" >
+	             <TextView
+		            android:id="@+id/txtParam2"
+		            android:layout_width="wrap_content"
+		            android:layout_height="wrap_content"
+		            android:text="@string/txtOAL"
+		             style="@style/text_ammo"/>
+	             <EditText
+	                 android:id="@+id/edtTxtParam2"
+	                 android:layout_width="75dp"
+	                 android:layout_height="35dp"
+				     style="@style/edit_ammo"
+				     android:background="@layout/edit_text">
+	             </EditText>
+	        </RelativeLayout>
+	        <!-- Value 3-->
+	        <RelativeLayout
+	            android:layout_width="fill_parent"
+	            android:layout_height="wrap_content"
+	            android:orientation="horizontal" >
+	             <TextView
+		            android:id="@+id/txtParam3"
+		            android:layout_width="wrap_content"
+		            android:layout_height="wrap_content"
+		            android:text="@string/txtBulletWeight"
+		             style="@style/text_ammo"/>
+	             <EditText
+	                 android:id="@+id/edtTxtParam3"
+	                 android:layout_width="75dp"
+	                 android:layout_height="35dp"
+				     style="@style/edit_ammo"
+				     android:background="@layout/edit_text">
+	             </EditText>
+	        </RelativeLayout>
+	        <!-- Value 4-->
+	        <RelativeLayout
+	            android:layout_width="fill_parent"
+	            android:layout_height="wrap_content"
+	            android:orientation="horizontal" >
+	             <TextView
+		            android:id="@+id/txtParam4"
+		            android:layout_width="wrap_content"
+		            android:layout_height="wrap_content"
+		            android:text="@string/txtRadiusOgive"
+		            style="@style/text_ammo"/>
+	             <EditText
+	                 android:id="@+id/edtTxtParam4"
+	                 android:layout_width="75dp"
+	                 android:layout_height="35dp"
+				     style="@style/edit_ammo"
+				     android:background="@layout/edit_text">
+	             </EditText>
+	        </RelativeLayout>
+	        <!-- Value 5-->
+	        <RelativeLayout
+	            android:layout_width="fill_parent"
+	            android:layout_height="wrap_content"
+	            android:orientation="horizontal" >
+	             <TextView
+		            android:id="@+id/txtParam5"
+		            android:layout_width="wrap_content"
+		            android:layout_height="wrap_content"
+		            android:text="@string/txtDiameterOfFlatNose"
+		            style="@style/text_ammo"/>
+	             <EditText
+	                 android:id="@+id/edtTxtParam5"
+	                 android:layout_width="75dp"
+	                 android:layout_height="35dp"
+				     style="@style/edit_ammo"
+				     android:background="@layout/edit_text">
+	             </EditText>
+	        </RelativeLayout>	        
+	        <!-- Value 6-->
+	        <RelativeLayout
+	            android:layout_width="fill_parent"
+	            android:layout_height="wrap_content"
+	            android:orientation="horizontal" >
+	             <TextView
+		            android:id="@+id/txtParam6"
+		            android:layout_width="wrap_content"
+		            android:layout_height="wrap_content"
+		            android:text="@string/txtDiameterOfNoseOnShoulder"
+		            style="@style/text_ammo"/>
+	             <EditText
+	                 android:id="@+id/edtTxtParam6"
+	                 android:layout_width="75dp"
+	                 android:layout_height="35dp"
+				     style="@style/edit_ammo"
+				     android:background="@layout/edit_text">
+	             </EditText>
+	        </RelativeLayout>
+			<!-- Value 7-->
+	        <RelativeLayout
+	            android:layout_width="fill_parent"
+	            android:layout_height="wrap_content"
+	            android:orientation="horizontal" >
+
+	             <EditText
+	                 android:id="@+id/edtTxtParam7"
+	                 android:layout_width="75dp"
+	                 android:layout_height="match_parent"
+				     style="@style/edit_ammo"
+				     android:background="@layout/edit_text">
+	             </EditText>
+
+	             <TextView
+	                 android:id="@+id/txtParam7"
+	                 style="@style/text_ammo"
+	                 android:layout_width="wrap_content"
+	                 android:layout_height="wrap_content"
+	                 android:layout_alignParentLeft="true"
+	                 android:layout_alignParentTop="true"
+	                 android:text="@string/txtDiameterOverCircumferentialStep" />
+
+	        </RelativeLayout>
+	        <!-- Value 8-->
+	        <RelativeLayout
+	            android:layout_width="fill_parent"
+	            android:layout_height="wrap_content"
+	            android:orientation="horizontal" >
+	             <TextView
+		            android:id="@+id/txtParam8"
+		            android:layout_width="wrap_content"
+		            android:layout_height="wrap_content"
+		            android:text="@string/txtRadiusOfRoundedTip"
+		            style="@style/text_ammo"/>
+	             <EditText
+	                 android:id="@+id/edtTxtParam8"
+	                 android:layout_width="75dp"
+	                 android:layout_height="35dp"
+				     style="@style/edit_ammo"
+				     android:background="@layout/edit_text">
+	             </EditText>
+	        </RelativeLayout>
+	        <!-- Value 9-->
+	        <RelativeLayout
+	            android:layout_width="fill_parent"
+	            android:layout_height="wrap_content"
+	            android:orientation="horizontal" >
+	             <TextView
+		            android:id="@+id/txtParam9"
+		            android:layout_width="wrap_content"
+		            android:layout_height="wrap_content"
+		            	android:text="@string/txtDiameterOfBluntTip"
+		             style="@style/text_ammo"/>
+	             <EditText
+	                 android:id="@+id/edtTxtParam9"
+	                 android:layout_width="75dp"
+	                 android:layout_height="35dp"
+				     style="@style/edit_ammo"
+				     android:background="@layout/edit_text">
+	             </EditText>
+	        </RelativeLayout>
+	        <!-- Value 10-->
+	        <RelativeLayout
+	            android:layout_width="fill_parent"
+	            android:layout_height="wrap_content"
+	            android:orientation="horizontal" >
+	             <TextView
+		            android:id="@+id/txtParam10"
+		            android:layout_width="wrap_content"
+		            android:layout_height="wrap_content"
+		            android:text="@string/txtDistanceCenterOgiveCurve"
+		            style="@style/text_ammo"/>
+	             <EditText
+	                 android:id="@+id/edtTxtParam10"
+	                 android:layout_width="75dp"
+	                 android:layout_height="35dp"
+				     style="@style/edit_ammo"
+				     android:background="@layout/edit_text">
+	             </EditText>
+	        </RelativeLayout>
+	        <!-- Value 11-->
+	        <RelativeLayout
+	            android:layout_width="fill_parent"
+	            android:layout_height="wrap_content"
+	            android:orientation="horizontal" >
+	             <TextView
+		            android:id="@+id/txtParam11"
+		            android:layout_width="wrap_content"
+		            android:layout_height="wrap_content"
+		            android:text="@string/txtNoselength"
+		            style="@style/text_ammo"/>
+	             <EditText
+	                 android:id="@+id/edtTxtParam11"
+	                 android:layout_width="75dp"
+	                 android:layout_height="35dp"
+				     style="@style/edit_ammo"
+				     android:background="@layout/edit_text">
+	             </EditText>
+	        </RelativeLayout>
+	        <!-- Value 12-->
+	        <RelativeLayout
+	            android:layout_width="fill_parent"
+	            android:layout_height="wrap_content"
+	            android:orientation="horizontal" >
+	             <TextView
+		            android:id="@+id/txtParam12"
+		            android:layout_width="wrap_content"
+		            android:layout_height="wrap_content"
+		            android:text="@string/txtBevelAngleOfNose"
+		            style="@style/text_ammo"/>
+	             <EditText
+	                 android:id="@+id/edtTxtParam12"
+	                 android:layout_width="75dp"
+	                 android:layout_height="35dp"
+				     style="@style/edit_ammo"
+				     android:background="@layout/edit_text">
+	             </EditText>
+	        </RelativeLayout>
+	        <!-- Value 13-->
+	        <RelativeLayout
+	            android:layout_width="fill_parent"
+	            android:layout_height="wrap_content"
+	            android:orientation="horizontal" >
+	             <TextView
+		            android:id="@+id/txtParam13"
+		            android:layout_width="wrap_content"
+		            android:layout_height="wrap_content"
+		            android:text="@string/txtAngleSecantOgiveCurve"
+		            style="@style/text_ammo"/>
+	             <EditText
+	                 android:id="@+id/edtTxtParam13"
+	                 android:layout_width="75dp"
+	                 android:layout_height="35dp"
+				     style="@style/edit_ammo"
+				     android:background="@layout/edit_text">
+	             </EditText>
+	        </RelativeLayout>
+	        <!-- Value 14-->
+	        <RelativeLayout
+	            android:layout_width="fill_parent"
+	            android:layout_height="wrap_content"
+	            android:orientation="horizontal" >
+	             <TextView
+		            android:id="@+id/txtParam14"
+		            android:layout_width="wrap_content"
+		            android:layout_height="wrap_content"
+		            android:text="@string/txtLengthBearingSurface"
+		            style="@style/text_ammo"/>
+	             <EditText
+	                 android:id="@+id/edtTxtParam14"
+	                 android:layout_width="75dp"
+	                 android:layout_height="35dp"
+				     style="@style/edit_ammo"
+				     android:background="@layout/edit_text">
+	             </EditText>
+	        </RelativeLayout>
+	        <!-- Value 15-->
+	        <RelativeLayout
+	            android:layout_width="fill_parent"
+	            android:layout_height="wrap_content"
+	            android:orientation="horizontal" >
+	             <TextView
+		            android:id="@+id/txtParam15"
+		            android:layout_width="wrap_content"
+		            android:layout_height="wrap_content"
+		            	android:text="@string/txtDiameterBoatTail"
+		            style="@style/text_ammo"/>
+	             <EditText
+	                 android:id="@+id/edtTxtParam15"
+	                 android:layout_width="75dp"
+	                 android:layout_height="35dp"
+				     style="@style/edit_ammo"
+				     android:background="@layout/edit_text">
+	             </EditText>
+	        </RelativeLayout>
+	        <!-- Value 16-->
+	        <RelativeLayout
+	            android:layout_width="fill_parent"
+	            android:layout_height="wrap_content"
+	            android:orientation="horizontal" >
+	             <TextView
+		            android:id="@+id/txtParam16"
+		            android:layout_width="wrap_content"
+		            android:layout_height="wrap_content"
+		            	android:text="@string/txtLengthBulletBoatTail"
+		            style="@style/text_ammo"/>
+	             <EditText
+	                 android:id="@+id/edtTxtParam16"
+	                 android:layout_width="75dp"
+	                 android:layout_height="35dp"
+				     style="@style/edit_ammo"
+				     android:background="@layout/edit_text">
+	             </EditText>
+	        </RelativeLayout>
+	        <!-- Value 17-->
+	        <RelativeLayout
+	            android:layout_width="fill_parent"
+	            android:layout_height="wrap_content"
+	            android:orientation="horizontal" >
+	             <TextView
+		            android:id="@+id/txtParam17"
+		            android:layout_width="wrap_content"
+		            android:layout_height="wrap_content"
+		            	android:text="@string/txtBevelAngleBulletBoatTail"
+		            style="@style/text_ammo"/>
+	             <EditText
+	                 android:id="@+id/edtTxtParam17"
+	                 android:layout_width="75dp"
+	                 android:layout_height="35dp"
+				     style="@style/edit_ammo"
+				     android:background="@layout/edit_text">
+	             </EditText>
+	        </RelativeLayout>
+	        <!-- Value 18-->
+	        <RelativeLayout
+	            android:layout_width="fill_parent"
+	            android:layout_height="wrap_content"
+	            android:orientation="horizontal" >
+	             <TextView
+		            android:id="@+id/txtParam18"
+		            android:layout_width="wrap_content"
+		            android:layout_height="wrap_content"
+		            	android:text="@string/txtDiameterCannelure"
+		            style="@style/text_ammo"/>
+	             <EditText
+	                 android:id="@+id/edtTxtParam18"
+	                 android:layout_width="75dp"
+	                 android:layout_height="35dp"
+				     style="@style/edit_ammo"
+				     android:background="@layout/edit_text">
+	             </EditText>
+	        </RelativeLayout>
+	        <!-- Value 19-->
+	        <RelativeLayout
+	            android:layout_width="fill_parent"
+	            android:layout_height="wrap_content"
+	            android:orientation="horizontal" >
+	             <TextView
+		            android:id="@+id/txtParam19"
+		            android:layout_width="wrap_content"
+		            android:layout_height="wrap_content"
+		            	android:text="@string/txtDistanceCannelureToBullet"
+		            style="@style/text_ammo"/>
+	             <EditText
+	                 android:id="@+id/edtTxtParam19"
+	                 android:layout_width="75dp"
+	                 android:layout_height="35dp"
+				     style="@style/edit_ammo"
+				     android:background="@layout/edit_text">
+	             </EditText>
+	        </RelativeLayout>
+	        <!-- Value 20-->
+	        <RelativeLayout
+	            android:layout_width="fill_parent"
+	            android:layout_height="wrap_content"
+	            android:orientation="horizontal" >
+	             <TextView
+		            android:id="@+id/txtParam20"
+		            android:layout_width="wrap_content"
+		            android:layout_height="wrap_content"
+		            	android:text="@string/txtCannelureWidth"
+		            style="@style/text_ammo"/>
+	             <EditText
+	                 android:id="@+id/edtTxtParam20"
+	                 android:layout_width="75dp"
+	                 android:layout_height="35dp"
+				     style="@style/edit_ammo"
+				     android:background="@layout/edit_text">
+	             </EditText>
+	        </RelativeLayout>
+	        <!-- Value 21-->
+	        <RelativeLayout
+	            android:layout_width="fill_parent"
+	            android:layout_height="wrap_content"
+	            android:orientation="horizontal" >
+	             <TextView
+		            android:id="@+id/txtParam21"
+		            android:layout_width="wrap_content"
+		            android:layout_height="wrap_content"
+		            	android:text="@string/txtDistanceBetweenTwoCannelures"
+		            style="@style/text_ammo"/>
+	             <EditText
+	                 android:id="@+id/edtTxtParam21"
+	                 android:layout_width="75dp"
+	                 android:layout_height="35dp"
+				     style="@style/edit_ammo"
+				     android:background="@layout/edit_text">
+	             </EditText>
+	        </RelativeLayout>
+	        <!-- Value 22-->
+	        <RelativeLayout
+	            android:layout_width="fill_parent"
+	            android:layout_height="wrap_content"
+	            android:orientation="horizontal" >
+	             <TextView
+		            android:id="@+id/txtParam22"
+		            android:layout_width="wrap_content"
+		            android:layout_height="wrap_content"
+		            	android:text="@string/txtDiameterCircumferentialStep"
+		            style="@style/text_ammo"/>
+	             <EditText
+	                 android:id="@+id/edtTxtParam22"
+	                 android:layout_width="75dp"
+	                 android:layout_height="35dp"
+				     style="@style/edit_ammo"
+				     android:background="@layout/edit_text">
+	             </EditText>
+	        </RelativeLayout>
+	        <!-- Value 23-->
+	        <RelativeLayout
+	            android:layout_width="fill_parent"
+	            android:layout_height="wrap_content"
+	            android:orientation="horizontal" >
+
+	             <TextView
+	                 android:id="@+id/txtParam23"
+	                 style="@style/text_ammo"
+	                 android:layout_width="wrap_content"
+	                 android:layout_height="wrap_content"
+	                 android:text="@string/txtDistanceCircumferentialStepToBulletBase" />
+
+	             <EditText
+	                 android:id="@+id/edtTxtParam23"
+	                 android:layout_width="75dp"
+	                 android:layout_height="match_parent"
+				     style="@style/edit_ammo"
+				     android:background="@layout/edit_text">
+	             </EditText>
+	        </RelativeLayout>
+	        <!-- Value 24-->
+	        <RelativeLayout
+	            android:layout_width="fill_parent"
+	            android:layout_height="wrap_content"
+	            android:orientation="horizontal" >
+	             <TextView
+		            android:id="@+id/txtParam24"
+		            android:layout_width="wrap_content"
+		            android:layout_height="wrap_content"
+		            	android:text="@string/txtWidthCircumferencialStep"
+ 					style="@style/text_ammo"/>
+	             <EditText
+	                 android:id="@+id/edtTxtParam24"
+	                 android:layout_width="75dp"
+	                 android:layout_height="35dp"
+				     style="@style/edit_ammo"
+				     android:background="@layout/edit_text">
+	             </EditText>
+	        </RelativeLayout>
+	        <!-- Value 25-->
+	        <RelativeLayout
+	            android:layout_width="fill_parent"
+	            android:layout_height="wrap_content"
+	            android:orientation="horizontal" >
+	             <TextView
+		            android:id="@+id/txtParam25"
+		            android:layout_width="wrap_content"
+		            android:layout_height="wrap_content"
+		            	android:text="@string/txtBevelAngleCircumferentialStep"
+		            style="@style/text_ammo"/>
+	             <EditText
+	                 android:id="@+id/edtTxtParam25"
+	                 android:layout_width="75dp"
+	                 android:layout_height="35dp"
+				     style="@style/edit_ammo"
+				     android:background="@layout/edit_text">
+	             </EditText>
+	        </RelativeLayout>
+	        <!-- Value 26-->
+	        <RelativeLayout
+	            android:layout_width="fill_parent"
+	            android:layout_height="wrap_content"
+	            android:orientation="horizontal" >
+	             <TextView
+		            android:id="@+id/txtParam26"
+		            android:layout_width="wrap_content"
+		            android:layout_height="wrap_content"
+		            android:text="@string/txtDistanceCircumferentialKnurlingBulletbase"
+		            style="@style/text_ammo"/>
+	             <EditText
+	                 android:id="@+id/edtTxtParam26"
+	                 android:layout_width="75dp"
+	                 android:layout_height="match_parent"
+				     style="@style/edit_ammo"
+				     android:background="@layout/edit_text">
+	             </EditText>
+	        </RelativeLayout>
+	        <!-- Value 27-->
+	        <RelativeLayout
+	            android:layout_width="fill_parent"
+	            android:layout_height="wrap_content"
+	            android:orientation="horizontal" >
+	             <TextView
+		            android:id="@+id/txtParam27"
+		            android:layout_width="wrap_content"
+		            android:layout_height="wrap_content"
+		            	android:text="@string/txtDistancePunchingPToBBase"
+		            style="@style/text_ammo"/>
+	             <EditText
+	                 android:id="@+id/edtTxtParam27"
+	                 android:layout_width="75dp"
+	                 android:layout_height="35dp"
+				     style="@style/edit_ammo"
+				     android:background="@layout/edit_text">
+	             </EditText>
+	        </RelativeLayout>
+        
+        </LinearLayout>
+        
+        <View
+            android:id="@+id/line4"
+            android:layout_width="fill_parent"
+            android:layout_height="1dp"
+            android:background="@color/bluelight" />
+
+        <!-- THIS IS START FOT AMMO PART ***************************************************************** -->
+
+        <TextView
+            android:id="@+id/txtViewAmmo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="@string/txtBulletPersonalParamsShort"
+            android:visibility="visible"
+            style="@style/text_header" />
+
+        <View
+            android:id="@+id/line5"
+            android:layout_width="fill_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="10dp"
+            android:background="@color/bluelight" />
+        
+          <!-- Value 28-->
+         <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
+             <EditText
+                 android:id="@+id/edtTxtParam28"
+                 android:layout_width="95dp"
+                 android:layout_height="35dp"
+			     style="@style/edit_ammo"
+			     android:background="@layout/edit_text">
+             </EditText>
+
+             <TextView
+                 android:id="@+id/txtParam28"
+                 style="@style/text_ammo"
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:layout_alignParentBottom="true"
+                 android:layout_alignParentLeft="true"
+                 android:text="@string/txtBWeight" />
+        </RelativeLayout>
+        
+	    <LinearLayout
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:orientation="horizontal"
+           android:gravity="center_vertical|center_horizontal" >
+
+	       <LinearLayout
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:orientation="horizontal">
+	       		<RadioButton
+		           android:id="@+id/rdBtnGrains"
+			       android:layout_width="50dp"
+				   android:layout_height="50dp"
+				   android:scaleType="fitXY"
+	               android:button="@layout/button_radio_custom" />
+			    	<TextView
+		               android:id="@+id/txt33"
+		               style="@style/text_ammo"
+		               android:layout_width="wrap_content"
+		               android:layout_height="wrap_content"
+	                   android:text="@string/rdBtnGrains"/>
+       			</LinearLayout>
+            <LinearLayout
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:orientation="horizontal" >
+	            <RadioButton
+	               android:id="@+id/rdBtnGramms"
+			       android:layout_width="50dp"
+				   android:layout_height="50dp"
+				   android:scaleType="fitXY"
+	     		   android:checked="true"
+	               android:button="@layout/button_radio_custom"/>
+			    	<TextView
+		               android:id="@+id/txt44"
+		               style="@style/text_ammo"
+		               android:layout_width="wrap_content"
+		               android:layout_height="wrap_content"
+	                   android:text="@string/rdBtnGramms"/>
+       		</LinearLayout>
+	    </LinearLayout>
+         
+        <!-- Value 29-->
+        <RelativeLayout
+           android:layout_width="fill_parent"
+           android:layout_height="wrap_content"
+           android:orientation="horizontal" >
+            <EditText
+                android:id="@+id/edtTxtParam29"
+                android:layout_width="95dp"
+                android:layout_height="35dp"
+		     	style="@style/edit_ammo"
+		     	android:background="@layout/edit_text">
+            </EditText>
+
+            <TextView
+                android:id="@+id/txtParam29"
+                style="@style/text_ammo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentLeft="true"
+                android:text="@string/txtStartSpeed" />
+       </RelativeLayout>
+       <!-- Value 30-->
+       <RelativeLayout
+          android:layout_width="fill_parent"
+          android:layout_height="wrap_content"
+          android:orientation="horizontal" >
+          <EditText
+ 	         android:id="@+id/edtTxtParam30"
+             android:layout_width="95dp"
+             android:layout_height="35dp"
+			 style="@style/edit_ammo"
+     		 android:background="@layout/edit_text">
+           </EditText>
+
+           <TextView
+               android:id="@+id/txtParam30"
+               style="@style/text_ammo"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:layout_alignParentBottom="true"
+               android:layout_alignParentLeft="true"
+               android:text="@string/txtBKoef" />
+      </RelativeLayout>
+       <!-- Value 31-->
+       <RelativeLayout
+          android:layout_width="fill_parent"
+          android:layout_height="wrap_content"
+          android:orientation="horizontal" >
+
+           <EditText
+               android:id="@+id/edtTxtParam31"
+               style="@style/edit_ammo"
+               android:layout_width="95dp"
+               android:layout_height="35dp"
+               android:background="@layout/edit_text" >
+
+           </EditText>
+
+           <TextView
+               android:id="@+id/txtParam31"
+               style="@style/text_ammo"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:layout_alignParentBottom="true"
+               android:layout_alignParentLeft="true"
+               android:text="@string/txtW1Const" />
+	      </RelativeLayout>
+	      <!-- Value 32-->
+	      <RelativeLayout
+	         android:layout_width="fill_parent"
+	         android:layout_height="wrap_content"
+	         android:orientation="horizontal" >
+	          <EditText
+	              android:id="@+id/edtTxtParam32"
+	              android:layout_width="95dp"
+	              android:layout_height="35dp"
+				  style="@style/edit_ammo"
+				  android:background="@layout/edit_text">
+	          </EditText>
+	
+	          <TextView
+	              android:id="@+id/txtParam32"
+	              style="@style/text_ammo"
+	              android:layout_width="wrap_content"
+	              android:layout_height="wrap_content"
+	              android:layout_alignParentBottom="true"
+	              android:layout_alignParentLeft="true"
+	              android:text="@string/txtBarrelStep" />
+	     </RelativeLayout>
+	     <!-- Value 33-->
+	     <RelativeLayout
+	        android:layout_width="fill_parent"
+	        android:layout_height="wrap_content"
+	        android:orientation="horizontal" >
+	         <EditText
+	             android:id="@+id/edtTxtParam33"
+	             android:layout_width="95dp"
+	             android:layout_height="35dp"
+	    		style="@style/edit_ammo"
+	    		android:background="@layout/edit_text">
+	         </EditText>
+	
+	         <TextView
+	             android:id="@+id/txtParam33"
+	             style="@style/text_ammo"
+	             android:layout_width="wrap_content"
+	             android:layout_height="wrap_content"
+	             android:layout_alignParentBottom="true"
+	             android:layout_alignParentLeft="true"
+	             android:text="@string/txtBullet_K_param" />
+	    </RelativeLayout>
+	     <!-- Value 34-->
+	     <RelativeLayout
+	        android:layout_width="fill_parent"
+	        android:layout_height="wrap_content"
+	        android:orientation="horizontal" >
+	         <EditText
+	             android:id="@+id/edtTxtParam34"
+	             android:layout_width="95dp"
+	             android:layout_height="35dp"
+			    style="@style/edit_ammo"
+			    android:background="@layout/edit_text">
+	         </EditText>
+	         <TextView
+	             android:id="@+id/txtParam34"
+	             style="@style/text_ammo"
+	             android:layout_width="wrap_content"
+	             android:layout_height="wrap_content"
+	             android:layout_alignParentBottom="true"
+	             android:layout_alignParentLeft="true"
+	             android:text="@string/txtDistanceMax" />
+	    </RelativeLayout>
+	    
+	    <RelativeLayout
+	        android:layout_width="fill_parent"
+	        android:layout_height="wrap_content"
+	        android:orientation="horizontal" >
+	        <Button
+	            android:id="@+id/btnSaveParameters"
+	            style="@style/button_text"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:layout_marginBottom="10dp"
+	            android:layout_alignParentBottom="true"
+	            android:layout_centerHorizontal="true"
+	            android:background="@layout/button_custom"
+	            android:text="@string/btnCalculate" />
+	    </RelativeLayout>
+    </LinearLayout>
+</ScrollView>

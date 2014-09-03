@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/scrollEncyclopedia"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/paper_texture_small"  >
+	<RelativeLayout 
+	    android:id="@+id/RelativeLayoutEncyclopedia"
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content" >
+	    <RelativeLayout 
+		    android:id="@+id/RelativeLayoutEncyclopedia1"
+		    android:layout_width="match_parent"
+		    android:layout_height="wrap_content" >
+	    
+		  	<TextView
+		  	    android:id="@+id/txtViewEncylopediaHeader"
+		  	    android:layout_width="wrap_content"
+		  	    android:layout_height="wrap_content"
+		  	    android:text="@string/encyclopedia"
+		  	    style="@style/text_header" 
+		  	    android:layout_centerHorizontal="true"/>
+		
+		  	<ImageView
+		  	    android:id="@+id/imgPic2"
+		  	    android:layout_width="50dp"
+		  	    android:layout_height="50dp"
+		  	    android:layout_alignRight="@+id/txtViewEncylopediaHeader"
+		  	    android:layout_below="@+id/txtViewEncylopediaHeader"
+		  	    android:layout_marginRight="15dp"
+		  	    android:contentDescription="@string/contentDesciption"
+		  	    android:scaleType="fitXY"
+		  	    android:src="@drawable/card_range2" />
+		
+		  	<TextView
+		  	    android:id="@+id/txtEncyclopedia1"
+		  	    android:layout_width="wrap_content"
+		  	    android:layout_height="wrap_content"
+		  	    android:layout_alignParentBottom="true"
+		  	    android:layout_alignParentLeft="true"
+		  	    android:layout_alignParentRight="true"
+		  	    android:layout_below="@+id/imgPic2"
+		  	    style="@style/text_info_encyclopedia" />
+
+		  	<ImageView
+		  	    android:id="@+id/imgPic1"
+		  	    android:layout_width="50dp"
+		  	    android:layout_height="50dp"
+		  	    android:layout_alignTop="@+id/imgPic2"
+		  	    android:layout_toLeftOf="@+id/imgPic2"
+		  	    android:layout_marginRight="10dp"
+		  	    android:contentDescription="@string/contentDesciption"
+		  	    android:scaleType="fitXY"
+		  	    android:src="@drawable/card_range1" />
+
+		</RelativeLayout>	
+		
+	  	<!-- CHAPTER 2 -->
+	  	
+  		<RelativeLayout 
+		    android:id="@+id/RelativeLayoutEncyclopedia2"
+		    android:layout_width="match_parent"
+		    android:layout_height="wrap_content"
+		    android:layout_below="@+id/RelativeLayoutEncyclopedia1" >
+	  	
+			<ImageView
+		  	    android:id="@+id/imgPic3"
+		  	    android:layout_width="100dp"
+		  	    android:layout_height="50dp"
+		  	    android:layout_marginRight="15dp"
+		  	    android:contentDescription="@string/contentDesciption"
+		  	    android:layout_centerHorizontal="true"
+		  	    android:scaleType="fitXY"
+		  	    android:src="@drawable/traecto1" />
+	
+	  		<TextView
+		  	    android:id="@+id/txtEncyclopedia2"
+		  	    android:layout_width="wrap_content"
+		  	    android:layout_height="wrap_content"
+		  	    android:layout_alignParentBottom="true"
+		  	    android:layout_alignParentLeft="true"
+		  	    android:layout_alignParentRight="true"
+		  	    android:layout_below="@+id/imgPic3"
+		  	    style="@style/text_info_encyclopedia" />
+  		</RelativeLayout>
+	
+	<!-- CHAPTER 3 -->
+	
+  		<RelativeLayout 
+		    android:id="@+id/RelativeLayoutEncyclopedia3"
+		    android:layout_width="match_parent"
+		    android:layout_height="wrap_content"
+		    android:layout_below="@+id/RelativeLayoutEncyclopedia2" >
+	
+	  		<TextView
+		  	    android:id="@+id/txtEncyclopedia3"
+		  	    android:layout_width="wrap_content"
+		  	    android:layout_height="wrap_content"
+		  	    android:layout_marginTop="25dp"
+		  	    android:layout_marginBottom="25dp"
+		  	    android:layout_alignParentBottom="true"
+		  	    android:layout_alignParentLeft="true"
+		  	    android:layout_alignParentRight="true"
+		  	    style="@style/text_info_encyclopedia" />
+  		</RelativeLayout>
+  		
+ 	<!-- CHAPTER 4 -->
+ 	
+ 		<RelativeLayout 
+		    android:id="@+id/RelativeLayoutEncyclopedia4"
+		    android:layout_width="match_parent"
+		    android:layout_height="wrap_content"
+		    android:layout_below="@+id/RelativeLayoutEncyclopedia3" >
+	  	
+			<ImageView
+		  	    android:id="@+id/imgPic4"
+		  	    android:layout_width="60dp"
+		  	    android:layout_height="50dp"
+		  	    android:layout_marginRight="15dp"
+		  	    android:contentDescription="@string/contentDesciption"
+		  	    android:scaleType="fitXY"
+		  	    android:layout_centerHorizontal="true"
+		  	    android:src="@drawable/mil_dot_01" />
+
+	  		<TextView
+	  		    android:id="@+id/txtEncyclopedia4"
+	  		    style="@style/text_info_encyclopedia"
+		  	    android:layout_width="wrap_content"
+		  	    android:layout_height="wrap_content"
+		  	     android:layout_below="@+id/imgPic4"
+		  	    android:layout_alignParentBottom="true"
+		  	    android:layout_alignParentLeft="true"
+		  	    android:layout_alignParentRight="true"
+	  		    android:layout_centerVertical="true" />
+	  		
+	  		<ImageView
+		  	    android:id="@+id/imgPic5"
+		  	    android:layout_width="60dp"
+		  	    android:layout_height="50dp"
+		  	    android:layout_marginRight="15dp"
+		  	    android:contentDescription="@string/contentDesciption"
+		  	    android:scaleType="fitXY"
+		  	    android:layout_below="@+id/txtEncyclopedia4"
+		  	    android:src="@drawable/mil_dot_02" />
+	  		
+	  		<ImageView
+		  	    android:id="@+id/imgPic6"
+		  	    android:layout_width="60dp"
+		  	    android:layout_height="50dp"
+		  	    android:layout_marginRight="15dp"
+		  	    android:contentDescription="@string/contentDesciption"
+		  	    android:scaleType="fitXY"
+		  	     android:layout_below="@+id/txtEncyclopedia4"
+		  	    android:layout_toRightOf="@+id/imgPic5"
+		  	    android:src="@drawable/mil_dot_03" />
+	  			  		
+  			<ImageView
+		  	    android:id="@+id/imgPic7"
+		  	    android:layout_width="60dp"
+		  	    android:layout_height="50dp"
+		  	    android:layout_marginRight="15dp"
+		  	    android:contentDescription="@string/contentDesciption"
+		  	    android:scaleType="fitXY"
+		  	    android:layout_toRightOf="@+id/imgPic6"
+		  	    android:layout_below="@+id/txtEncyclopedia4"
+		  	    android:src="@drawable/mil_dot_04" />
+  			
+  		</RelativeLayout>		
+	</RelativeLayout>
+</ScrollView>

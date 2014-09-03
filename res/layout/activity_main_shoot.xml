@@ -1,0 +1,254 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical">
+
+    <!-- android:background="@drawable/background_shot_activity_800x480" -->
+
+    <ImageView
+        android:id="@+id/imageMainShootPic"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:contentDescription="@string/contentDesciption"
+        android:scaleType = "centerCrop"
+        android:adjustViewBounds="true"
+        android:paddingBottom="0dp"
+        android:paddingLeft="0dp"
+        android:paddingRight="0dp"
+        android:paddingTop="0dp"/>
+    
+    <ImageView
+	      android:id="@+id/imageZoomedTarget"
+	      android:layout_width="15dp"
+	      android:layout_height="35dp"
+	      android:layout_marginLeft="200dp"
+      	  android:layout_marginTop="180dp"
+	      android:contentDescription="@string/contentDesciption"
+	      android:src="@drawable/target1"
+	      android:visibility="invisible" />
+    
+    <ImageView
+        android:id="@+id/imageMainScopePic"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:contentDescription="@string/contentDesciption"
+         android:scaleType = "centerCrop"
+         android:adjustViewBounds="true"
+        android:paddingBottom="0dp"
+        android:paddingLeft="0dp"
+        android:paddingRight="0dp"
+        android:paddingTop="0dp" />
+    
+    <!-- android:src="@drawable/background_shot_activity_800x480" +++++++++++ -->
+
+    <ImageView
+        android:id="@+id/imgCompasBackground"
+        android:layout_width="110dp"
+        android:layout_height="110dp"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:contentDescription="@string/contentDesciption"
+        android:src="@drawable/wind"
+        android:visibility="invisible" />
+    
+    <ImageButton
+        android:id="@+id/ImgUpBtn"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_above="@+id/ImgLeftBtn"
+        android:layout_toRightOf="@+id/ImgLeftBtn"
+        android:background="@android:color/transparent"
+        android:contentDescription="@string/contentDesciption"
+        android:scaleType="fitXY"
+        android:src="@drawable/go_up_blue"
+        android:visibility="invisible" />
+    
+    <ImageButton
+        android:id="@+id/ImgDownBtn"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_alignParentBottom="true"
+        android:layout_toRightOf="@+id/ImgLeftBtn"
+        android:background="@android:color/transparent"
+        android:contentDescription="@string/contentDesciption"
+        android:scaleType="fitXY"
+        android:src="@drawable/go_down_blue"
+        android:visibility="invisible" />
+
+    <ImageButton
+        android:id="@+id/ImgLeftBtn"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_above="@+id/ImgDownBtn"
+        android:layout_alignParentLeft="true"
+        android:background="@android:color/transparent"
+        android:contentDescription="@string/contentDesciption"
+        android:scaleType="fitXY"
+        android:src="@drawable/go_left_blue"
+        android:visibility="invisible" />
+
+    <ImageButton
+        android:id="@+id/ImgRightBtn"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_below="@+id/ImgUpBtn"
+        android:layout_toRightOf="@+id/ImgUpBtn"
+        android:background="@android:color/transparent"
+        android:contentDescription="@string/contentDesciption"
+        android:scaleType="fitXY"
+        android:src="@drawable/go_right_blue"
+        android:visibility="invisible" />
+    
+    <ImageButton
+        android:id="@+id/ImageButtonShoot"
+        android:layout_width="55dp"
+        android:layout_height="55dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:contentDescription="@string/contentDesciption"
+        android:scaleType="fitXY"
+        android:background="@android:color/transparent"
+        android:src="@drawable/img_shoot_button"
+        android:visibility="invisible" />
+
+    <ImageView
+        android:id="@+id/imgViewCloud"
+        android:layout_width="15dp"
+        android:layout_height="15dp"
+        android:contentDescription="@string/contentDesciption"
+        android:scaleType="fitXY"
+        android:src="@drawable/cloud_0"
+        android:visibility="invisible" />
+
+    <TextView
+        android:id="@+id/txtHorizontalParam"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:textColor="@color/DarkSeaGreen"
+        android:text="@string/defHorizontParam"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:visibility="invisible" />
+
+    <TextView
+        android:id="@+id/txtVerticalParam"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/txtHorizontalParam"
+        android:textColor="@color/DarkSeaGreen"
+        android:text="@string/defVerticalParam"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:visibility="invisible" />
+
+    <TextView
+        android:id="@+id/txtWindParam"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/txtVerticalParam"
+        android:text="@string/defWindParam"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:textColor="@color/DarkSeaGreen"
+        android:visibility="invisible" />
+
+    <!-- #################################################################################### -->
+
+    <ScrollView
+        android:id="@+id/vscrollClickLine"
+        android:layout_width="50dp"
+        android:layout_height="80dp"
+        android:layout_alignTop="@+id/ImgUpBtn"
+         android:layout_alignParentRight="true"
+         android:layout_marginRight="80dp"
+        android:visibility="invisible" >
+
+        <LinearLayout
+            android:id="@+id/listViewClickVertical"
+            android:layout_width="60dp"
+            android:layout_height="50dp"
+            android:layout_gravity="right"
+            android:layout_marginLeft="15dp"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:visibility="invisible" >
+
+        </LinearLayout>
+    </ScrollView>
+	<!-- #################################################################################### -->
+    <ImageButton
+        android:id="@+id/imgBtnTable"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:scaleType="fitXY"
+        android:background="@android:color/transparent"
+        android:contentDescription="@string/contentDesciption"
+        android:layout_above="@+id/ImgDownBtn"
+        android:layout_toRightOf="@+id/ImgLeftBtn"
+        android:src="@drawable/note"
+        android:visibility="invisible" />
+
+    <ProgressBar
+        android:id="@+id/prgrsBar"
+        style="?android:attr/progressBarStyleLarge"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:visibility="invisible" />
+    
+      <ImageView
+        android:id="@+id/imgScopeMil"
+        android:contentDescription="@string/contentDesciption"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:src="@drawable/scope_mil"
+        android:visibility="invisible"/>
+
+
+      <ImageButton
+          android:id="@+id/ImgTargetBtn"
+          android:layout_width="40dp"
+          android:layout_height="50dp"
+          android:layout_marginLeft="5dp"
+          android:layout_alignParentLeft="true"
+          android:layout_alignTop="@+id/ImageButtonShoot"
+          android:background="@android:color/transparent"
+          android:contentDescription="@string/contentDesciption"
+          android:scaleType="fitXY"
+          android:src="@drawable/target_main"
+          android:visibility="invisible" />
+
+      <ImageView
+          android:id="@+id/imgCompasArrow"
+          android:layout_width="80dp"
+          android:layout_height="80dp"
+          android:layout_alignRight="@+id/imgCompasBackground"
+          android:layout_alignParentRight="true"
+          android:layout_marginTop="15dp"
+          android:layout_marginRight="15dp"
+          android:contentDescription="@string/contentDesciption"
+          android:src="@drawable/compass_arrow"
+          android:visibility="invisible" />
+
+      <HorizontalScrollView
+          android:id="@+id/hscrollClickLine"
+          android:layout_width="80dp"
+          android:layout_height="45dp"
+          android:layout_alignTop="@+id/txtWindParam"
+          android:layout_centerHorizontal="true"
+          android:visibility="invisible" >
+
+          <LinearLayout
+              android:id="@+id/listViewClickHorizontal"
+              android:layout_width="wrap_content"
+              android:layout_height="match_parent"
+              android:gravity="center"
+              android:orientation="horizontal"
+              android:visibility="invisible" >
+          </LinearLayout>
+      </HorizontalScrollView>
+ 
+</RelativeLayout>

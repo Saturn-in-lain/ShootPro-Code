@@ -1,0 +1,227 @@
+{
+  "TAG" : "Bullets",
+  "BULLET_LIST" : 
+  [
+  	{
+		"bulletName"     	: "Standard",
+		"bulletDiametr" 	: "0.00785",
+        "bulletTotalLengs" 	: "0.0286", 
+        
+        "isMassInGrains" : false,
+        "bulletWeight"   : "0.0091",
+     
+        "bulletRadius" 					: "0.00000",
+        "bulletRadiusOfTip" 			: "0.00000",
+        "bulletNoseDiameter" 			: "0.00145", 
+        "bulletDiameterOfBluntTip" 		: "0.00000",
+     	"bulletNoseShoulderDiameter" 	: "0.00000",
+     	
+     	"bulletNoseDiameterOverCircumferentialStep" : "0.000",
+     
+        "bulletDistanceToCenterOfOgiveCurve" : "0.000",
+    	"bulletNoseLength"                   : "0.000",
+     	"bulletBevelAngleOfNose"             : "0.000", 
+     	"bulletSecantOgiveCurveAngle"        : "0.000",
+        "bulletBearingLength" 				 : "0.000",
+              
+	    "bulletMainBeltDiameter"   : "0.00785",
+	    "bulletLengthsOfBoatTail"  : "0.00785",
+	    "bulletDiameterOfBoatTail" : "0.00785",
+	    "bulletLengthsOfBoatTail"  : "0.00000",
+	    "bulletBevelBoatTailAngle" : "0.00000",
+	    
+	    "bulletLengthFromCannelureToBase"              : "0.000",
+	    "bulletCannelureWidth"                         : "0.000",
+	    "bulletDistanceBetweenTwoCannelures"           : "0.000",
+	    "bulletDiameterOfCircumferentialStep"          : "0.000",
+	    "bulletDistanceFromCircumStepAndBulletBase"    : "0.000",
+	    "bulletAngleOfCircumferentialStep"             : "0.000",
+	    "bulletDistanceFromCircumKnurlingToBulletBase" : "0.000",
+	    "bulletDistanceFrompunchingPointToBulletBase"  : "0.000", 
+	  
+	    "bulletFormOfBase"    : "No info",
+	    "bulletMaterials"     : "No info",
+	    "bulletColorMarking"  : "No info",
+	     
+	    "bulletCalibre"  		: "0.00762",
+	    "difDiameter"    		: "0.00000",
+	    "radiusTang"     		: "0.00000",
+	    "radiusOjivInCalibre" 	: "6.835",
+	    "RtR"                 	: "0.000",
+	         
+	    "bulletDeviationKoefficient"  : "0.005", 
+	    "bulletBallisticsKoefficient" : "0.400",
+	    
+	    "ammo_startSpeed"  			 : "800.0",
+	    "ammo_speedAtXyards"  		 : "0.000",
+	    "bullet_startDistance"  	 : "0.000",
+	    "bullet_XyardDistance" 	     : "0.000",
+	    "ammo_crossSection" 		 : "0.000",
+	    
+	    "bullet_W1Const" 	         : "1120.4068",
+	    "bullet_turn_speed" 		 : "3504.166",
+	    "bullet_K_param"		     : "0.005"
+  	},
+	{  
+		"bulletName"     	: "Berger 168 grain",
+		"bulletDiametr" 	: "0.00785",
+        "bulletTotalLengs" 	: "0.0286", 
+        
+        "isMassInGrains" : false,
+        "bulletWeight"   : "0.0108862169",
+     
+        "bulletRadius" 					: "0.00000",
+        "bulletRadiusOfTip" 			: "0.00000",
+        "bulletNoseDiameter" 			: "0.00145", 
+        "bulletDiameterOfBluntTip" 		: "0.00000",
+     	"bulletNoseShoulderDiameter" 	: "0.00000",
+     	
+     	"bulletNoseDiameterOverCircumferentialStep" : "0.000",
+     
+        "bulletDistanceToCenterOfOgiveCurve" : "0.000",
+    	"bulletNoseLength"                   : "0.000",
+     	"bulletBevelAngleOfNose"             : "0.000", 
+     	"bulletSecantOgiveCurveAngle"        : "0.000",
+        "bulletBearingLength" 				 : "0.000",
+              
+	    "bulletMainBeltDiameter"   : "0.00785",
+	    "bulletTailDiameter" 	   : "0.00785",
+	    "bulletDiameterOfBoatTail" : "0.00785",
+	    "bulletTailLength"         : "0.00000",
+	    "bulletBevelBoatTailAngle" : "0.00000",
+	    
+	    "bulletLengthFromCannelureToBase"              : "0.000",
+	    "bulletCannelureWidth"                         : "0.000",
+	    "bulletDistanceBetweenTwoCannelures"           : "0.000",
+	    "bulletDiameterOfCircumferentialStep"          : "0.000",
+	    "bulletDistanceFromCircumStepAndBulletBase"    : "0.000",
+	    "bulletAngleOfCircumferentialStep"             : "0.000",
+	    "bulletDistanceFromCircumKnurlingToBulletBase" : "0.000",
+	    "bulletDistanceFrompunchingPointToBulletBase"  : "0.000", 
+	  
+	    "bulletFormOfBase"    : "No info",
+	    "bulletMaterials"     : "No info",
+	    "bulletColorMarking"  : "No info",
+	     
+	    "bulletCalibre"  		: "0.00762",
+	    "difDiameter"    		: "0.00000",
+	    "radiusTang"     		: "0.00000",
+	    "radiusOjivInCalibre" 	: "6.835",
+	    "RtR"                 	: "0.000",
+	         
+	    "bulletDeviationKoefficient"  : "0.005", 
+	    "bulletBallisticsKoefficient" : "0.320",
+	    
+	    "ammo_startSpeed"  			 : "885.0",
+	    "ammo_speedAtXyards"  		 : "0.000",
+	    "bullet_startDistance"  	 : "0.000",
+	    "bullet_XyardDistance" 	     : "0.000",
+	    "ammo_crossSection" 		 : "0.000",
+	    
+		"bullet_W1Const" 	         : "1120.4068",
+	    "bullet_turn_speed" 		 : "3504.166",
+	    "bullet_K_param"		     : "0.005"
+    },
+    {  
+		"bulletName"     	: "Berger 180 grain",
+		"bulletDiametr" 	: "0.00785",
+        "bulletTotalLengs" 	: "0.0286", 
+        
+        "isMassInGrains" : false,
+        "bulletWeight"   : "0.0116638038",
+     
+        "bulletRadius" 					: "0.00000",
+        "bulletRadiusOfTip" 			: "0.00000",
+        "bulletNoseDiameter" 			: "0.00145", 
+        "bulletDiameterOfBluntTip" 		: "0.00000",
+     	"bulletNoseShoulderDiameter" 	: "0.00000",
+     	
+     	"bulletNoseDiameterOverCircumferentialStep" : "0.000",
+     
+        "bulletDistanceToCenterOfOgiveCurve" : "0.000",
+    	"bulletNoseLength"                   : "0.000",
+     	"bulletBevelAngleOfNose"             : "0.000", 
+     	"bulletSecantOgiveCurveAngle"        : "0.000",
+        "bulletBearingLength" 				 : "0.000",
+              
+	    "bulletMainBeltDiameter"   : "0.00785",
+	    "bulletTailDiameter" 	   : "0.00785",
+	    "bulletDiameterOfBoatTail" : "0.00785",
+	    "bulletTailLength"         : "0.00000",
+	    "bulletBevelBoatTailAngle" : "0.00000",
+	    
+	    "bulletLengthFromCannelureToBase"              : "0.000",
+	    "bulletCannelureWidth"                         : "0.000",
+	    "bulletDistanceBetweenTwoCannelures"           : "0.000",
+	    "bulletDiameterOfCircumferentialStep"          : "0.000",
+	    "bulletDistanceFromCircumStepAndBulletBase"    : "0.000",
+	    "bulletAngleOfCircumferentialStep"             : "0.000",
+	    "bulletDistanceFromCircumKnurlingToBulletBase" : "0.000",
+	    "bulletDistanceFrompunchingPointToBulletBase"  : "0.000", 
+	  
+	    "bulletFormOfBase"    : "No info",
+	    "bulletMaterials"     : "No info",
+	    "bulletColorMarking"  : "No info",
+	     
+	    "bulletCalibre"  		: "0.00762",
+	    "difDiameter"    		: "0.00000",
+	    "radiusTang"     		: "0.00000",
+	    "radiusOjivInCalibre" 	: "6.835",
+	    "RtR"                 	: "0.000",
+	         
+	    "bulletDeviationKoefficient"  : "0.005", 
+	    "bulletBallisticsKoefficient" : "0.320",
+	    
+	    "ammo_startSpeed"  			 : "885.0",
+	    "ammo_speedAtXyards"  		 : "0.000",
+	    "bullet_startDistance"  	 : "0.000",
+	    "bullet_XyardDistance" 	     : "0.000",
+	    "ammo_crossSection" 		 : "0.000",
+	    
+		"bullet_W1Const" 	         : "1120.4068",
+	    "bullet_turn_speed" 		 : "3504.166",
+	    "bullet_K_param"		     : "0.005"
+    }
+  ],
+  "BULLET_TYPE" : 
+  [
+  	{
+		"BULLET" : 
+		"Диапазон применения этих двух пуль лежит от охоты на крупного 
+		 зверя до соревнований на кучность на больших дистанциях, включая 
+		 стрельбу на дальние дистанции по правилам NRA 
+		 (Национальная стрелковая ассоциация) и стрельбу на очки в F-классе.
+		 
+		 Характеристики пули:
+		 Размер образца: 5
+		 Вес: 168 грейн
+		 Радиус оживала: 18,1 калибров
+		 Rt/R: 0,57
+		 Оборудование для тестирования:
+		 Диапазон скоростей: 885 м/с - 580 м/с
+		 Ствол: Broughton
+		 Шаг нарезов: 1:8,7
+		 Поле/нарез: 0,2633/0,284"
+		},
+		{
+		"BULLET" : 
+		"Диапазон применения этих двух пуль лежит от охоты на крупного 
+    	зверя до соревнований на кучность на больших дистанциях, включая 
+    	стрельбу на дальние дистанции по правилам NRA 
+    	(Национальная стрелковая ассоциация) и стрельбу на очки в F-классе.
+    	Семимиллиметровая 180-грейновая VLD-пуля особенно интересна из-за 
+    	своего разрекламированного выдающегося баллистического коэффициента (БК).
+    		
+    	Характеристики пули:
+		Размер образца: 17
+		Вес: 180 грейн
+		Радиус оживала: 18,5 калибров
+		Rt/R: 0,54
+		борудование для тестирования:
+		Диапазон скоростей: 885 м/с - 519 м/с
+		Ствол: Broughton
+		Шаг нарезов: 1:8,7
+		Поле/нарез: 0,2633/0,284"
+		}
+  	]
+}

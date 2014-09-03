@@ -1,0 +1,522 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/scrollInfo"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/paper_texture_small"
+    android:orientation="horizontal" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
+
+        <!-- Header Weather parameters -->
+
+        <TextView
+            android:id="@+id/txtWeatherParameter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical|center_horizontal"
+            android:layout_marginTop="10dp"
+            android:text="@string/weatherInformation"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+			style="@style/text_header"
+            android:visibility="visible" />
+<!-- line -->
+        <View
+            android:id="@+id/line1"
+            android:layout_width="fill_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="10dp"
+            android:background="@color/bluelight" />
+
+        <!-- Parameters -->
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:id="@+id/txtParam1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="10dp"
+                android:text="@string/altitude"
+                style="@style/text_ammo" />
+
+            <EditText
+                android:id="@+id/edtTxtParam1"
+                android:layout_width="85dp"
+                android:layout_height="35dp"
+                android:layout_alignParentRight="true"
+                style="@style/edit_info"
+                android:background="@layout/edit_text" >
+            </EditText>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:id="@+id/txtParam2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="10dp"
+                android:text="@string/temperature"
+                style="@style/text_ammo" />
+
+            <EditText
+                android:id="@+id/edtTxtParam2"
+                android:layout_width="85dp"
+                android:layout_height="35dp"
+                style="@style/edit_info"
+                android:background="@layout/edit_text" >
+            </EditText>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:id="@+id/txtParam3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="10dp"
+                android:text="@string/density"
+                style="@style/text_ammo" />
+
+            <EditText
+                android:id="@+id/edtTxtParam3"
+                android:layout_width="85dp"
+                android:layout_height="35dp"
+                style="@style/edit_info"
+                android:background="@layout/edit_text" >
+            </EditText>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:id="@+id/txtParam4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="10dp"
+                android:text="@string/pressure"
+                style="@style/text_ammo" />
+
+            <EditText
+                android:id="@+id/edtTxtParam4"
+                android:layout_width="85dp"
+                android:layout_height="35dp"
+                style="@style/edit_info"
+                android:background="@layout/edit_text">
+            </EditText>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:id="@+id/txtParam5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="10dp"
+                android:text="@string/humidity"
+                style="@style/text_ammo" />
+
+            <EditText
+                android:id="@+id/edtTxtParam5"
+                android:layout_width="85dp"
+                android:layout_height="35dp"
+                style="@style/edit_info"
+                android:background="@layout/edit_text" >
+            </EditText>
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
+
+            <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
+	        	<RadioButton
+	                android:id="@+id/rdBCelcius"
+		       		android:layout_width="50dp"
+			   		android:layout_height="50dp"
+					android:scaleType="fitXY"
+	                android:checked="true"
+	                android:button="@layout/button_radio_custom"  />
+	
+		    	<TextView
+	               android:id="@+id/txt33"
+	               style="@style/text_ammo"
+	               android:layout_width="wrap_content"
+	               android:layout_height="wrap_content"
+	               android:text="@string/celcium"/>
+       		</LinearLayout>
+
+			<LinearLayout
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:orientation="horizontal" >
+	        	<RadioButton
+                	android:id="@+id/rdFarenheit"
+	               	android:layout_width="50dp"
+			   		android:layout_height="50dp"
+			   		android:scaleType="fitXY"
+	                android:layout_marginLeft="78dp"
+	                android:button="@layout/button_radio_custom"  />
+		    	<TextView
+	               android:id="@+id/txt44"
+	               style="@style/text_ammo"
+	               android:layout_width="wrap_content"
+	               android:layout_height="wrap_content"
+          	       android:text="@string/farenheit"/>
+       		</LinearLayout>
+        </LinearLayout>
+        
+        <View
+            android:id="@+id/line5"
+            android:layout_width="fill_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="10dp"
+            android:background="@color/bluelight" />
+                
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:id="@+id/txtParam6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="10dp"
+                android:text="@string/latitude"
+                style="@style/text_ammo" />
+
+            <EditText
+                android:id="@+id/edtTxtParam6"
+                style="@style/edit_info"
+                android:layout_width="110dp"
+                android:layout_height="35dp"
+                android:background="@layout/edit_text" >
+            </EditText>
+        </RelativeLayout>
+        
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:id="@+id/txtParam13"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="10dp"
+                android:text="@string/azimuth"
+                style="@style/text_ammo" />
+
+            <EditText
+                android:id="@+id/edtTxtParam13"
+                style="@style/edit_info"
+                android:layout_width="110dp"
+                android:layout_height="35dp"
+                android:background="@layout/edit_text" >
+            </EditText>
+        </RelativeLayout>
+        
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:id="@+id/txtParam9"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="10dp"
+                android:text="@string/coordAngle"
+                style="@style/text_ammo" />
+
+            <EditText
+                android:id="@+id/edtTxtParam9"
+                style="@style/edit_info"
+                android:layout_width="110dp"
+                android:layout_height="35dp"
+                android:background="@layout/edit_text" >
+            </EditText>
+        </RelativeLayout>
+        
+<!-- line================================Calculated Header===================================== -->
+        <View
+            android:id="@+id/line2"
+            android:layout_width="fill_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="10dp"
+            android:background="@color/bluelight" />
+
+        <TextView
+            android:id="@+id/txtWeatherCalcParameter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical|center_horizontal"
+            android:layout_marginTop="10dp"
+            android:text="@string/calculatedInformation"
+            style="@style/text_header" />
+        
+<!-- line================================Calculated=========================================== -->
+        <View
+            android:id="@+id/line3"
+            android:layout_width="fill_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="10dp"
+            android:background="@color/bluelight" />
+
+        <RelativeLayout 
+			android:layout_width="match_parent"
+	        android:layout_height="wrap_content">
+	        <TextView
+	            android:id="@+id/txtCalcParam1"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:text="@string/currentSoundSpeed"
+	            style="@style/text_info" />
+
+	        <TextView
+	            android:id="@+id/txtCalcParam1_1"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:text="@string/defString" 
+	            style="@style/text_info_param"/>
+        </RelativeLayout>
+
+        <RelativeLayout 
+			android:layout_width="match_parent"
+	        android:layout_height="wrap_content">
+	        <TextView
+	            android:id="@+id/txtCalcParam2"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:text="@string/currentG"
+	            style="@style/text_info" />
+
+	        <TextView
+	            android:id="@+id/txtCalcParam2_1"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:text="@string/defString" 
+	            style="@style/text_info_param"/>
+        </RelativeLayout>
+        
+        <RelativeLayout 
+			android:layout_width="match_parent"
+	        android:layout_height="wrap_content">
+	        <TextView
+	            android:id="@+id/txtCalcParam3"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:text="@string/densityDryAir"
+	            style="@style/text_info" />
+
+	        <TextView
+	            android:id="@+id/txtCalcParam3_1"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:text="@string/defString" 
+	            style="@style/text_info_param"/>
+        </RelativeLayout>
+<!-- line============================================================================== -->
+
+        <Button
+            android:id="@+id/btnCalculate"
+            android:layout_width="wrap_content"
+            android:layout_height="35dp"
+            android:layout_marginRight="15dp"
+            android:text="@string/btnCalculate" 
+            android:layout_gravity="center"
+            android:background="@layout/button_custom"
+            style="@style/button_text"/>
+
+        <View
+            android:id="@+id/line4"
+            android:layout_width="fill_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="10dp"
+            android:background="@color/bluelight" />
+        
+
+        <RelativeLayout 
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+	        <ToggleButton
+	            android:id="@+id/tglBtnConstParams"
+	            android:layout_width="85dp"
+	            android:layout_height="45dp"
+	            android:layout_alignParentRight="true"
+	            android:layout_marginRight="15dp"
+	            android:textOn="@string/tglBtnConstParamsShow"
+	            android:textOff="@string/tglBtnConstParamsHide"
+	            android:checked="true" />
+
+	        <TextView
+	            android:id="@+id/txtWeatherConstParameter"
+	            style="@style/text_header"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:layout_alignParentTop="true"
+	            android:layout_centerHorizontal="true"
+	            android:gravity="center"
+	            android:text="@string/constantInformation"
+	            android:visibility="visible" />
+        </RelativeLayout>
+<!-- line -->
+        <View
+            android:id="@+id/line6"
+            android:layout_width="fill_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="10dp"
+            android:background="@color/bluelight" />
+
+        <LinearLayout
+            android:id="@+id/constValuesLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:visibility="gone" >
+        
+	        <RelativeLayout
+	            android:layout_width="fill_parent"
+	            android:layout_height="wrap_content"
+	            android:orientation="horizontal" >
+		        <TextView
+		            android:id="@+id/txtParam66"
+		            android:layout_width="wrap_content"
+		            android:layout_height="wrap_content"
+		            android:text="@string/airPressureOnSeaLevel"
+		            style="@style/text_info" />
+	
+		        <TextView
+		            android:id="@+id/txtParam66.1"
+		            android:layout_width="wrap_content"
+		            android:layout_height="wrap_content"
+		            android:text="@string/defVal1"
+		            style="@style/text_info_param" />
+			</RelativeLayout>
+			
+	         <RelativeLayout
+	            android:layout_width="fill_parent"
+	            android:layout_height="wrap_content"
+	            android:orientation="horizontal" >
+		        <TextView
+		            android:id="@+id/txtParam7"
+		            android:layout_width="wrap_content"
+		            android:layout_height="wrap_content"
+		            android:text="@string/gravitaion"
+		            style="@style/text_info" />
+	   	        <TextView
+		            android:id="@+id/txtParam77"
+		            android:layout_width="wrap_content"
+		            android:layout_height="wrap_content"
+		            android:text="@string/defVal2"
+		            style="@style/text_info_param" />
+			</RelativeLayout>
+			
+	        <RelativeLayout
+	            android:layout_width="fill_parent"
+	            android:layout_height="wrap_content"
+	            android:orientation="horizontal" >
+		        <TextView
+		            android:id="@+id/txtParam8"
+		            android:layout_width="wrap_content"
+		            android:layout_height="wrap_content"
+		            android:text="@string/molalAirMass"
+		            style="@style/text_info" />
+		        <TextView
+		            android:id="@+id/txtParam88"
+		            android:layout_width="wrap_content"
+		            android:layout_height="wrap_content"
+		            android:text="@string/defVal3"
+		            style="@style/text_info_param" />
+			</RelativeLayout>
+			
+	         <RelativeLayout
+	            android:layout_width="fill_parent"
+	            android:layout_height="wrap_content"
+	            android:orientation="horizontal" >
+		        <TextView
+		            android:id="@+id/txtParam14"
+		            android:layout_width="wrap_content"
+		            android:layout_height="wrap_content"
+		            android:text="@string/universalGasConst"
+		            style="@style/text_info" />
+		        <TextView
+		            android:id="@+id/txtParam140"
+		            android:layout_width="wrap_content"
+		            android:layout_height="wrap_content"
+		            android:text="@string/defVal4"
+		            style="@style/text_info_param" />
+			</RelativeLayout>
+			
+	          <RelativeLayout
+	            android:layout_width="fill_parent"
+	            android:layout_height="wrap_content"
+	            android:orientation="horizontal" >
+		        <TextView
+		            android:id="@+id/txtParam10"
+		            android:layout_width="wrap_content"
+		            android:layout_height="wrap_content"
+		            android:text="@string/constSoundSpeed"
+		            style="@style/text_info" />
+		        <TextView
+		            android:id="@+id/txtParam110"
+		            android:layout_width="wrap_content"
+		            android:layout_height="wrap_content"
+		            android:text="@string/defVal5"
+		            style="@style/text_info_param" />
+	        </RelativeLayout>
+	        
+	        <RelativeLayout
+	         android:layout_width="fill_parent"
+	         android:layout_height="wrap_content"
+	         android:orientation="horizontal" >
+		        <TextView
+		            android:id="@+id/txtParam12"
+		            android:layout_width="wrap_content"
+		            android:layout_height="wrap_content"
+		            android:text="@string/kinematicAirViscosity"
+		            style="@style/text_info" />
+		        <TextView
+		            android:id="@+id/txtParam120"
+		            android:layout_width="wrap_content"
+		            android:layout_height="wrap_content"
+		            android:text="@string/defVal6"
+		            style="@style/text_info_param" />
+	        </RelativeLayout>
+    	</LinearLayout>
+    	
+	</LinearLayout>
+</ScrollView>

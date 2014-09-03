@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TableRow xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/tableRow1"
+    android:layout_width="wrap_content"
+    android:layout_height="40dp"
+    android:orientation="horizontal">
+
+  	    	<TextView
+	      		android:id="@+id/rempty"
+	      		android:layout_width="150dp"
+	      		android:layout_height="wrap_content"
+	      		style="@style/table_row_field"/>		
+	    	<!-- ======================================================== -->
+	    	<TextView
+	      		android:id="@+id/rowX"
+	      		android:layout_width="150dp"
+	      		android:layout_height="wrap_content"
+	      		style="@style/table_row_field"
+	      		android:text="@string/rowX" />
+	    	<TextView
+	      		android:id="@+id/rowY"
+	      		android:layout_width="150dp"
+	      		android:layout_height="wrap_content"
+				style="@style/table_row_field"
+	      		android:text="@string/rowY" />
+  		    	<!-- ======================================================== -->
+	    		    	<TextView
+				      		android:id="@+id/rowMOAY"
+				      		android:layout_width="150dp"
+				      		android:layout_height="wrap_content"
+							style="@style/table_row_field"
+				      		android:text="@string/rowMOA" />
+	    		    	<TextView
+				      		android:id="@+id/rowMilsY"
+				      		android:layout_width="150dp"
+				      		android:layout_height="wrap_content"
+							style="@style/table_row_field"
+				      		android:text="@string/rowMils" />
+	    		    	<TextView
+				      		android:id="@+id/rowInchesY"
+				      		android:layout_width="150dp"
+				      		android:layout_height="wrap_content"
+							style="@style/table_row_field"
+				      		android:text="@string/rowInches" />
+			<!-- ======================================================== -->
+	    	<TextView
+	      		android:id="@+id/rowZ"
+	      		android:layout_width="150dp"
+	      		android:layout_height="wrap_content"
+				style="@style/table_row_field"
+	      		android:text="@string/rowZ" />
+		    	<!-- ======================================================== -->
+    		    		<TextView
+				      		android:id="@+id/rowMOAZ"
+				      		android:layout_width="150dp"
+				      		android:layout_height="wrap_content"
+							style="@style/table_row_field"
+				      		android:text="@string/rowMOA" />
+	    		    	<TextView
+				      		android:id="@+id/rowMilsZ"
+				      		android:layout_width="150dp"
+				      		android:layout_height="wrap_content"
+							style="@style/table_row_field"
+				      		android:text="@string/rowMils" />
+	    		    	<TextView
+				      		android:id="@+id/rowInchesZ"
+				      		android:layout_width="150dp"
+				      		android:layout_height="wrap_content"
+							style="@style/table_row_field"
+				      		android:text="@string/rowInches" />    	
+			<!-- ======================================================== -->
+	   		<TextView
+	      		android:id="@+id/rowVx"
+	      		android:layout_width="150dp"
+	      		android:layout_height="wrap_content"
+	      		style="@style/table_row_field"
+	      		android:text="@string/rowVx" />
+	    	<TextView
+	      		android:id="@+id/rowVy"
+	      		android:layout_width="150dp"
+	      		android:layout_height="wrap_content"
+				style="@style/table_row_field"
+	      		android:text="@string/rowVy" />
+	    	<TextView
+	      		android:id="@+id/rowVz"
+	      		android:layout_width="150dp"
+	      		android:layout_height="wrap_content"
+				style="@style/table_row_field"
+	      		android:text="@string/rowVz" />
+	    	<!-- ======================================================== -->
+	   		<TextView
+	      		android:id="@+id/rowVwx"
+	      		android:layout_width="150dp"
+	      		android:layout_height="wrap_content"
+	      		style="@style/table_row_field"
+	      		android:text="@string/rowVwx" />
+	    	<TextView
+	      		android:id="@+id/rowVwy"
+	      		android:layout_width="150dp"
+	      		android:layout_height="wrap_content"
+				style="@style/table_row_field"
+	      		android:text="@string/rowVwy" />
+	    	<TextView
+	      		android:id="@+id/rowVwz"
+	      		android:layout_width="150dp"
+	      		android:layout_height="wrap_content"
+				style="@style/table_row_field"
+	      		android:text="@string/rowVwz" />
+	    	<!-- ======================================================== -->
+	   		<TextView
+	      		android:id="@+id/rowVPx"
+	      		android:layout_width="150dp"
+	      		android:layout_height="wrap_content"
+	      		style="@style/table_row_field"
+	      		android:text="@string/rowVPx" />
+	    	<TextView
+	      		android:id="@+id/rowVPy"
+	      		android:layout_width="150dp"
+	      		android:layout_height="wrap_content"
+				style="@style/table_row_field"
+	      		android:text="@string/rowVPy" />
+	    	<TextView
+	      		android:id="@+id/rowVPz"
+	      		android:layout_width="150dp"
+	      		android:layout_height="wrap_content"
+				style="@style/table_row_field"
+	      		android:text="@string/rowVPz" />
+	    	<!-- ======================================================== -->
+	   		<TextView
+	      		android:id="@+id/rowAx"
+	      		android:layout_width="150dp"
+	      		android:layout_height="wrap_content"
+	      		style="@style/table_row_field"
+	      		android:text="@string/rowAx" />
+	    	<TextView
+	      		android:id="@+id/rowAy"
+	      		android:layout_width="150dp"
+	      		android:layout_height="wrap_content"
+				style="@style/table_row_field"
+	      		android:text="@string/rowAy" />
+	    	<TextView
+	      		android:id="@+id/rowAz"
+	      		android:layout_width="150dp"
+	      		android:layout_height="wrap_content"
+				style="@style/table_row_field"
+	      		android:text="@string/rowAz" />
+	    	<!-- ======================================================== -->
+	   		<TextView
+	      		android:id="@+id/rowMainVelocity"
+	      		android:layout_width="150dp"
+	      		android:layout_height="wrap_content"
+	      		style="@style/table_row_field"
+	      		android:text="@string/rowMainVelocity" />
+	    	<TextView
+	      		android:id="@+id/rowMAX"
+	      		android:layout_width="150dp"
+	      		android:layout_height="wrap_content"
+				style="@style/table_row_field"
+	      		android:text="@string/rowMAX" />
+	    	<TextView
+	      		android:id="@+id/rowRfunction"
+	      		android:layout_width="150dp"
+	      		android:layout_height="wrap_content"
+				style="@style/table_row_field"
+	      		android:text="@string/rowRfunction" />
+	   		<TextView
+	      		android:id="@+id/rowAcceleration"
+	      		android:layout_width="150dp"
+	      		android:layout_height="wrap_content"
+	      		style="@style/table_row_field"
+	      		android:text="@string/rowAcceleration" />
+	    	<TextView
+	      		android:id="@+id/rowTime"
+	      		android:layout_width="150dp"
+	      		android:layout_height="wrap_content"
+				style="@style/table_row_field"
+	      		android:text="@string/rowTime" />
+	    	<TextView
+	      		android:id="@+id/rowEnergy"
+	      		android:layout_width="150dp"
+	      		android:layout_height="wrap_content"
+				style="@style/table_row_field"
+	      		android:text="@string/rowEnergy" />
+	    	<!-- ======================================================== -->
+</TableRow>
