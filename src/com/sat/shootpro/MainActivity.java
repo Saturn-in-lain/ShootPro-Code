@@ -20,7 +20,13 @@ import android.widget.TextView;
 import com.sat.resourses.BitmapWorkerTask;
 import com.sat.resourses.HorizontalLockableScrollView;
 import com.sat.resourses.LockableScrollView;
-
+/******************************************************************
+ * @author:     stas.savinov
+ * @Name:       MainActivity
+ * @Desciption: Activity for Not zoomed view of the trainer.
+ * @category:   UI Business Logic of the view
+ * @version:    1.1.0
+ *****************************************************************/
 public class MainActivity extends Activity implements InitializerPerClass,OnClickListener
 {
    private static String  LOG  = "MainActivity";
