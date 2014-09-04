@@ -120,7 +120,7 @@ public class UIHardCode
    public UIHardCode(Point size)
    {
       if( (size.y == HDPI_x) && 
-               (size.x == HDPI_y) )
+                  (size.x == HDPI_y) )
       {
          this.SizeCustomizationName   = "HDPI";
          this.MOVE_STEP               = (HDPI_MOVE);
@@ -129,8 +129,6 @@ public class UIHardCode
          this.ScopeGridMargin         = (HDPI_MG);
          this.VerticalClickMargin     = (HDPI_VerticalClickMargin);
          this.pixelSizeEvalution      = (int) (pixelSizeEvalution * MDPI);
-        
-         
          this.pixelBackgroundMargin   = (HDPI_pixelBackgroundMargin);
          
          this.cloudSizeZoomAct        = (HDPI_cloudSizeZoomAct);
@@ -150,7 +148,7 @@ public class UIHardCode
          this.fingerMoveMainActRight  = (HDPI_fingerMoveMainActRight);
       } 
       else if ((size.y == XHDPI_x) && 
-               (size.x == XHDPI_y) ) // Nexus 7
+                        (size.x == XHDPI_y) ) // Nexus 7
       {
          this.SizeCustomizationName = "XHDPI";
          this.ScopeSize             = XHDPI_SG;
@@ -161,7 +159,7 @@ public class UIHardCode
 
       } 
       else if ((size.y == XXHDPI_x) && 
-               (size.x == XXHDPI_y) )
+                        (size.x == XXHDPI_y) )
       {
          this.SizeCustomizationName = "XXHDPI";
          this.ScopeSize             = XXHDPI_SG;

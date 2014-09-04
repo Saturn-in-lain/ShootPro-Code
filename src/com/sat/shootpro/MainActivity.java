@@ -29,10 +29,9 @@ import com.sat.resourses.LockableScrollView;
  *****************************************************************/
 public class MainActivity extends Activity implements InitializerPerClass,OnClickListener
 {
-   private static String  LOG  = "MainActivity";
-   
-   private static boolean dragStatus               = false;
-   private        boolean scroolActivated          = true;
+   private static String      LOG                  = "MainActivity";
+   private static boolean     dragStatus           = false;
+   private        boolean     scroolActivated      = true;
    private static ImageButton sniperNotebookButton = null;
    private static ImageButton shootButton          = null;
    private static TextView    txtWindSpeed         = null;
@@ -45,11 +44,12 @@ public class MainActivity extends Activity implements InitializerPerClass,OnClic
    private static HorizontalLockableScrollView  scrollMainHorizontalImage = null;
    
    /** Target data */
-   public static Point windowGabarites = new Point(0,0);
-   Point targetCoord = new Point(0,0);  // Real coordinates
-   Point scopeCoord  = new Point(0,0);  // Real coordinates
-   Point moveCoord   = new Point(0,0);  // While moving scroll windows
-   Point centerCoord = new Point(0,0);  // Coordinates only within 800x480 windows size 
+   public static Point windowGabarites     = new Point(0,0);  // Gabarites only within  windows size
+   public static Point fullwindowGabarites = new Point(0,0);  // Gabarites of full image scrolling size
+   Point               targetCoord         = new Point(0,0);  // Real coordinates
+   Point               scopeCoord          = new Point(0,0);  // Real coordinates
+   Point               moveCoord           = new Point(0,0);  // While moving scroll windows
+   Point               centerCoord         = new Point(0,0);  // Coordinates only within 800x480 windows size 
    
    /** Background polygon picture */
    public  static BitmapWorkerTask     task     = null;
@@ -67,19 +67,17 @@ public class MainActivity extends Activity implements InitializerPerClass,OnClic
       scrollMainVerticalImage   = (LockableScrollView )findViewById(R.id.scrollMainImage);
       scrollMainHorizontalImage = (HorizontalLockableScrollView)
                                              findViewById(R.id.scrollMainHorizontalImage);
+      sniperScope               = (ImageView)   findViewById(R.id.sniperScope);
+      sniperNotebookButton      = (ImageButton) findViewById(R.id.btn_sniper_notebook);
+      shootButton               = (ImageButton) findViewById(R.id.btn_shoot);
+      txtWindSpeed              = (TextView)    findViewById(R.id.txtWindSpeed); 
+      imageTargetScoped         = (ImageView)   findViewById(R.id.imageTarget);
+      
+      UICustom                  = new UIHardCode(getWindowsSize());
       
       scrollMainVerticalImage.setVerticalScrollBarEnabled(false);
       scrollMainHorizontalImage.setHorizontalScrollBarEnabled(false);
-      
-      sniperScope            = (ImageView)   findViewById(R.id.sniperScope);
-      sniperNotebookButton   = (ImageButton) findViewById(R.id.btn_sniper_notebook);
-      shootButton            = (ImageButton) findViewById(R.id.btn_shoot);
-      txtWindSpeed           = (TextView)    findViewById(R.id.txtWindSpeed); 
-      imageTargetScoped      = (ImageView)   findViewById(R.id.imageTarget);
-     
-      windowGabarites = setImageCenterCoordinates();
-      
-      UICustom = new UIHardCode(getWindowsSize());
+      windowGabarites           = setImageCenterCoordinates();
    } 
    
    /**************************************************************************
@@ -201,37 +199,25 @@ public class MainActivity extends Activity implements InitializerPerClass,OnClic
       targetCoord.x  =  targetCoord.x - (moveCoord.x + UICustom.scopeAdaptMainActX); 
       targetCoord.y  =  targetCoord.y - (moveCoord.y + UICustom.scopeAdaptMainActY); 
       
-      
-      //TODO
-      /*Here I need to fix this issue*/
-      
-      //TODO
-      
+      /*-------------------------------------------------------------------------------------*/
+      fullwindowGabarites.x = backgroundView.getWidth();
+      fullwindowGabarites.y = backgroundView.getHeight();
+      /*-------------------------------------------------------------------------------------*/
       
       if( isTargetAndScopeOverlap(centerCoord,targetCoord) )
       {
+         targetCoord.x  +=  (moveCoord.x + UICustom.scopeAdaptMainActX); 
+         targetCoord.y  +=  (moveCoord.y + UICustom.scopeAdaptMainActY);
          selectedImageSliceId = detectImageSliceIdDependence(targetCoord);
       }
+      
       myIntent = new Intent(getApplicationContext(), MainZoomShoot.class);
       myIntent.putExtra("imageLocation", selectedImageSliceId );
-
-      if( (selectedImageSliceId != DEADBEAF) )
-      {
-         myIntent.putExtra(strLocation_x,  targetCoord.x);
-         myIntent.putExtra(strLocation_y,  targetCoord.y);
-      }
-      else
-      {
-         myIntent.putExtra(strLocation_x,  0);
-         myIntent.putExtra(strLocation_y,  0);
-      }
-
+      myIntent.putExtra(strLocation_x,  targetCoord.x);
+      myIntent.putExtra(strLocation_y,  targetCoord.y);
+ 
       startActivity(myIntent);
-      if(null != task)
-      {
-         task.cancel(true);
-         task = null;
-      }
+      beforeDestroy();
    }
    
    /**************************************************************************
@@ -403,13 +389,23 @@ public class MainActivity extends Activity implements InitializerPerClass,OnClic
     protected void onDestroy()
     {
        super.onDestroy();
-       if(null != task)
-       {
-          task.cancel(true);
-          task = null;
-       }
+       beforeDestroy();
     }
     
+    /**************************************************************************
+     * Function: beforeDestroy
+     * @param () None.
+     * @return None.
+     * ***********************************************************************/
+     private void beforeDestroy()
+     {
+        if(null != task)
+        {
+           task.cancel(true);
+           task = null;
+        }
+     }
+     
     /**************************************************************************
      * Function: detectTargetAndScopeOverlap() - return true if target
      * placed within scope  
@@ -430,6 +426,7 @@ public class MainActivity extends Activity implements InitializerPerClass,OnClic
        }
        return bRet;
     }
+    
     /**************************************************************************
      * Function: detectImageTargetId - TODO
      * @param () x,y. - this is stupid and it must be reworked. Only to prove general concept!
@@ -442,9 +439,12 @@ public class MainActivity extends Activity implements InitializerPerClass,OnClic
        int step_width = UICustom.sliceDetectionWidtgMainActTop;
        int start_x    = imageTargetScoped.getWidth()/2; 
        int start_y    = imageTargetScoped.getHeight()/2;
-       int end_x      = windowGabarites.x - imageTargetScoped.getWidth()/2;  
-       int end_y      = windowGabarites.y - imageTargetScoped.getHeight()/2; 
-
+       
+//       int end_x      = windowGabarites.x - imageTargetScoped.getWidth()/2;  
+//       int end_y      = windowGabarites.y - imageTargetScoped.getHeight()/2; 
+       int end_x      = fullwindowGabarites.x - imageTargetScoped.getWidth()/2;  
+       int end_y      = fullwindowGabarites.y - imageTargetScoped.getHeight()/2; 
+       
        if ((detectCoordinate.x >= start_x) && 
            (detectCoordinate.y >= start_y) && 
            (detectCoordinate.x <= end_x)   && 
@@ -473,7 +473,11 @@ Log.e( LOG, "F:[detectImageSliceIdDependence]>> result: " + result);
        }
        else
        {
-          Log.e( LOG, "F:[detectImageSliceIdDependence] Error: [" + detectCoordinate.x + "][" + detectCoordinate.y + "] result = 666" );
+Log.e( LOG, "F:[detectImageSliceIdDependence] Error: [" + detectCoordinate.x + "][" + detectCoordinate.y + "] result = 666" );
+Log.e( LOG, "F:[start_x,y]:[" + start_x + "][" + start_y + "]" );
+Log.e( LOG, "F:[end_x,y]:[" + end_x + "][" + end_y + "]" );
+         detectCoordinate.x = 0;
+         detectCoordinate.y = 0;
        }
        return result;
     }
