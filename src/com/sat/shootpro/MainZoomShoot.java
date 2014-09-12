@@ -81,15 +81,15 @@ public class MainZoomShoot extends Activity implements InitializerPerClass, OnCl
    private AnimationDrawable        animation         = null; 
    public  Resources                globalRessources  = null;
    /** Coordinates ********************************************************/
-   private Point targetCoordinates        = new Point(0,0); // target coordinates in  
-   private Point windowCenterCoordinates  = new Point(0,0); // center of screen/ scopes center
-   private Point scopeClickSetsXY         = new Point(0,0); // scope click values
-   private boolean recalculateShootParams = true;
-   private boolean isReloadDone           = true;
-   private boolean isTargetPresent        = false;
+   private Point targetCoordinates                    = new Point(0,0); // target coordinates in  
+   private Point windowCenterCoordinates              = new Point(0,0); // center of screen/ scopes center
+   private Point scopeClickSetsXY                     = new Point(0,0); // scope click values
+   private boolean recalculateShootParams             = true;
+   private boolean isReloadDone                       = true;
+   private boolean isTargetPresent                    = false;
    /** Loading ***************************************************/
-   private static ProgressBar Loading     = null;
-   private        Handler     mHandler    = new Handler();
+   private static ProgressBar Loading                 = null;
+   private        Handler     mHandler                = new Handler();
    /** Clicks ***************************************************/
    String[] clickString = new String[]
     {
@@ -121,33 +121,27 @@ public class MainZoomShoot extends Activity implements InitializerPerClass, OnCl
    @Override
    public void InitAllResourcesInClass(View view)
    {
-      animation       = new AnimationDrawable();
-      TargetClass     = new Target();
-      
-      ShootButton     = (ImageButton) findViewById(R.id.ImageButtonShoot);
-      UpBtn           = (ImageButton) findViewById(R.id.ImgUpBtn);
-      DownBtn         = (ImageButton) findViewById(R.id.ImgDownBtn);
-      LeftBtn         = (ImageButton) findViewById(R.id.ImgLeftBtn);
-      RightBtn        = (ImageButton) findViewById(R.id.ImgRightBtn);
-      DialogTable     = (ImageButton) findViewById(R.id.imgBtnTable);
-
-      TargetDialog    = (ImageButton) findViewById(R.id.ImgTargetBtn);
-      
-      txtHorizVal     = (TextView)  findViewById(R.id.txtHorizontalParam);
-      txtVertcVal     = (TextView)  findViewById(R.id.txtVerticalParam);
-      txtWindVal      = (TextView)  findViewById(R.id.txtWindParam);
-
-      cloudAnimation  = (ImageView) findViewById(R.id.imgViewCloud);
-      imgCompasGround = (ImageView) findViewById(R.id.imgCompasBackground);
-      imgScopeGrid    = (ImageView) findViewById(R.id.imgScopeMil);
-      
-      imageZoomedTargetScoped = (ImageView)           findViewById(R.id.imageZoomedTarget);
-      VerticalScrollView      = (ScrollView)          findViewById(R.id.vscrollClickLine);
-      HorizontalScrollView    = (HorizontalScrollView)findViewById(R.id.hscrollClickLine);
-
+      animation               = new AnimationDrawable();
+      TargetClass             = new Target();
+      ShootButton             = (ImageButton)          findViewById(R.id.ImageButtonShoot);
+      UpBtn                   = (ImageButton)          findViewById(R.id.ImgUpBtn);
+      DownBtn                 = (ImageButton)          findViewById(R.id.ImgDownBtn);
+      LeftBtn                 = (ImageButton)          findViewById(R.id.ImgLeftBtn);
+      RightBtn                = (ImageButton)          findViewById(R.id.ImgRightBtn);
+      DialogTable             = (ImageButton)          findViewById(R.id.imgBtnTable);
+      TargetDialog            = (ImageButton)          findViewById(R.id.ImgTargetBtn);
+      txtHorizVal             = (TextView)             findViewById(R.id.txtHorizontalParam);
+      txtVertcVal             = (TextView)             findViewById(R.id.txtVerticalParam);
+      txtWindVal              = (TextView)             findViewById(R.id.txtWindParam);
+      cloudAnimation          = (ImageView)            findViewById(R.id.imgViewCloud);
+      imgCompasGround         = (ImageView)            findViewById(R.id.imgCompasBackground);
+      imgScopeGrid            = (ImageView)            findViewById(R.id.imgScopeMil);
+      imageZoomedTargetScoped = (ImageView)            findViewById(R.id.imageZoomedTarget);
+      VerticalScrollView      = (ScrollView)           findViewById(R.id.vscrollClickLine);
+      HorizontalScrollView    = (HorizontalScrollView) findViewById(R.id.hscrollClickLine);
       windowCenterCoordinates = MainActivity.getWindowsCenter();
-      
-      targetLayoutParams = (RelativeLayout.LayoutParams) imageZoomedTargetScoped.getLayoutParams();
+      targetLayoutParams      = (RelativeLayout.LayoutParams) 
+                                          imageZoomedTargetScoped.getLayoutParams();
    }
    
    /**************************************************************************
@@ -170,21 +164,17 @@ public class MainZoomShoot extends Activity implements InitializerPerClass, OnCl
       VerticalScrollView.setVisibility          (View.VISIBLE);
       HorizontalBarLayout.setVisibility         (View.VISIBLE);  
       HorizontalScrollView.setVisibility        (View.VISIBLE);
-      
+      imgScopeGrid.setVisibility                (View.VISIBLE);
+      imgCompasGround.setVisibility             (View.VISIBLE);
       if(true == isTargetPresent)
       {
          imageZoomedTargetScoped.setVisibility  (View.VISIBLE);
          TargetDialog.setVisibility             (View.VISIBLE);
       }
-      imgScopeGrid.setVisibility                (View.VISIBLE);
-      imgCompasGround.setVisibility             (View.VISIBLE);
-      
       /* Strange bug Init here and all works*/
       imgCompasArrow  = (ImageView) findViewById(R.id.imgCompasArrow);
       imgCompasArrow.setVisibility              (View.VISIBLE);
-      
       setWindDirection();
-      
       Loading.setVisibility( View.GONE );
    }
    
@@ -230,13 +220,16 @@ public class MainZoomShoot extends Activity implements InitializerPerClass, OnCl
        txtWindVal.setText(String.format("%s %.2g",
                                         getString(R.string.defWindParam),
                                         StartMenuActivity.Engine.Parameters.windStrength));
-       
        /* Scope settings */
        scopeClickSetsXY.x = StartMenuActivity.Interf.getScopeClickX();
        scopeClickSetsXY.y = StartMenuActivity.Interf.getScopeClickY();
        
-       txtVertcVal.setText(String.format("Vertical Click: %d",    scopeClickSetsXY.y));
-       txtHorizVal.setText(String.format("Horizontal Click: %d",  scopeClickSetsXY.x));
+       
+       String verticalClick = getResources().getString(R.string.defVerticalParam);
+       String horizontalClick = getResources().getString(R.string.defHorizontParam);
+       
+       txtVertcVal.setText(String.format(verticalClick+"%d",    scopeClickSetsXY.y));
+       txtHorizVal.setText(String.format(horizontalClick+"%d",  scopeClickSetsXY.x));
     }
     
     /**************************************************************************
@@ -320,10 +313,10 @@ public class MainZoomShoot extends Activity implements InitializerPerClass, OnCl
    @Override
    public void onBackPressed() 
    {
-     targetCoordinates.x = 0;     //recalculateShootParams = true;
-     targetCoordinates.y = 0;
-     this.finish();
-     return;
+      targetCoordinates.x = 0;     //recalculateShootParams = true;
+      targetCoordinates.y = 0;
+      this.finish();
+      return;
    }   
    
    /**************************************************************************
@@ -906,24 +899,23 @@ Log.e(LOG,String.format("Clicks meters + deviation meters [%g][%g]",
        scopeCenter = MainActivity.getImageCenterInScreenContent(imgScopeGrid);
 
        TargetClass.setSmallTargetCoordinates(StartMenuActivity.Interf.getImageLeftTopCoordinates(imageZoomedTargetScoped)); 
-
-       //---------------------------------------------------------
+       //-------------------------------------------------------------------
        xVal =  (double)TargetClass.getMilsAndMeterKoeff() * xVal;     
        yVal =  (double)TargetClass.getMilsAndMeterKoeff() * yVal; 
-       //---------------------------------------------------------
+       //-------------------------------------------------------------------
        int sizeX = (int) (xVal * MainActivity.UICustom.pixelSizeEvalution);
        int sizeY = (int) (yVal * MainActivity.UICustom.pixelSizeEvalution);
-       //---------------------------------------------------------
+       //-------------------------------------------------------------------
        bulletHit.x = ( scopeCenter.x + sizeX );
        bulletHit.y = ( scopeCenter.y + sizeY );
-       
+       //-------------------------------------------------------------------
        fRet = TargetClass.isBulletHitTheTarget(bulletHit);
        return fRet;
     }
 
    /**************************************************************************
    * Function: targetMissed() - perform all tasks related to that event.
-   * @param  None.
+   * @param  isTargetPresent - boolean.
    * @return None.
    * ***********************************************************************/
     private void targetMissed(boolean isTargetPresent)
@@ -942,6 +934,7 @@ Log.e(LOG,String.format("Clicks meters + deviation meters [%g][%g]",
     
     /**************************************************************************
      * Function: setScopeClickMargin() TODO This is dirty huck
+     * @param   (VL) ScrollView 
      * @return  None.
      * ***********************************************************************/
     private void setScopeClickMargin( ScrollView VL ) 
@@ -996,7 +989,7 @@ Log.e(LOG,String.format("Clicks meters + deviation meters [%g][%g]",
      } 
      
      /***************************************************************************
-      *  addVerticalItem() - add button in list vertically
+      *  addVerticalItem()        - add button in list vertically
       *  @param ctx               - (Context) 
       *  @param index             - (int)
       *  @param VerticalBarLayout - LinearLayout
@@ -1009,19 +1002,17 @@ Log.e(LOG,String.format("Clicks meters + deviation meters [%g][%g]",
                                               index, 
                                               clickString[index],
                                               true);
-               
-         
         VerticalBarLayout.addView(item);
      }
      
     /***************************************************************************
      *  addScopeClickItemButton() - add button value for scope clicks
-     *  @param btn        - (Button) button view
-     *  @param index      - (int)   position in list
-     *  @param text       - (String) show text  
-     *  @param isVertical - (boolean) added button will be for vertical(true)
-     *  horizontal(false)
-     *  @return Created button         
+     *  @param btn                - (Button) button view
+     *  @param index              - (int)   position in list
+     *  @param text               - (String) show text  
+     *  @param isVertical         - (boolean) added button will be for vertical(true)
+     *                              horizontal(false)
+     *  @return (Button) Created button         
      **************************************************************************/
      private Button addScopeClickItemButton(Button btn, 
                                             final int index, 

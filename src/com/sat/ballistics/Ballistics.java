@@ -9,8 +9,6 @@ import android.util.Log;
  * http://www.shooterscalculator.com/ballistic-trajectory-chart.php
  * http://www.bfxyz.nl/docs/bfxaboutdragfunctions.shtml - data for round bullet also
  * http://vk.bstu.ru/book52/list.htm - data for encyclopedia
- * 
- * 
  * http://www.shooterscalculator.com/ballistic-trajectory-chart.php?pl=%5BMY%5D&presets=%5BMY%5D~~G1~0.4~140.4312~2624~0~1.5~0~0~0~false~0~59~29.92~50~true~1000~100&df=G1&bc=0.4&bw=140.4312&vi=2624&zr=100&sh=1.5&sa=0&ws=0&wa=0&ssb=on&cr=1202.97&ss=100&chartColumns=Range~m%3BElevation~cm%3BWindage~cm%3BEnergy~J%3BTime~s%3BVel%5Bx%2By%5D~m%2Fs%3BVel%5Bx%5D~m%2Fs%3BVel%5By%5D~m%2Fs&lbl=&submitst=+Create+Chart+
  * This is statistics of separate test data 
  * G1 = 0.4       Angle = 0 
@@ -19,9 +17,6 @@ import android.util.Log;
  * yard = 1202.97 = 1000 meters
  * yard = 109.36  = 100 meters  
  */
-
-
-/*TODO: Вынести константы из баллистики.... наверное*/
 
 public class Ballistics
 {
@@ -80,7 +75,7 @@ public class Ballistics
     =======================================================*/
    
    /*=============================================================================*/
-   private BulletInfo bullet = null;
+   private BulletSpecifications bullet = null;
    /*=============================================================================*/
    public class bulletFlightParams
    {
@@ -178,8 +173,8 @@ public class Ballistics
       private WIND_DIRECTIONS(String toString, int value, int angle) 
       {
          this.stringName = toString;
-         this.intNumber = value;
-         this.intAngle = angle;
+         this.intNumber  = value;
+         this.intAngle   = angle;
       }
 
       public int getNumber()
@@ -319,7 +314,7 @@ public class Ballistics
     * Constructor: Ballistics class constructor for ordinal job
     *  
     * ***********************************************************************/
-   public Ballistics(BulletInfo info)
+   public Ballistics(BulletSpecifications info)
    {
       BallisticsInit();
       //set BulletInfo parameters
@@ -383,7 +378,7 @@ public class Ballistics
     * @param info - BulletInfo
     * @return None.
     * ***********************************************************************/
-   public void setBulletInfo(BulletInfo info)
+   public void setBulletInfo(BulletSpecifications info)
    {
       if(null != info)
       {
@@ -1699,7 +1694,7 @@ public class Ballistics
 //                                 BulletSpecifications.bulletRadiusOjivalo,
 //                                 BulletSpecifications.bulletTailDiameter);
       
-      bullet.calculatePreParametersOfMcCoy();
+      calculatePreParametersOfMcCoy();
       /*************************************** Example *****************************/
       
 //            800 М/С Cx = 0,342349055954777 
@@ -1897,7 +1892,7 @@ public class Ballistics
     * @param double Cg - коэффициента сопротивления аэродинамических сил стандартной пули (G1)
     * @return (double) Range in yards
     * ***********************************************************************/
-    public double calculateBalisticKoef(BulletInfo bullet, double Cb, double Cg)
+    public double calculateBalisticKoef(BulletSpecifications bullet, double Cb, double Cg)
     {
        double koef = init;
        double SD = bullet.bulletWeight / bullet.ammo_crossSection;
@@ -1914,7 +1909,7 @@ public class Ballistics
      * @return (double) Range in yards
      * @Note:  i_form_factor take from G1 or G7
      * ***********************************************************************/
-     public double calculateBalisticKoef1(BulletInfo bullet, double calibre, double i_form_factor)
+     public double calculateBalisticKoef1(BulletSpecifications bullet, double calibre, double i_form_factor)
      {
         double koef = init;
         double SD = bullet.bulletWeight / bullet.ammo_crossSection;
@@ -2034,4 +2029,86 @@ public class Ballistics
          Log.e(LOG,"[setTargetDistance]");
    }
    
+   /**************************************************************************
+    * Function: calculatePreParametersOfMcCoy() 
+    * 
+    * @return (void) 
+    * @Note:
+    * ***********************************************************************/
+    public void calculatePreParametersOfMcCoy()
+    {
+       /** Some data sheets has no parameters... It's not an error. Conversion must be done */
+       if (0 ==  bullet.bulletLengthsOfBoatTail)
+       {
+          bullet.bulletDiameterOfBoatTail = bullet.bulletDiametr;
+       }
+       else if (bullet.bulletNoseDiameter == bullet.bulletDiametr)
+       {
+          bullet.bulletLengthsOfBoatTail = 0; 
+       }
+
+       /* Вариант вычисления радиуса*/
+       if(0 == bullet.bulletRadius)
+       {
+          if( (0 != bullet.radiusOjivInCalibre) && 
+              (0 != bullet.bulletDiametr)           )
+          {
+             bullet.bulletRadius = (bullet.radiusOjivInCalibre * bullet.bulletDiametr);
+          }
+       }
+       
+       /* Вычисляем радиус тангенциального оживала */
+       if (bullet.RtR == 0)
+       {
+          double DifD     = (bullet.bulletDiametr - bullet.bulletNoseDiameter);
+          bullet.radiusTang = ( Math.pow((bullet.bulletNoseLength / DifD),2) + 0.25) * bullet.bulletDiametr;
+          bullet.RtR        = bullet.radiusTang / bullet.bulletRadius; //'Для конической головной части равно нулю
+       }
+    }
+       
+    /**************************************************************************
+     * Function: calculateBKfromSpeed() 
+     * @param double speed_point_1 for example 100m
+     * @param double speed_point_2             400m
+     * @param double distance_point_1          850m/s
+     * @param double distance_point_2          750m/s
+     * @return (double) result - ballistic koeff
+     * @Note:
+     * ***********************************************************************/
+     public double calculateBKfromSpeed(double speed_point_1, double speed_point_2,
+                                        double distance_point_1, double distance_point_2)
+     {
+        double result = 0;
+        double koeff  = (0.0052834); 
+        
+        double Distance       = distance_point_2 - distance_point_1;
+        double sqrtSpeedParam = Math.sqrt(speed_point_1) - Math.sqrt(speed_point_2);
+           result = Math.round( ((Distance * koeff) / (sqrtSpeedParam * 1000 )) / 1000 );
+        return result;
+     }
+     
+     /**************************************************************************
+      * Function: aeroDinamicKoeff_Cd() 
+      * @param double speed_point_1 for example 100m
+      * @param double speed_point_2             400m
+      * @param double distance_point_1          850m/s
+      * @param double distance_point_2          750m/s
+      * @param double mass                      10 kg
+      * @param double ammo_crossSection         0.024 m2 
+      * @return (double) result - // аэродинамический безразмерный коэффициент
+      * @Note:
+      * ***********************************************************************/
+      public double aeroDinamicKoeff_Cd(double speed_point_1, double speed_point_2,
+                                         double distance_point_1, double distance_point_2,
+                                         double mass, double ammo_crossSection)
+      {
+         double result = 0;
+         double ro_air_density  = (1.225); 
+         double Distance = (distance_point_2 - distance_point_1);
+         
+         double r1 = (-Math.log(1-speed_point_1))/speed_point_1;
+         double r2 = (-Math.log(1-speed_point_2))/speed_point_2;
+            result = ( (2 * (r1 - r2)) / (Distance *  ro_air_density) )  * ( mass / ammo_crossSection);  
+         return result;
+      }
 }

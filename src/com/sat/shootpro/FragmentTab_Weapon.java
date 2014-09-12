@@ -233,22 +233,22 @@ public class FragmentTab_Weapon extends Fragment implements InitializerPerClass,
             case R.id.imgViewSVD:
                imgDialog.showPictureDialog(R.drawable.svd,
                                            0,
-                     StartMenuActivity.WeaponInformation.getInfoAboutWeaponFromDataBase(ctx,1));
+                     StartMenuActivity.WeaponInformation.getInfoAboutFromDataBase(ctx,1));
                break;
             case R.id.imgViewL96:
                imgDialog.showPictureDialog(R.drawable.l96,
                                            0,
-                     StartMenuActivity.WeaponInformation.getInfoAboutWeaponFromDataBase(ctx,0));
+                     StartMenuActivity.WeaponInformation.getInfoAboutFromDataBase(ctx,0));
                break;
             case R.id.imgViewBender:
                imgDialog.showPictureDialog(R.drawable.schmidt_bender_scope,
                                            0,
-                     StartMenuActivity.ScopeInformation.getInfoAboutScopeFromDataBase(ctx,1));
+                     StartMenuActivity.ScopeInformation.getInfoAboutFromDataBase(ctx,1));
                break;
             case R.id.imgViewPSO:
                imgDialog.showPictureDialog(R.drawable.pso_scope,
                                            0,
-                    StartMenuActivity.ScopeInformation.getInfoAboutScopeFromDataBase(ctx,0));
+                    StartMenuActivity.ScopeInformation.getInfoAboutFromDataBase(ctx,0));
                break;
             default:
                break;

@@ -51,27 +51,24 @@ public class FragmentTab_Main extends Fragment implements InitializerPerClass
    @Override
    public void InitAllResourcesInClass(View view)
    {
+      this.ctx        = view.getContext();
       btnSetTableRows = (Button)       view.findViewById(R.id.btnSetTableRows);
       rdbInches       = (RadioButton)  view.findViewById(R.id.rdBtnInches);
       rdbMeters       = (RadioButton)  view.findViewById(R.id.rdBtnMeters);
       etWidth         = (EditText)     view.findViewById(R.id.edtTxtTWidth);
       etHeight        = (EditText)     view.findViewById(R.id.edtTxtTHeight);
-      
       chkBxDistance   = (CheckBox) view.findViewById(R.id.chkBxSelectDistance);
       etDistance      = (EditText)view.findViewById(R.id.editTxtDistanceSelection);
       tCurrentWeapon  = (TextView)view.findViewById(R.id.txtCurrentWeapon);
       tCurrentAmmo    = (TextView)view.findViewById(R.id.txtCurrentAmmo);
       tCurrentScope   = (TextView)view.findViewById(R.id.txtCurrentScope);
       
-      this.ctx = view.getContext();
-      TableSetting = new TableSettingsInDialog(this.ctx,view);
-      
-      Double width  = StartMenuActivity.Interf.getTargetWidthParameter();
-      Double height = StartMenuActivity.Interf.getTargetHeightParameter();
+      TableSetting    = new TableSettingsInDialog(this.ctx,view);
+      Double width    = StartMenuActivity.Interf.getTargetWidthParameter();
+      Double height   = StartMenuActivity.Interf.getTargetHeightParameter();
       
       etWidth.setText( width.toString() );
       etHeight.setText( height.toString() );
-
       setIncrementStep();
    }
    
@@ -156,7 +153,7 @@ public class FragmentTab_Main extends Fragment implements InitializerPerClass
    private void setCurrentMainInfirmation()
    {
       tCurrentWeapon.setText(StartMenuActivity.WeaponInformation.weaponName);
-      tCurrentAmmo.setText(StartMenuActivity.BulletParameters.bulletName);
+      tCurrentAmmo.setText(StartMenuActivity.BulletInformation.bulletName);
       tCurrentScope.setText(StartMenuActivity.ScopeInformation.scopeName);
    }
    

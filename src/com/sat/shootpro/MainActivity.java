@@ -194,16 +194,13 @@ public class MainActivity extends Activity implements InitializerPerClass,OnClic
       }
       moveCoord.x    = scrollMainHorizontalImage.getScrollCoordinates();
       moveCoord.y    = scrollMainVerticalImage.getScrollCoordinates();
-      
       targetCoord    =  StartMenuActivity.Interf.getImageCenterCoordinates(imageTargetScoped,null);
       targetCoord.x  =  targetCoord.x - (moveCoord.x + UICustom.scopeAdaptMainActX); 
       targetCoord.y  =  targetCoord.y - (moveCoord.y + UICustom.scopeAdaptMainActY); 
       
-      /*-------------------------------------------------------------------------------------*/
       fullwindowGabarites.x = backgroundView.getWidth();
       fullwindowGabarites.y = backgroundView.getHeight();
-      /*-------------------------------------------------------------------------------------*/
-      
+
       if( isTargetAndScopeOverlap(centerCoord,targetCoord) )
       {
          targetCoord.x  +=  (moveCoord.x + UICustom.scopeAdaptMainActX); 
@@ -256,9 +253,9 @@ public class MainActivity extends Activity implements InitializerPerClass,OnClic
                  break;
                  
               case MotionEvent.ACTION_MOVE:         
-                 MoveStop.x = (int) event.getRawX(); 
-                 MoveStop.y = (int) event.getRawY();
-                                             
+                 MoveStop.x  = (int) event.getRawX(); 
+                 MoveStop.y  = (int) event.getRawY();
+               
                  // Scope image size and margin for scope cross 
                  if ( ( MoveStop.x + UICustom.fingerMoveMainActRight ) >= windowGabarites.x )
                     break;
@@ -276,11 +273,9 @@ public class MainActivity extends Activity implements InitializerPerClass,OnClic
                  sniperScope.setLayoutParams(params);
                  centerCoord = setScopeCenterCoordinate();
                  break;
-                 
-              default:
-                 break;
-                 
+
               case MotionEvent.ACTION_UP:
+              default:
                  break;
           } 
        }
@@ -308,10 +303,10 @@ public class MainActivity extends Activity implements InitializerPerClass,OnClic
     * ***********************************************************************/
     public Point setImageCenterCoordinates()
     {
-       Point current = new Point(0,0);
+       Point current     = new Point(0,0);
            Display mdisp = getWindowManager().getDefaultDisplay();
-           current.x = mdisp.getWidth();
-           current.y = mdisp.getHeight();
+           current.x     = mdisp.getWidth();
+           current.y     = mdisp.getHeight();
        return current;
     }
    /**************************************************************************
@@ -331,8 +326,8 @@ public class MainActivity extends Activity implements InitializerPerClass,OnClic
     public static Point getWindowsCenter()
     {
        Point current = new Point(0,0);
-          current.x = windowGabarites.x/2;
-          current.y = windowGabarites.y/2;
+          current.x  = windowGabarites.x/2;
+          current.y  = windowGabarites.y/2;
        return current;
     }
     /**************************************************************************
@@ -345,14 +340,12 @@ public class MainActivity extends Activity implements InitializerPerClass,OnClic
      {
         Point imageCenter   = new Point(0,0);
         
-        int Top  = image.getTop();
-        int Left = image.getLeft();
-        
+        int Top               = image.getTop();
+        int Left              = image.getLeft();
         int ImageHeightCenter = image.getHeight()/2;
         int ImageWidthCenter  = image.getWidth()/2;
-        
-        imageCenter.y = Top + ImageHeightCenter;
-        imageCenter.x = Left + ImageWidthCenter;
+        imageCenter.y         = (Top + ImageHeightCenter);
+        imageCenter.x         = (Left + ImageWidthCenter);
 
         return imageCenter;
      }
@@ -502,7 +495,6 @@ Log.e( LOG, "F:[end_x,y]:[" + end_x + "][" + end_y + "]" );
     * ***********************************************************************/
     protected void onClose()
     {
-       //Log.d(LOG,"onClose: Remove image in activity");
        return;
     }
 

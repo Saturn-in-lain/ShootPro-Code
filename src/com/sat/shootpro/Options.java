@@ -15,17 +15,14 @@ import android.widget.TextView;
 
 public class Options extends Activity implements InitializerPerClass
 {
-   //private static String LOG = "Options";
-   private static Button NewGameButton  = null;
-   private static CheckBox CheckSound   = null;
-   private static RadioButton langEng   = null;
-   private static RadioButton langRus   = null;
-
-   private static TextView headerText   = null;
-   private static TextView langTextEng  = null;
-   private static TextView langTextRus  = null;
-
-   private SaveGame FileInterf          = null;
+   private static Button      NewGameButton  = null;
+   private static CheckBox    CheckSound     = null;
+   private static RadioButton langEng        = null;
+   private static RadioButton langRus        =  null;
+   private static TextView    headerText     = null;
+   private static TextView    langTextEng    = null;
+   private static TextView    langTextRus    = null;
+   private        SaveGame    FileInterf     = null;
    /* This is for language settings */
    private String en = "en";
    private String ru = "ru";

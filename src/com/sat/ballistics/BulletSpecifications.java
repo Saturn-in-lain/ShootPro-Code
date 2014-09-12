@@ -10,52 +10,129 @@ import com.sat.shootpro.R;
 import android.content.Context;
 import android.util.Log;
 
-public class BulletSpecifications
+public class BulletSpecifications implements Specification
 {
     /* TODO: this file mast download and pars txt file which will contain 
            information about bullets. 
            http://www.norma.cc/en/Products/Hunting/308-Winchester/
     */
+// http://sbc-spb.com/index.php?option=com_content&view=article&id=70:uni&catid=21:2011-01-11-13-35-45&Itemid=31&lang=en
    
    /* This data from http://guns.allzip.org/topic/91/902146.html
+
     * Bullet - Berger 7mm 168 grain VLD */
    
-   //public static double rtr                = 0.57;   
-   //public static double bulletCenterLength = 0;
+   /*******************************************************************************/
+   /*              |--------|
+              _ _ _|   |    |_ _ _ _ _ _ _ _ _ _ _ _|_     __________________
+            _|     |   |    |          |            | \\_
+     _ _  _|       |   |    |          |            |    \\_               |
+         |         |   |    |          |            |       \\__           |
+     Dbt |         |   |    |          |            |        ===== De      Dn
+     - -  -        |   dp   |          D            |      _//   |         |
+           |_      |   |    |          |            |   _//      |         |
+             |     |   |    |          |            | //         |         |
+          |   - - -|   |    |- - - - - - - - - - - -|-           |_________|____
+          |        |_ _|_ _ |                       |            | 
+          |        |        |                       |            |
+              Lbt                                        Xgc
+                            |       OAL
+                            |                  Lr                |
+   */                       
+   /*******************************************************************************/
+
+   private static int        databaseID       = 0;
+   private String            LOG              = "BulletSpecifications";
    
+   /**************************************************************************
+    * Main parameters of bullet 
+    * ***********************************************************************/
+   public String bulletName                                   = "No info"; 
+   /** Set parameters **************************************************/
+   public double bulletDiametr                                = 0; // D
+   public double bulletTotalLengs                             = 0; // OAL overall length
+   /** Bullet mass *****************************************************/
+   public boolean isInGrains                                  = false;
+   public double bulletWeight                                 = 0; // WGT
+   /** Geometry of nose ************************************************/
+   public double bulletRadius                                 = 0; // R bulletRadius = bulletcalibre * bulletDiametr;
+   public double bulletRadiusOfTip                            = 0; // Rrn
+   public double bulletNoseDiameter                           = 0; // De  Only one De vs Dmp 
+   public double bulletDiameterOfBluntTip                     = 0; // Dmp
+   public double bulletNoseShoulderDiameter                   = 0; // Dsh
+   public double bulletNoseDiameterOverCircumferentialStep    = 0; // Dn  Some bullets has this params, other Dsh
    
+   public double bulletDistanceToCenterOfOgiveCurve           = 0; // Lr may be the same for bullets
+   public double bulletNoseLength                             = 0; // Ln
+   public double bulletBevelAngleOfNose                       = 0; // B
+   public double bulletSecantOgiveCurveAngle                  = 0; // Y
+   /** Bearing part length */
+   public double bulletBearingLength                          = 0;
+   /** Geometry of boat tail ****************************************/
+   public double bulletDiameterOfBoatTail                     = 0;   // Dbt ~ Dx
+   public double bulletLengthsOfBoatTail                      = 0;   // Lbt
+   public double bulletBevelBoatTailAngle                     = 0;   // y
+   /** Crimping manner - обжимка ************************************/
+   public double bulletMainBeltDiameter                       = 0; // dp
+   public double bulletLengthFromCannelureToBase              = 0; // Lc not all has
+   public double bulletCannelureWidth                         = 0; // lc
+   public double bulletDistanceBetweenTwoCannelures           = 0; // Llc
+   public double bulletDiameterOfCircumferentialStep          = 0; // dst
+   public double bulletDistanceFromCircumStepAndBulletBase    = 0; // Lst
+   public double bulletAngleOfCircumferentialStep             = 0; // Ф
+   public double bulletDistanceFromCircumKnurlingToBulletBase = 0; // Lk
+   public double bulletDistanceFrompunchingPointToBulletBase  = 0; // Lp
+   /*************************************************************************/
+   public double bulletDeviationKoefficient                   = 0; //0.005
+   public double bulletBallisticsKoefficient                  = 0;
+   /*************************************************************************/
+   public String bulletFormOfBase                             = null;
+   public String bulletMaterials                              = null;
+   public String bulletColorMarking                           = null;
+   /** Calculate parameter **************************************************/
+   public double bulletCalibre                                = 0;
+   public double difDiameter                                  = 0;
+   public double radiusTang                                   = 0;
+   public double radiusOjivInCalibre                          = 0; // R_O
+   public double RtR                                          = 0;
+   /*************************************************************************/    
+   public double ammo_startSpeed                              = 0;
+   public double ammo_speedAtXyards                           = 0;
+   public double bullet_startDistance                         = 0;
+   public double bullet_XyardDistance                         = 0;
+   public double ammo_crossSection                            = 0;  // Поперечное сечение d^2 
+   public double bullet_W1Const                               = 0;  // 1120.4068 
+   public double bullet_turn_speed                            = 0;  //  3504.166 
+   public double bullet_K_param                               = 0;
+   /*************************************************************************/
+   
+   /**************************************************************************
+    * Class JSONBulletTag - For storing parser field data
+    * ***********************************************************************/
    private class JSONBulletTag
    {
       static final String TAG_S_DATA                        = "TAG";
       static final String TAG_A_AMMO                        = "BULLET_LIST";
-      
       static final String TAG_S_NAME                        = "bulletName";
       static final String TAG_D_DIAMETER                    = "bulletDiametr";
       static final String TAG_D_LENGTH                      = "bulletTotalLengs"; 
-      
       static final String TAG_B_GRAINS                      = "isMassInGrains";
       static final String TAG_D_WEIGHT                      = "bulletWeight";
-   
-      static final String TAG_D_RADIUS                      =  "bulletRadius";
-      static final String TAG_D_RADIUS_TIP                  =  "bulletRadiusOfTip";
-      static final String TAG_D_NODE_DIAMETER               =  "bulletNoseDiameter"; 
-      static final String TAG_D_DIAMETER_BLUNTTIP           =  "bulletDiameterOfBluntTip";
-      static final String TAG_D_HOSE_SHOULDER_DIAMETER      =  "bulletNoseShoulderDiameter";
-    
+      static final String TAG_D_RADIUS                      = "bulletRadius";
+      static final String TAG_D_RADIUS_TIP                  = "bulletRadiusOfTip";
+      static final String TAG_D_NODE_DIAMETER               = "bulletNoseDiameter"; 
+      static final String TAG_D_DIAMETER_BLUNTTIP           = "bulletDiameterOfBluntTip";
+      static final String TAG_D_HOSE_SHOULDER_DIAMETER      = "bulletNoseShoulderDiameter";
       static final String TAG_D_NOSE_DIAMETER_STEP          = "bulletNoseDiameterOverCircumferentialStep";
-   
       static final String TAG_D_DISTANCE_TO_CENTER_OJIV     = "bulletDistanceToCenterOfOgiveCurve";
       static final String TAG_D_NOSE_LENGTH                 = "bulletNoseLength";
       static final String TAG_D_BEVEl_ANGLE_NOSE            = "bulletBevelAngleOfNose"; 
       static final String TAG_D_SECAN_OJIV_ANGLE            = "bulletSecantOgiveCurveAngle";
       static final String TAG_D_BEARING_LENGTH              = "bulletBearingLength";
-            
       static final String TAG_D_MAIN_BELT_DIAMETER          = "bulletMainBeltDiameter";
-
       static final String TAG_D_TAIL_BOAT_LENGTH            = "bulletLengthsOfBoatTail";
       static final String TAG_D_DIAMETER_OF_BOAT            = "bulletDiameterOfBoatTail";
       static final String TAG_D_BEVEL_TAIL_ANGLE            = "bulletBevelBoatTailAngle";
-     
       static final String TAG_D_LENGTH_FROM_CANNELUR        = "bulletLengthFromCannelureToBase";
       static final String TAG_D_CANNELUR_WIDTH              = "bulletCannelureWidth";
       static final String TAG_D_DISTANCE_BETWEEN_CANNELURES = "bulletDistanceBetweenTwoCannelures";
@@ -64,30 +141,24 @@ public class BulletSpecifications
       static final String TAG_D_ANGLE_STEP                  = "bulletAngleOfCircumferentialStep";
       static final String TAG_D_KNURLING_AND_BASE           = "bulletDistanceFromCircumKnurlingToBulletBase";
       static final String TAG_D_DISTANCR_PUNCHING_BASE      = "bulletDistanceFrompunchingPointToBulletBase"; 
-   
       static final String TAG_S_FORM                        = "bulletFormOfBase";
       static final String TAG_S_MATERIALS                   = "bulletMaterials";
       static final String TAG_S_COLOR_MARKING               = "bulletColorMarking";
-      
       static final String TAG_D_CALIBRE                     = "bulletCalibre";
       static final String TAG_D_DIF_DIAMETER                = "difDiameter";
       static final String TAG_D_RADIUS_TANG                 = "radiusTang";
       static final String TAG_RADIUS_OJIV                   = "radiusOjivInCalibre";
       static final String TAG_RTR                           = "RtR";
-          
       static final String TAG_D_DEVIATION                   = "bulletDeviationKoefficient"; 
       static final String TAG_D_BALLISTIC_KOEFF             = "bulletBallisticsKoefficient";
-     
       static final String TAG_D_START_SPEED                 = "ammo_startSpeed";
       static final String TAG_D_SPEED_AT_X_YARD             = "ammo_speedAtXyards";
       static final String TAG_D_START_DISTANCE              = "bullet_startDistance";
       static final String TAG_D_XYARD_DISTANCE              = "bullet_XyardDistance";
       static final String TAG_D_CROSS_SECTION               = "ammo_crossSection";
-      
       static final String TAG_D_W1_CONST                    = "bullet_W1Const";
       static final String TAG_D_TURN_SPEED                  = "bullet_turn_speed";
       static final String TAG_D_K_PARAM                     = "bullet_K_param";
-      
       static final String TAG_A_BULLET_TYPE                 = "BULLET_TYPE";
       static final String TAG_A_BULLET_DATA                 = "BULLET";
    }
@@ -96,52 +167,24 @@ public class BulletSpecifications
    * Function: BulletSpecifications - constructor
    * ***********************************************************************/ 
    public BulletSpecifications(Context ctx, 
-                               BulletInfo BulletParameters,
                                int LastBulletIndex)
    {
-      String parserString = null;
-      parserString = FileManipulations.readFromLocalFile(ctx, 
-                                                         R.raw.bulletbase);
-      BulletSpecifications.LoadBulletDataBase(ctx,
-                                             BulletParameters,
-                                             LastBulletIndex,
-                                             parserString);
-
+      String parserString   = null;
+      databaseID            = R.raw.bulletbase;
+      parserString          = FileManipulations.readFromLocalFile(ctx,databaseID);
+      
+      LoadDataBase(ctx, LastBulletIndex, parserString);
    }
-   
-   
+      
+  
    /**************************************************************************
-    * Function: LoadBulletDataBase - 
-    * @param  ctx       Context
-    * @param  bInfo     BulletInfo
-    * @param  bulletTag int
-    * @return 
-    * ***********************************************************************/ 
-   public static void LoadBulletDataBase(Context ctx, BulletInfo bInfo, int bulletTag,String parserString)
-   {
-      if( null != ctx )
-      {
-         if(null != parserString)
-         {
-            jsonBulletParser( parserString,
-                              bInfo,
-                              bulletTag);
-         }
-      }
-      else
-      {
-         Log.e("BulletSpecifications","F:[LoadBulletDataBase] >> ERROR Ctx == null");
-      }
-   }
-   
-   /**************************************************************************
-    * Function: jsonEncyclopediaParser - Parser of JSON
+    * Function: jsonParser - Parser of JSON
     * @param  jsonString - String - JSON string for parsing 
-    * @param  bInfo      - BulletInfo class that will be filled with data
     * @param  bulletTag  - int number of selected ammo 
     * @return None.
     * ***********************************************************************/ 
-   private static void jsonBulletParser(String jsonString, BulletInfo bInfo, int bulletTag)
+   @Override
+   public void jsonParser(String jsonString, int Tag)
    {
       try
       {
@@ -154,65 +197,65 @@ public class BulletSpecifications
             return;
          }
          JSONArray jsonBullets = jsonFullResult.getJSONArray(JSONBulletTag.TAG_A_AMMO);
-         JSONObject selectedBullet = jsonBullets.getJSONObject(bulletTag);
+         JSONObject selectedBullet = jsonBullets.getJSONObject(Tag);
          /*========================================================================================================*/
-         bInfo.bulletName                 = selectedBullet.getString(JSONBulletTag.TAG_S_NAME);
-         bInfo.bulletDiametr              = selectedBullet.getDouble(JSONBulletTag.TAG_D_DIAMETER);
-         bInfo.bulletTotalLengs           = selectedBullet.getDouble(JSONBulletTag.TAG_D_LENGTH);
+         this.bulletName                 = selectedBullet.getString(JSONBulletTag.TAG_S_NAME);
+         this.bulletDiametr              = selectedBullet.getDouble(JSONBulletTag.TAG_D_DIAMETER);
+         this.bulletTotalLengs           = selectedBullet.getDouble(JSONBulletTag.TAG_D_LENGTH);
          
-         bInfo.isInGrains                 = selectedBullet.getBoolean(JSONBulletTag.TAG_B_GRAINS);
-         bInfo.bulletWeight               = selectedBullet.getDouble(JSONBulletTag.TAG_D_WEIGHT);
+         this.isInGrains                 = selectedBullet.getBoolean(JSONBulletTag.TAG_B_GRAINS);
+         this.bulletWeight               = selectedBullet.getDouble(JSONBulletTag.TAG_D_WEIGHT);
          
-         bInfo.bulletRadius               =  selectedBullet.getDouble(JSONBulletTag.TAG_D_RADIUS);
-         bInfo.bulletRadiusOfTip          =  selectedBullet.getDouble(JSONBulletTag.TAG_D_RADIUS_TIP);
-         bInfo.bulletNoseDiameter         =  selectedBullet.getDouble(JSONBulletTag.TAG_D_NODE_DIAMETER);
-         bInfo.bulletDiameterOfBluntTip   =  selectedBullet.getDouble(JSONBulletTag.TAG_D_DIAMETER_BLUNTTIP);
-         bInfo.bulletNoseShoulderDiameter =  selectedBullet.getDouble(JSONBulletTag.TAG_D_HOSE_SHOULDER_DIAMETER);
+         this.bulletRadius               =  selectedBullet.getDouble(JSONBulletTag.TAG_D_RADIUS);
+         this.bulletRadiusOfTip          =  selectedBullet.getDouble(JSONBulletTag.TAG_D_RADIUS_TIP);
+         this.bulletNoseDiameter         =  selectedBullet.getDouble(JSONBulletTag.TAG_D_NODE_DIAMETER);
+         this.bulletDiameterOfBluntTip   =  selectedBullet.getDouble(JSONBulletTag.TAG_D_DIAMETER_BLUNTTIP);
+         this.bulletNoseShoulderDiameter =  selectedBullet.getDouble(JSONBulletTag.TAG_D_HOSE_SHOULDER_DIAMETER);
          
-         bInfo.bulletNoseDiameterOverCircumferentialStep =  selectedBullet.getDouble(JSONBulletTag.TAG_D_NOSE_DIAMETER_STEP);
+         this.bulletNoseDiameterOverCircumferentialStep =  selectedBullet.getDouble(JSONBulletTag.TAG_D_NOSE_DIAMETER_STEP);
          
-         bInfo.bulletDistanceToCenterOfOgiveCurve  =  selectedBullet.getDouble(JSONBulletTag.TAG_D_DISTANCE_TO_CENTER_OJIV);
-         bInfo.bulletNoseLength                    =  selectedBullet.getDouble(JSONBulletTag.TAG_D_NOSE_LENGTH);
-         bInfo.bulletBevelAngleOfNose              =  selectedBullet.getDouble(JSONBulletTag.TAG_D_BEVEl_ANGLE_NOSE);
-         bInfo.bulletSecantOgiveCurveAngle         =  selectedBullet.getDouble(JSONBulletTag.TAG_D_SECAN_OJIV_ANGLE);
-         bInfo.bulletBearingLength                 =  selectedBullet.getDouble(JSONBulletTag.TAG_D_BEARING_LENGTH);
+         this.bulletDistanceToCenterOfOgiveCurve  =  selectedBullet.getDouble(JSONBulletTag.TAG_D_DISTANCE_TO_CENTER_OJIV);
+         this.bulletNoseLength                    =  selectedBullet.getDouble(JSONBulletTag.TAG_D_NOSE_LENGTH);
+         this.bulletBevelAngleOfNose              =  selectedBullet.getDouble(JSONBulletTag.TAG_D_BEVEl_ANGLE_NOSE);
+         this.bulletSecantOgiveCurveAngle         =  selectedBullet.getDouble(JSONBulletTag.TAG_D_SECAN_OJIV_ANGLE);
+         this.bulletBearingLength                 =  selectedBullet.getDouble(JSONBulletTag.TAG_D_BEARING_LENGTH);
          
-         bInfo.bulletMainBeltDiameter              =  selectedBullet.getDouble(JSONBulletTag.TAG_D_MAIN_BELT_DIAMETER);
-         bInfo.bulletLengthsOfBoatTail             =  selectedBullet.getDouble(JSONBulletTag.TAG_D_TAIL_BOAT_LENGTH);
-         bInfo.bulletDiameterOfBoatTail            =  selectedBullet.getDouble(JSONBulletTag.TAG_D_DIAMETER_OF_BOAT);
-         bInfo.bulletBevelBoatTailAngle            =  selectedBullet.getDouble(JSONBulletTag.TAG_D_BEVEL_TAIL_ANGLE);
+         this.bulletMainBeltDiameter              =  selectedBullet.getDouble(JSONBulletTag.TAG_D_MAIN_BELT_DIAMETER);
+         this.bulletLengthsOfBoatTail             =  selectedBullet.getDouble(JSONBulletTag.TAG_D_TAIL_BOAT_LENGTH);
+         this.bulletDiameterOfBoatTail            =  selectedBullet.getDouble(JSONBulletTag.TAG_D_DIAMETER_OF_BOAT);
+         this.bulletBevelBoatTailAngle            =  selectedBullet.getDouble(JSONBulletTag.TAG_D_BEVEL_TAIL_ANGLE);
          
-         bInfo.bulletLengthFromCannelureToBase     =  selectedBullet.getDouble(JSONBulletTag.TAG_D_LENGTH_FROM_CANNELUR);
-         bInfo.bulletCannelureWidth                =  selectedBullet.getDouble(JSONBulletTag.TAG_D_CANNELUR_WIDTH);
-         bInfo.bulletDistanceBetweenTwoCannelures  =  selectedBullet.getDouble(JSONBulletTag.TAG_D_DISTANCE_BETWEEN_CANNELURES);
-         bInfo.bulletDiameterOfCircumferentialStep =  selectedBullet.getDouble(JSONBulletTag.TAG_D_DIAMETER_OF_STEP);
-         bInfo.bulletDistanceFromCircumStepAndBulletBase    =  selectedBullet.getDouble(JSONBulletTag.TAG_D_DISTANCE_STEP_AND_BASE);
-         bInfo.bulletAngleOfCircumferentialStep             =  selectedBullet.getDouble(JSONBulletTag.TAG_D_ANGLE_STEP);
-         bInfo.bulletDistanceFromCircumKnurlingToBulletBase =  selectedBullet.getDouble(JSONBulletTag.TAG_D_KNURLING_AND_BASE);
-         bInfo.bulletDistanceFrompunchingPointToBulletBase  =  selectedBullet.getDouble(JSONBulletTag.TAG_D_DISTANCR_PUNCHING_BASE);
+         this.bulletLengthFromCannelureToBase     =  selectedBullet.getDouble(JSONBulletTag.TAG_D_LENGTH_FROM_CANNELUR);
+         this.bulletCannelureWidth                =  selectedBullet.getDouble(JSONBulletTag.TAG_D_CANNELUR_WIDTH);
+         this.bulletDistanceBetweenTwoCannelures  =  selectedBullet.getDouble(JSONBulletTag.TAG_D_DISTANCE_BETWEEN_CANNELURES);
+         this.bulletDiameterOfCircumferentialStep =  selectedBullet.getDouble(JSONBulletTag.TAG_D_DIAMETER_OF_STEP);
+         this.bulletDistanceFromCircumStepAndBulletBase    =  selectedBullet.getDouble(JSONBulletTag.TAG_D_DISTANCE_STEP_AND_BASE);
+         this.bulletAngleOfCircumferentialStep             =  selectedBullet.getDouble(JSONBulletTag.TAG_D_ANGLE_STEP);
+         this.bulletDistanceFromCircumKnurlingToBulletBase =  selectedBullet.getDouble(JSONBulletTag.TAG_D_KNURLING_AND_BASE);
+         this.bulletDistanceFrompunchingPointToBulletBase  =  selectedBullet.getDouble(JSONBulletTag.TAG_D_DISTANCR_PUNCHING_BASE);
          
-         bInfo.bulletFormOfBase     =  selectedBullet.getString(JSONBulletTag.TAG_S_FORM);
-         bInfo.bulletMaterials      =  selectedBullet.getString(JSONBulletTag.TAG_S_MATERIALS);
-         bInfo.bulletColorMarking   =  selectedBullet.getString(JSONBulletTag.TAG_S_COLOR_MARKING);
+         this.bulletFormOfBase     =  selectedBullet.getString(JSONBulletTag.TAG_S_FORM);
+         this.bulletMaterials      =  selectedBullet.getString(JSONBulletTag.TAG_S_MATERIALS);
+         this.bulletColorMarking   =  selectedBullet.getString(JSONBulletTag.TAG_S_COLOR_MARKING);
 
-         bInfo.bulletCalibre        = selectedBullet.getDouble(JSONBulletTag.TAG_D_CALIBRE);
-         bInfo.difDiameter          =  selectedBullet.getDouble(JSONBulletTag.TAG_D_DIF_DIAMETER);
-         bInfo.radiusTang           =  selectedBullet.getDouble(JSONBulletTag.TAG_D_RADIUS_TANG);
-         bInfo.radiusOjivInCalibre  =  selectedBullet.getDouble(JSONBulletTag.TAG_RADIUS_OJIV);
-         bInfo.RtR                  =  selectedBullet.getDouble(JSONBulletTag.TAG_RTR);
+         this.bulletCalibre        = selectedBullet.getDouble(JSONBulletTag.TAG_D_CALIBRE);
+         this.difDiameter          =  selectedBullet.getDouble(JSONBulletTag.TAG_D_DIF_DIAMETER);
+         this.radiusTang           =  selectedBullet.getDouble(JSONBulletTag.TAG_D_RADIUS_TANG);
+         this.radiusOjivInCalibre  =  selectedBullet.getDouble(JSONBulletTag.TAG_RADIUS_OJIV);
+         this.RtR                  =  selectedBullet.getDouble(JSONBulletTag.TAG_RTR);
 
-         bInfo.bulletDeviationKoefficient   = selectedBullet.getDouble(JSONBulletTag.TAG_D_DEVIATION);
-         bInfo.bulletBallisticsKoefficient  = selectedBullet.getDouble(JSONBulletTag.TAG_D_BALLISTIC_KOEFF);
+         this.bulletDeviationKoefficient   = selectedBullet.getDouble(JSONBulletTag.TAG_D_DEVIATION);
+         this.bulletBallisticsKoefficient  = selectedBullet.getDouble(JSONBulletTag.TAG_D_BALLISTIC_KOEFF);
          
-         bInfo.ammo_startSpeed      =  selectedBullet.getDouble(JSONBulletTag.TAG_D_START_SPEED);
-         bInfo.ammo_speedAtXyards   =  selectedBullet.getDouble(JSONBulletTag.TAG_D_SPEED_AT_X_YARD);
-         bInfo.bullet_startDistance =  selectedBullet.getDouble(JSONBulletTag.TAG_D_START_DISTANCE);
-         bInfo.bullet_XyardDistance =  selectedBullet.getDouble(JSONBulletTag.TAG_D_XYARD_DISTANCE);
-         bInfo.ammo_crossSection    =  selectedBullet.getDouble(JSONBulletTag.TAG_D_CROSS_SECTION);
+         this.ammo_startSpeed      =  selectedBullet.getDouble(JSONBulletTag.TAG_D_START_SPEED);
+         this.ammo_speedAtXyards   =  selectedBullet.getDouble(JSONBulletTag.TAG_D_SPEED_AT_X_YARD);
+         this.bullet_startDistance =  selectedBullet.getDouble(JSONBulletTag.TAG_D_START_DISTANCE);
+         this.bullet_XyardDistance =  selectedBullet.getDouble(JSONBulletTag.TAG_D_XYARD_DISTANCE);
+         this.ammo_crossSection    =  selectedBullet.getDouble(JSONBulletTag.TAG_D_CROSS_SECTION);
          
-         bInfo.bullet_W1Const       =  selectedBullet.getDouble(JSONBulletTag.TAG_D_W1_CONST);
-         bInfo.bullet_turn_speed    =  selectedBullet.getDouble(JSONBulletTag.TAG_D_TURN_SPEED);
-         bInfo.bullet_K_param       =  selectedBullet.getDouble(JSONBulletTag.TAG_D_K_PARAM);
+         this.bullet_W1Const       =  selectedBullet.getDouble(JSONBulletTag.TAG_D_W1_CONST);
+         this.bullet_turn_speed    =  selectedBullet.getDouble(JSONBulletTag.TAG_D_TURN_SPEED);
+         this.bullet_K_param       =  selectedBullet.getDouble(JSONBulletTag.TAG_D_K_PARAM);
          
          /*========================================================================================================*/
       }
@@ -220,34 +263,17 @@ public class BulletSpecifications
       {
          e.printStackTrace();
       }
-   }
-   
-   /**************************************************************************
-    * Function:  getInfoAboutScopeFromDataBase
-    * @param ctx      - Contex
-    * @param scopeTag - int
-    * @return None.
-    * ***********************************************************************/ 
-   public String getInfoAboutBulletFromDataBase(Context ctx, int scopeTag)
-   {
-      String sRet    = null;
-      String sParsed = null;
       
-      sParsed = FileManipulations.readFromLocalFile(ctx, 
-                                                    R.raw.bulletbase);
-      sRet    = jsonBulletTypeParser(sParsed, 
-                                    scopeTag);
-      
-      return sRet;
    }
-   
+  
    /**************************************************************************
-    * Function: jsonBulletTypeParser - Parser of JSON
+    * Function: jsonTypeParser - Parser of JSON
     * @param  jsonString - String - JSON string for parsing 
     * @param  bulletTag  - int number of selected bullet 
     * @return None.
     * ************************************************************************/ 
-   private String jsonBulletTypeParser(String jsonString, int bulletTag)
+   @Override
+   public String jsonTypeParser(String jsonString, int Tag)
    {
       String sRet    = null;
       try
@@ -256,13 +282,13 @@ public class BulletSpecifications
          String start = jsonFullResult.getString(JSONBulletTag.TAG_S_DATA);
          if( !start.equals("Bullets"))
          {
-            Log.e("BulletSpecifications","F:[jsonBulletTypeParser] ERROR ON START OF PARSER");
+            Log.e(LOG,"F:[jsonBulletTypeParser] ERROR ON START OF PARSER");
             return sRet;
          }
          JSONArray jsonScopes     = jsonFullResult.getJSONArray(JSONBulletTag.TAG_A_BULLET_TYPE);
-         if(bulletTag <= jsonScopes.length())
+         if(Tag <= jsonScopes.length())
          {
-            JSONObject selectedScope = jsonScopes.getJSONObject(bulletTag);
+            JSONObject selectedScope = jsonScopes.getJSONObject(Tag);
             sRet                 = selectedScope.getString(JSONBulletTag.TAG_A_BULLET_DATA);
          }
       }
@@ -272,23 +298,44 @@ public class BulletSpecifications
       }
       return sRet;
    }
-   
-   /*************************************************************************************/
-//   public static double bulletDiametr          = 0.00785; // D meters
-//   public static double bulletNoseDiameter     = 0.00145; // Dg
-//   public static double bulletMainBeltDiameter = 0.00785; // Dp
-//   public static double bulletTailDiameter     = 0.00785; // Dx
-//
-//   public static double bulletTotalLengs       = 0.0286;  // Xk
-//   public static double bulletNoseLength       = 0.0184;  // Xgc
-//   public static double bulletTailLength       = 0.0000;  // Xxvc
-//   public static double bulletRadiusOjivalo    = 6.835;   // R_O  (R_O - радиус оживала в калибрах) 
-//   
-//   public static double bulletcalibre      = 0.00762;   //? 
-//   public static double bulletWeight       = 0.0096;  // gm 
-//   public static double bulletVelocity     = 950 ;   // meters/sec
-//   
-//   public static double bulletBalisticKoef         = 0.197; 
-//   public static double bulletDeviationKoefficient = 0.005;
-   /*************************************************************************************/
+
+
+   /**************************************************************************
+    * Function: LoadDataBase 
+    * @param  ctx       Context
+    * @param  bInfo     BulletInfo
+    * @param  bulletTag int
+    * @return 
+    * ***********************************************************************/ 
+   @Override
+   public void LoadDataBase(Context ctx, int Tag, String parserString)
+   {
+      if( null != ctx )
+      {
+         if(null != parserString)
+         {
+            jsonParser( parserString,Tag);
+         }
+      }
+      else
+      {
+         Log.e("BulletSpecifications","F:[LoadBulletDataBase] >> ERROR Ctx == null");
+      }
+   }
+
+   /**************************************************************************
+   * Function:  getInfoAboutFromDataBase
+   * @param ctx      - Contex
+   * @param scopeTag - int
+   * @return None.
+   * ***********************************************************************/ 
+   @Override
+   public String getInfoAboutFromDataBase(Context ctx, int Tag)
+   {
+      String sRet    = null;
+      String sParsed = null;
+             sParsed = FileManipulations.readFromLocalFile(ctx, databaseID);
+             sRet    = jsonTypeParser(sParsed, Tag);
+      return sRet;
+   }
 }

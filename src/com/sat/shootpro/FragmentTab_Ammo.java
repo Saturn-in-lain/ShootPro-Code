@@ -199,19 +199,19 @@ public class FragmentTab_Ammo extends Fragment implements InitializerPerClass,
     * ***********************************************************************/
    private void getFieldParamsFromMemory()
    {
-      Double weight = StartMenuActivity.BulletParameters.bulletWeight;
+      Double weight = StartMenuActivity.BulletInformation.bulletWeight;
       etWeight.setText(weight.toString());
       
-      Double speed = StartMenuActivity.BulletParameters.ammo_startSpeed;
+      Double speed = StartMenuActivity.BulletInformation.ammo_startSpeed;
       etSpeed.setText(speed.toString());
       
-      Double BallistikKoef = StartMenuActivity.BulletParameters.bulletBallisticsKoefficient;
+      Double BallistikKoef = StartMenuActivity.BulletInformation.bulletBallisticsKoefficient;
       etBallistikKoef.setText(BallistikKoef.toString());
       
-      Double W1Const = StartMenuActivity.BulletParameters.bullet_W1Const;
+      Double W1Const = StartMenuActivity.BulletInformation.bullet_W1Const;
       etW1Const.setText(W1Const.toString());
      
-      Double BarrelKparam = StartMenuActivity.BulletParameters.bullet_K_param;
+      Double BarrelKparam = StartMenuActivity.BulletInformation.bullet_K_param;
       etBulletK_param.setText(BarrelKparam.toString());      
       
       Double BarrelRifling = StartMenuActivity.WeaponInformation.weaponBarrelRiflingStep;
@@ -257,11 +257,11 @@ public class FragmentTab_Ammo extends Fragment implements InitializerPerClass,
          {
             case R.id.imgViewBerger168:
                imgDialog.showPictureDialog(R.drawable.berger7mm168grain, 0,
-               StartMenuActivity.BulletInformation.getInfoAboutBulletFromDataBase(ctx,0));
+               StartMenuActivity.BulletInformation.getInfoAboutFromDataBase(ctx,0));
                break;
             case R.id.imgViewBerger180:
                imgDialog.showPictureDialog(R.drawable.berger7mm180gran, 0,
-               StartMenuActivity.BulletInformation.getInfoAboutBulletFromDataBase(ctx,1));
+               StartMenuActivity.BulletInformation.getInfoAboutFromDataBase(ctx,1));
                break;
             case R.id.imgViewBulletTips:
                imgDialog.showPictureDialog(R.drawable.schema,0,null);

@@ -66,21 +66,16 @@ public class Target
    {
       realMetersGabarites           = new PointF();
       bulletShotsList               = new Vector<Point>();
-      
       holeImages                    = new Vector<Integer>();
-      
       smallTargetLeftTop            = new Point();
       smallTargetRightBottom        = new Point();
       smallTargetCenterCoordinates  = new Point();
       smallTargetPixelSize          = new Point();
       smallTargetMilsSize           = new PointF();
-      
       largeTargetGabarites          = new Point();
-      
       shotsCounter                  = 0;
       smallTargetZoomKoef           = 0;
       shotsForLargeCounters         = 0;
-      
       bulletLargeTargetShotsList    = new Vector<BULLET_SHOT_STRUCTURE>();
       
       addBulletHolesList();
@@ -160,8 +155,8 @@ public class Target
    **************************************************************************/
    public void setLargeTargetGabarites(int width, int height)
    {
-      largeTargetGabarites.x =  width;
-      largeTargetGabarites.y =  height;
+      largeTargetGabarites.x = width;
+      largeTargetGabarites.y = height;
       
       setOnePixEqualsOnLargeTaret();
    }
@@ -410,12 +405,12 @@ public class Target
          if (true == isHeightToReturn)
          {
             iRet = smallTargetPixelSize.y;
-            //Log.d(LOG,String.format("F:[getSmallTargetPixelSize]>>h[%d]",iRet));
+//Log.d(LOG,String.format("F:[getSmallTargetPixelSize]>>h[%d]",iRet));
          }
          else
          {
             iRet = smallTargetPixelSize.x;
-            //Log.d(LOG,String.format("F:[getSmallTargetPixelSize]>>w[%d]",iRet)); 
+//Log.d(LOG,String.format("F:[getSmallTargetPixelSize]>>w[%d]",iRet)); 
          }
       }
       else
@@ -467,10 +462,10 @@ public class Target
       {
          Log.e(LOG,"F:[setSmallTargetMilsSize] ->> ERROR");
       }
-      Log.e(LOG,String.format("F:[setSmallTargetMilsSize] mils w[%g]y[%g] %g", 
-                              smallTargetMilsSize.x,
-                              smallTargetMilsSize.y,
-                              MilsAndMeterKoeff));
+//      Log.e(LOG,String.format("F:[setSmallTargetMilsSize] mils w[%g]y[%g] %g", 
+//                              smallTargetMilsSize.x,
+//                              smallTargetMilsSize.y,
+//                              MilsAndMeterKoeff));
    }
 
    /***************************************************************************

@@ -3,7 +3,6 @@ package com.sat.shootpro;
 import java.util.Locale;
 
 import com.sat.ballistics.Ballistics;
-import com.sat.ballistics.BulletInfo;
 import com.sat.ballistics.BulletSpecifications;
 import com.sat.ballistics.ScopeSpecification;
 import com.sat.ballistics.WeaponSpecification;
@@ -23,21 +22,17 @@ public class StartMenuActivity extends Activity implements InitializerPerClass,O
 {
    //private static String LOG = "StartMenu";
    
-   private static Button startButton  = null;
-   private static Button optionButton = null;
-   private static Button informButton = null;
-   private static Button exitButton   = null;
-
-   private static TextView startButtonText  = null;
-   private static TextView optionButtonText = null;
-   private static TextView informButtonText = null;
-   private static TextView exitButtonText   = null;
-   
+   private static Button                    startButton  = null;
+   private static Button                    optionButton = null;
+   private static Button                    informButton = null;
+   private static Button                    exitButton   = null;
+   private static TextView              startButtonText  = null;
+   private static TextView              optionButtonText = null;
+   private static TextView              informButtonText = null;
+   private static TextView              exitButtonText   = null;
    /** Global class instances which will be used all over the place */
-   public static Ballistics Engine            = null;
-   public static BulletInfo BulletParameters  = null;
-  
-   public static PesonalGlobalParamsInteface Interf = null;
+   public static Ballistics            Engine            = null;
+   public static PesonalGlobalParamsInteface Interf      = null;
    
    public static ScopeSpecification   ScopeInformation   = null;
    public static WeaponSpecification  WeaponInformation  = null;
@@ -56,26 +51,23 @@ public class StartMenuActivity extends Activity implements InitializerPerClass,O
       ctx = StartMenuActivity.this;
       
       /** Initialize main buttons for this activity */
-      startButton  = (Button)findViewById(R.id.btnStart);
-      optionButton = (Button)findViewById(R.id.btnOptions);
-      informButton = (Button)findViewById(R.id.btnInformation);
-      exitButton   = (Button)findViewById(R.id.btnExit);
+      startButton       = (Button)findViewById(R.id.btnStart);
+      optionButton      = (Button)findViewById(R.id.btnOptions);
+      informButton      = (Button)findViewById(R.id.btnInformation);
+      exitButton        = (Button)findViewById(R.id.btnExit);
+      startButtonText   = (TextView)findViewById(R.id.txtStart);
+      optionButtonText  = (TextView)findViewById(R.id.txtInfo);
+      informButtonText  = (TextView)findViewById(R.id.txtOption);
+      exitButtonText    = (TextView)findViewById(R.id.txtExit);
       
-      startButtonText  = (TextView)findViewById(R.id.txtStart);
-      optionButtonText = (TextView)findViewById(R.id.txtInfo);
-      informButtonText = (TextView)findViewById(R.id.txtOption);
-      exitButtonText   = (TextView)findViewById(R.id.txtExit);
+      Interf            = new PesonalGlobalParamsInteface(ctx);
       
-      Interf = new PesonalGlobalParamsInteface(ctx);
-        
       /** Initialize main ballistics classes */
       updateBulletClass(this);
-
       updateScopeClass(this);
-      
       updateWeaponClass(this);
       
-      Engine = new Ballistics(BulletParameters);
+      Engine = new Ballistics(BulletInformation);
       Interf.getInitAtmospereParams();
       
       updateTexts();
@@ -104,7 +96,7 @@ public class StartMenuActivity extends Activity implements InitializerPerClass,O
    
    /*************************************************************************
     * Function: updateTexts() -- TODO -> is this needed
-    * @param 
+    * @param  None.
     * @return None. 
     * ***********************************************************************/
    private void updateTexts()
@@ -159,7 +151,7 @@ public class StartMenuActivity extends Activity implements InitializerPerClass,O
    
    /**************************************************************************
     * Function: updateWeaponClass
-    * @param  None. 
+    * @param  ctx Context. 
     * @return None.
     * ***********************************************************************/
    public static void updateWeaponClass(Context ctx)
@@ -170,7 +162,7 @@ public class StartMenuActivity extends Activity implements InitializerPerClass,O
 
    /**************************************************************************
     * Function: updateScopeClass
-    * @param  None. 
+    * @param  ctx Context. 
     * @return None.
     * ***********************************************************************/
    public static void updateScopeClass(Context ctx)
@@ -181,15 +173,13 @@ public class StartMenuActivity extends Activity implements InitializerPerClass,O
    
    /**************************************************************************
     * Function: updateBulletClass
-    * @param  None. 
+    * @param  ctx Context. 
     * @return None.
     * ***********************************************************************/
    public static void updateBulletClass(Context ctx)
    {
-      BulletParameters    = new BulletInfo();
       BulletInformation   = new BulletSpecifications(ctx,
-                                                     BulletParameters,
-                                                     Interf.getLastUsedAmmoParameter());
+                                   Interf.getLastUsedAmmoParameter());
    }
    
    /**************************************************************************

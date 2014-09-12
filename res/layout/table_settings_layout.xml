@@ -77,7 +77,7 @@
 
 		    <RelativeLayout
 		       	android:layout_height="wrap_content"
-				android:layout_width="fill_parent"
+				android:layout_width="match_parent"
        			android:orientation="horizontal" >
        			
        			 <TextView
@@ -102,8 +102,8 @@
 		        android:id="@+id/btnSaveAndClose"
 		        android:layout_width="wrap_content"
 		        android:layout_height="wrap_content"
-		        android:layout_gravity="top|center"
 		        android:layout_marginTop="10dp"
+		        android:layout_marginLeft="10dp"
 		        android:text="@string/btnCalculate"
 		        android:background="@layout/button_custom"
 		        style="@style/button_text" />

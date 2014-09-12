@@ -90,12 +90,12 @@ public class UIHardCode
 //---------------------------------------------------------------//
    private String SizeCustomizationName = "MDPI";
    
-   public int ScopeSize             = (MDPI_SG);
-   public int ScopeGridMargin       = (MDPI_MG);
-   public int VerticalClickMargin   = (0);
-   public int pixelSizeEvalution    = (int) (MDPI_pixelSizeEvalution * MDPI);
-   public int MOVE_STEP             = (MDPI_MOVE);
-   public int ScrollTextSize        = (MDPI_ScrollTextSize);
+   public int ScopeSize               = (MDPI_SG);
+   public int ScopeGridMargin         = (MDPI_MG);
+   public int VerticalClickMargin     = (0);
+   public int pixelSizeEvalution      = (int) (MDPI_pixelSizeEvalution * MDPI);
+   public int MOVE_STEP               = (MDPI_MOVE);
+   public int ScrollTextSize          = (MDPI_ScrollTextSize);
    
    public int pixelBackgroundMargin   = (HDPI_pixelBackgroundMargin);
    public int cloudSizeZoomAct        = (HDPI_cloudSizeZoomAct);

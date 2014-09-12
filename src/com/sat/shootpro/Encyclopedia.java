@@ -19,7 +19,6 @@ public class Encyclopedia extends Activity implements InitializerPerClass, OnCli
 {
    private static String         LOG       = "Encyclopedia";
    private static Context        ctx       = null;
-   
    private static ImageView      pic1      = null;
    private static ImageView      pic2      = null;
    private static ImageView      pic3      = null;
@@ -27,18 +26,15 @@ public class Encyclopedia extends Activity implements InitializerPerClass, OnCli
    private static ImageView      pic5      = null;
    private static ImageView      pic6      = null;
    private static ImageView      pic7      = null;
-   
-   
    private ImageInDialogView     imgDialog = null;
-   
-   private TextView encPart1 = null;
-   private TextView encPart2 = null;
-   private TextView encPart3 = null;
-   private TextView encPart4 = null;
+   private        TextView       encPart1  = null;
+   private        TextView       encPart2  = null;
+   private        TextView       encPart3  = null;
+   private        TextView       encPart4  = null;
 
    private class JSONTagTemple
    {
-      static final String TAG_S_DATA = "TAG";
+      static final String TAG_S_DATA     = "TAG";
       static final String TAG_S_CHAPTERS = "CHAPTERS";
       static final String TAG_S_CHAPTER  = "CHAPTER";
    }
@@ -59,12 +55,10 @@ public class Encyclopedia extends Activity implements InitializerPerClass, OnCli
       pic6 = (ImageView) findViewById(R.id.imgPic6);
       pic7 = (ImageView) findViewById(R.id.imgPic7);
       
-      
       encPart1 = (TextView) findViewById(R.id.txtEncyclopedia1);
       encPart2 = (TextView) findViewById(R.id.txtEncyclopedia2);
       encPart3 = (TextView) findViewById(R.id.txtEncyclopedia3);
       encPart4 = (TextView) findViewById(R.id.txtEncyclopedia4);
-      
       ctx = this;      
    }
    
