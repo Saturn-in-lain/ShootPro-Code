@@ -5,6 +5,9 @@ import java.util.Vector;
 import android.graphics.Point;
 import android.graphics.PointF;
 import android.util.Log;
+/**
+ * http://www.wikihow.com/Calculate-Distances-With-a-Mil-Dot-Rifle-Scope
+ * */
 
 public class Target
 {

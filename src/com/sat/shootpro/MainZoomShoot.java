@@ -934,8 +934,6 @@ Log.e(LOG,String.format("Clicks meters + deviation meters [%g][%g]",
        L.width  = (MainActivity.UICustom.ScopeSize);
        
        imgScopeGrid.setLayoutParams(L);
-
-Log.e(LOG,String.format("F:[setUIOffsetsByWindowSize] [%d][%d]",L.bottomMargin,L.rightMargin));
     }
     
     /**************************************************************************
@@ -948,8 +946,6 @@ Log.e(LOG,String.format("F:[setUIOffsetsByWindowSize] [%d][%d]",L.bottomMargin,L
        RelativeLayout.LayoutParams LP  = (android.widget.RelativeLayout.LayoutParams) VL.getLayoutParams();
        LP.rightMargin   = (LP.rightMargin + MainActivity.UICustom.VerticalClickMargin);
        VL.setLayoutParams(LP);
-       
-Log.e(LOG,String.format("F:[setScopeClickMargin]!"));
     }
     
     /***************************************************************************
