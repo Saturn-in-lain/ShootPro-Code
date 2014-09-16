@@ -209,8 +209,8 @@ public class MainZoomShoot extends Activity implements InitializerPerClass, OnCl
    
    /**************************************************************************
     * Function: setSavedParameters()
-    *    1. Wind parameter
-    *    2. Target size parameters
+    *    1. Wind string parameter
+    *    2. Scope click parameters
     * @param None.
     * @return None.
     *************************************************************************/
@@ -225,11 +225,11 @@ public class MainZoomShoot extends Activity implements InitializerPerClass, OnCl
        scopeClickSetsXY.y = StartMenuActivity.Interf.getScopeClickY();
        
        
-       String verticalClick = getResources().getString(R.string.defVerticalParam);
+       String verticalClick   = getResources().getString(R.string.defVerticalParam);
        String horizontalClick = getResources().getString(R.string.defHorizontParam);
        
-       txtVertcVal.setText(String.format(verticalClick+"%d",    scopeClickSetsXY.y));
-       txtHorizVal.setText(String.format(horizontalClick+"%d",  scopeClickSetsXY.x));
+       txtVertcVal.setText(String.format(verticalClick+" %d",    scopeClickSetsXY.y));
+       txtHorizVal.setText(String.format(horizontalClick+" %d",  scopeClickSetsXY.x));
     }
     
     /**************************************************************************
@@ -369,6 +369,8 @@ public class MainZoomShoot extends Activity implements InitializerPerClass, OnCl
     * ***********************************************************************/
    private void setUIOffsetsByWindowSize()
    {
+Log.e(LOG,"F:[setUIOffsetsByWindowSize]");
+      
       Point windowCenter            = MainActivity.getWindowsCenter();
       RelativeLayout.LayoutParams L = (RelativeLayout.LayoutParams) imgScopeGrid.getLayoutParams();
       
@@ -785,7 +787,8 @@ public class MainZoomShoot extends Activity implements InitializerPerClass, OnCl
           @Override
           public void run() 
           {
-             ShootClass.initBallisticEngineParameters(StartMenuActivity.Interf.getMaxTargetDistance());
+             StartMenuActivity.Engine.setMaxTargetDistance(StartMenuActivity.Interf.getMaxTargetDistance());
+             ShootClass.initBallisticEngineParameters();
              calculateNewShoot();
           }
        },MainActivity.UICustom.TIME_STEP);
@@ -817,7 +820,7 @@ public class MainZoomShoot extends Activity implements InitializerPerClass, OnCl
                                 TargetClass,  
                                 increment,
                                 StartMenuActivity.Interf.getTableColumsVisibility());
-        increment    = ( increment + step );
+        increment += step;
         showProgressBar( increment/10 );
      }
      ShootClass.shootOnTargetDistance();

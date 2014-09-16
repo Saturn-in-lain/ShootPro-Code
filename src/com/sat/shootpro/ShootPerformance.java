@@ -64,13 +64,13 @@ public class ShootPerformance
                             StartMenuActivity.Engine.Parameters.humidity));
 
        StartMenuActivity.Engine.Parameters.soundSpeed =  
-                         Math.abs(StartMenuActivity.Engine.getSoundSpeedInAir( 
+                         Math.abs(StartMenuActivity.Engine.calculateSoundSpeedInAir( 
                             StartMenuActivity.Engine.Parameters.temperature, 
                             StartMenuActivity.Engine.Parameters.preasure,
                             StartMenuActivity.Engine.Parameters.humidity));
        
        StartMenuActivity.Engine.Parameters.gravityAcceleration =  
-                         Math.abs(StartMenuActivity.Engine.getLocalG( 
+                         Math.abs(StartMenuActivity.Engine.calculateLocalG( 
                             StartMenuActivity.Engine.Parameters.latitude, 
                             StartMenuActivity.Engine.Parameters.altitude));
        
@@ -84,9 +84,9 @@ public class ShootPerformance
    * @param  None. 
    * @return None. 
    * ***********************************************************************/
-   public void initBallisticEngineParameters(double maxDistance)
+   public void initBallisticEngineParameters()
    {
-      StartMenuActivity.Engine.prepareBallisticShoot(maxDistance);
+      StartMenuActivity.Engine.prepareBallisticShoot();
    }
     
    /**************************************************************************

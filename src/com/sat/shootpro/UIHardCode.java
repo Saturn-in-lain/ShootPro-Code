@@ -146,6 +146,7 @@ public class UIHardCode
          this.fingerMoveMainActDown   = (HDPI_fingerMoveMainActDown);
          this.fingerMoveMainActLeft   = (HDPI_fingerMoveMainActLeft);
          this.fingerMoveMainActRight  = (HDPI_fingerMoveMainActRight);
+         Log.e("[UIHardCode]","[ HDPI ] >> Not tested yet");
       } 
       else if ((size.y == XHDPI_x) && 
                         (size.x == XHDPI_y) ) // Nexus 7
@@ -156,6 +157,7 @@ public class UIHardCode
          this.VerticalClickMargin   = XHDPI_VerticalClickMargin;
          this.pixelSizeEvalution    = (int) (pixelSizeEvalution  * XHDPI);
          this.ScrollTextSize        = (int) (MDPI_ScrollTextSize * XHDPI);
+         Log.e("[UIHardCode]","[ XHDPI ] >> Not tested yet");
 
       } 
       else if ((size.y == XXHDPI_x) && 
@@ -171,6 +173,7 @@ public class UIHardCode
       else
       {
          // By default we have MDPI
+         Log.e("[UIHardCode]","[ MDPI ] >> Not tested yet");
       }
    }
    

@@ -340,7 +340,7 @@ public class FragmentTab_Info extends Fragment implements InitializerPerClass,On
       StartMenuActivity.Engine.Parameters.humidity   = Double.valueOf(edTxt_humidity.getText().toString());
       
       StartMenuActivity.Engine.Parameters.soundSpeed =  
-         Math.abs(StartMenuActivity.Engine.getSoundSpeedInAir( 
+         Math.abs(StartMenuActivity.Engine.calculateSoundSpeedInAir( 
                                                             StartMenuActivity.Engine.Parameters.temperature, 
                                                             StartMenuActivity.Engine.Parameters.preasure,
                                                             StartMenuActivity.Engine.Parameters.humidity));
@@ -359,7 +359,7 @@ public class FragmentTab_Info extends Fragment implements InitializerPerClass,On
       StartMenuActivity.Engine.Parameters.latitude  = Double.valueOf(edTxt_latitude.getText().toString());
       
       StartMenuActivity.Engine.BulletFlight.coordAngle = Double.valueOf(edTxt_angle.getText().toString());
-      StartMenuActivity.Engine.Parameters.gravityAcceleration =  Math.abs(StartMenuActivity.Engine.getLocalG( 
+      StartMenuActivity.Engine.Parameters.gravityAcceleration =  Math.abs(StartMenuActivity.Engine.calculateLocalG( 
                                                                   StartMenuActivity.Engine.Parameters.latitude, 
                                                                   StartMenuActivity.Engine.Parameters.altitude));
       

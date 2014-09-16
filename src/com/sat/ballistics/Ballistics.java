@@ -21,10 +21,10 @@ import android.util.Log;
 public class Ballistics
 {
    private static String LOG = "Ballistics";
-   public final double  e    = (2.71828182845904523536);
 
    private final static double constAngularVelocity    = (7.29212);                  // Кинетическая вязкость воздуха в нормальных условиях
    private final static double kinematicAirViscosity   = (0.0000146);                // m^2/c
+   public final double         e                       = (2.71828182845904523536);
    public static double WearthSpeed = constAngularVelocity * Math.pow(10,-5);       // рад/с.
    /* --------------------------------------------------------------------------------*/
    private final static int X = (0);
@@ -40,14 +40,12 @@ public class Ballistics
    final static double airPresureOnSeaLevel    = (101.325);    // kPa
    private double K0 = airPresureOnSeaLevel * Math.pow(constSoundSpeed,2); // кг/м3 (11816749.48125)
    /* --------------------------------------------------------------------------------*/
-   private double      oneMillToMOA          = (double)(3.438);  // 1 mil equals 3.438 MOA
-   private double      oneMOAonHundredMeters = (double)(2.9089); // cm
-   
-   private final float yardConstant     = (float) (27.778); 
-   private final float meterConstant    = (float) (25.4);
-   private final float oneInchPerMeter  = (float) (0.0254);
-   private final float oneInchesInMeter = (float) (39.37);
-   
+   private double      oneMillToMOA             = (double)(3.438);  // 1 mil equals 3.438 MOA
+   private double      oneMOAonHundredMeters    = (double)(2.9089); // cm
+   private final float yardConstant             = (float) (27.778); 
+   private final float meterConstant            = (float) (25.4);
+   private final float oneInchPerMeter          = (float) (0.0254);
+   private final float oneInchesInMeter         = (float) (39.37);
    /* --------------------------------------------------------------------------------*/
    final static double constSoundSpeed          = (341.5);
    final static double T0                       = (273.15);
@@ -57,23 +55,15 @@ public class Ballistics
    final static double universalGasConstant     = (8.3143);    // Djoul/ mol * K
    final static double speedOfTemperatureLow    = (0.0065);    // K/m
    final static double soundSpeedCalcConst      = (331.5024);  // K/m
-  
    /* --------------------------------------------------------------------------------*/
-   final double adiotabConst_20  = (1.400);
-   final double adiotabConst_100 = (1.402);
-   final double adiotabConst_0   = (1.403);
-   final double constMinMaxAngle = (90.0);
+   final double adiotabConst_20                 = (1.400);
+   final double adiotabConst_100                = (1.402);
+   final double adiotabConst_0                  = (1.403);
+   final double constMinMaxAngle                = (90.0);
    /* --------------------------------------------------------------------------------*/
-   public final int roundConst      = (10); 
-   public final int roundSmallConst = (2); 
-   final public double init         = (0.00);
-   /* --------------------------------------------------------------------------------*/   
-   /*============== Table 1 =================================
-    Meters / Feet / Density / Pressure / Temp C / SoundSpeed /  
-    ============== Table 2 =================================
-    Distance of flight / Vertical deviation / bullet speed 
-    =======================================================*/
-   
+   public final int roundConst                  = (10); 
+   public final int roundSmallConst             = (2); 
+   final public double init                     = (0.00);
    /*=============================================================================*/
    private BulletSpecifications bullet = null;
    /*=============================================================================*/
@@ -88,11 +78,11 @@ public class Ballistics
       /* Weapon parameter */
       private double bullet_turn_speed    = (init);             // parsed params
       public double barrel_rifling        = (init);   //0.24    // parsed params //0.02313; 
-      public double Deviation_K           = (init); // calculated             
+      public double Deviation_K           = (init);             // calculated             
       /* Additional bullet parameters*/
-      public double sectional_bullets     = (init); // may be if bullet spec?
+      public double sectional_bullets     = (init); 
       private double targetDistance       = (init);
-      private double maxDistance          = (init);
+      public double maxDistance           = (init);
       
       // TODO: К=J/(Нцтцд*m)
       private double bullet_K_param       = (init);            // parsed params
@@ -312,12 +302,11 @@ public class Ballistics
 
    /**************************************************************************
     * Constructor: Ballistics class constructor for ordinal job
-    *  
+    *  Use this one, or errors will find you!
     * ***********************************************************************/
    public Ballistics(BulletSpecifications info)
    {
       BallisticsInit();
-      //set BulletInfo parameters
       setBulletInfo(info);
    }
    
@@ -331,7 +320,7 @@ public class Ballistics
    }
    
    /**************************************************************************
-    * Function: BallisticsInit  
+    * Function: BallisticsInit  - main 
     * @param None.
     * @return None.
     * ***********************************************************************/
@@ -373,119 +362,21 @@ public class Ballistics
       BulletFlight.flightTime = (BulletFlight.flightTime - BulletFlight.dt);
    }
    
-   /**************************************************************************
-    * Function: setBulletInfo  
-    * @param info - BulletInfo
-    * @return None.
-    * ***********************************************************************/
-   public void setBulletInfo(BulletSpecifications info)
-   {
-      if(null != info)
-      {
-         bullet = info;
-         BulletFlight.mass                 = bullet.bulletWeight * 1000; //(for 9.10)
-         BulletFlight.balistic_koef        = bullet.bulletBallisticsKoefficient;  
-         BulletFlight.bulletStartSpeed     = bullet.ammo_startSpeed;
-         BulletFlight.W1Const              = bullet.bullet_W1Const;
-         BulletFlight.bullet_turn_speed    = bullet.bullet_turn_speed;
-         BulletFlight.bullet_K_param       = bullet.bullet_K_param;
-      }
-      else
-      {
-         Log.e(LOG,"Information was not parsed");
-         bullet = null;
-      }
-   }
-   
-   /**************************************************************************
-    * Function: setBulletFlightPrivates  
-    * @param mass             - double in grams/grains TODO
-    * @param bulletStartSpeed - double 
-    * @param balistic_koef    - double 
-    * @param W1Const          - double
-    * @param barrel_rifling   - double 
-    * @param bullet_K_param   - double 
-    * @return None.
-    * ***********************************************************************/
-   public void setBulletFlightPrivates(double mass,
-                                       boolean isInGramms,
-                                       double bulletStartSpeed,
-                                       double balistic_koef,
-                                       double W1Const,
-                                       double barrel_rifling,
-                                       double bullet_K_param)
-   {
-      if(null != BulletFlight)
-      {
-         if(true == isInGramms)
-         {
-            BulletFlight.mass                 = mass / 1000;
-         }
-         else
-         {
-            BulletFlight.mass                 = mass;
-         }
-         BulletFlight.bulletStartSpeed     = bulletStartSpeed;
-         BulletFlight.balistic_koef        = balistic_koef;  
-         BulletFlight.W1Const              = W1Const;
-         BulletFlight.barrel_rifling       = barrel_rifling;
-         BulletFlight.bullet_K_param       = bullet_K_param;
-      }
-   }
-   
-   /**************************************************************************
-    * Function: getBulletVectorsInfo  
-    * @param Type - VECTOR_TYPE enum
-    * @param result - Vector<Double>
-    * @return None.
-    * ***********************************************************************/
-   public void getBulletVectorsInfo( VECTOR_TYPE Type, Vector<Double> result)
-   {
-      if(null == BulletFlight)
-      {
-         Log.e(LOG,"Some issues with BulletFlight init values == null");
-         return;
-      }
-      
-      switch(Type)
-      {
-         case VECTOR_TYPE_RV:
-            copyVectors(BulletFlight.Rv,result);
-            break;
-            
-         case VECTOR_TYPE_VB:
-            copyVectors(BulletFlight.Vb,result);
-            break;
-            
-         case VECTOR_TYPE_VD:
-            copyVectors(BulletFlight.Vd,result);
-            break;
-            
-         case VECTOR_TYPE_VP:
-            copyVectors(BulletFlight.Vp,result);
-            break;
-            
-         case VECTOR_TYPE_Ab:
-            copyVectors(BulletFlight.A_b,result);
-            break;
-            
-         case VECTOR_TYPE_RV_TARGERT:
-            copyVectors(BulletFlight.Rv_target,result);
-            break;
-            
-         default:
-            break;
-      }
-   }
 
+
+   /** ====================================================================================================
+    * ==================================== CALCULATION =====================================================
+    *  ==================================================================================================== */
+   
+   
+   
    /**************************************************************************
-    * Function: shootingTragectory  http://twtmas.mpei.ac.ru/mas/worksheets/shooting.mcd
+    * Function: prepareBallisticShoot  http://twtmas.mpei.ac.ru/mas/worksheets/shooting.mcd
     * @Note:  This is main function with will be filled with smaller ones =)  
-    * @param Mass of bullet 
-    * @param Starting speed of the bullet
+    * @param None.
     * @return None.
     * ***********************************************************************/
-   public void prepareBallisticShoot(double maxDistanceToTarget)
+   public void prepareBallisticShoot()
    {
       if ((null == Parameters) || (null == BulletFlight))
       {
@@ -498,7 +389,6 @@ public class Ballistics
       BulletFlight.Vb.set(X,BulletFlight.bulletStartSpeed);
       BulletFlight.Vb.set(Y,init);
       BulletFlight.Vb.set(Z,init);
-      BulletFlight.maxDistance = maxDistanceToTarget;
       
       /* Calculate bullet_turn_speed or w parameter: [OK] */
       if(0 == BulletFlight.bullet_K_param)
@@ -512,21 +402,18 @@ public class Ballistics
          double turn = (BulletFlight.bulletStartSpeed / BulletFlight.barrel_rifling );
          BulletFlight.bullet_turn_speed = roundTo(turn,roundConst);
       }
-      /* Pre set of Vp vectors */
-      Mlt(BulletFlight.Vb,
-          -1, 
-          BulletFlight.Vp);
-      /* ------------------------------------------------------------------------------------ */
+      /* Pre set of Vp vectors [ OK ] */
+      Mlt(BulletFlight.Vb, -1,  BulletFlight.Vp);
       /* Calculate speed near target [ OK ] */
-      BulletFlight.speedNearTarget = getAmmoSpeedNearTarget(BulletFlight.bulletStartSpeed,
+      BulletFlight.speedNearTarget = calculationAmmoSpeedNearTarget(BulletFlight.bulletStartSpeed,
                                                             BulletFlight.targetDistance);
       /* Calculate earth speed vector [ OK ] */
-      earthSpeedVector(BulletFlight.latitude, 
+      calculateEarthSpeedVector(BulletFlight.latitude, 
                        BulletFlight.azimuth, 
                        BulletFlight.coordAngle,
                        BulletFlight.Wearth);
       /* Calculate gravitation vector [ OK ] */
-      gravitationTurnVector(BulletFlight.coordAngle,
+      calculateGravitationTurnVector(BulletFlight.coordAngle,
                             BulletFlight.G);
    }
    
@@ -547,14 +434,14 @@ public class Ballistics
       {
          if( Lng(BulletFlight.Rv) < BulletFlight.targetDistance)
          {
-            saveVectorParameterNearTarget();
+            setVectorParameterNearTarget();
          }
          
          temp = init;
          temp_vector.set(X,init); 
          temp_vector.set(Y,init); 
          temp_vector.set(Z,init);
-         /*----------------------------------------------------------------------------------------*/
+         
          /* 1. Set Vp0 = Vp 
           * 1--- сохраняем старый вектор потока
           * 2--- плюсуем ветер */ 
@@ -571,9 +458,7 @@ public class Ballistics
          }        
          else
          {
-            Mlt(BulletFlight.Vb,
-                -1, 
-                BulletFlight.Vp);
+            Mlt(BulletFlight.Vb,  -1,  BulletFlight.Vp);
          }
         
          /*----------------------------------------------------------------------------------------*/
@@ -583,29 +468,30 @@ public class Ballistics
             BulletFlight.Vd);
          
          /* Calculate Vd_s= K*w/(Lng(Vp)*Lng(Vp0)); Vd = Mlt(Vd, Vd_s);  Tested [ CHECK ] */
-         BulletFlight.Deviation_K = caclulateDeviationkoef( Lng(BulletFlight.Vp),
+         BulletFlight.Deviation_K = calculateDeviationkoef( Lng(BulletFlight.Vp),
                                                             Lng(BulletFlight.Vp0));
          Mlt(BulletFlight.Vd,                  
              BulletFlight.Deviation_K,
              BulletFlight.Vd);
 /*-----------------------------------------------------------------------------------------------------------*/
+// TODO         
 //Ath=Find_Ath(RV); Recalculate atmosphere params, because shooting from 700m to 0m - parameters can be changed  
 /*-----------------------------------------------------------------------------------------------------------*/
          BulletFlight.mainVelocity  = calculateVelocity(BulletFlight.Vp);
          BulletFlight.MAXSoundSpeed = (BulletFlight.mainVelocity / Parameters.soundSpeed);
-         BulletFlight.R_function    = getR_Function(BulletFlight.MAXSoundSpeed,
+         BulletFlight.R_function    = calculationR_Function(BulletFlight.MAXSoundSpeed,
                                                     BulletFlight.W1Const);
          
-         BulletFlight.EnergyInDjoule = caclulateBulletEnergy(BulletFlight.mass,
+         BulletFlight.EnergyInDjoule = calculateBulletEnergy(BulletFlight.mass,
                                                              BulletFlight.mainVelocity); 
          /*-----------------------------------------------------------------------------------------------*/          
          if (BulletFlight.sectional_bullets != 0)
          {
-            BulletFlight.acceleration = getG1AccelerationKoef(BulletFlight.sectional_bullets);
+            BulletFlight.acceleration = calculationG1AccelerationKoef(BulletFlight.sectional_bullets);
          }
          else
          {
-            BulletFlight.acceleration = getAmmoAcceleration(BulletFlight.R_function,
+            BulletFlight.acceleration = calculationAmmoAcceleration(BulletFlight.R_function,
                                                             BulletFlight.balistic_koef, 
                                                             Parameters.soundSpeed, 
                                                             Parameters.density);
@@ -623,7 +509,7 @@ public class Ballistics
          /* Calculate additional A_b for with earth [ CHECK ]
           * A_b = (A_b + G); */
          
-         additionalAccelerationCalculateion( BulletFlight.Rv,        
+         calculateAditionalAcceleration( BulletFlight.Rv,        
                                              BulletFlight.Vb,
                                              BulletFlight.A_b);
          //TODO: A_b = Find_A(Vp, Ath); 
@@ -637,7 +523,6 @@ public class Ballistics
          vectorAddition(BulletFlight.Rv,
                         temp_vector,
                         BulletFlight.Rv);
-        
          /*---------------------------------------------------------------------*/
          /* 6. [Приращение скоростей] Calculate Vb = Vb + Mlt(A_b, dT) + Vd; vector [ OK? ] */
          
@@ -666,95 +551,19 @@ public class Ballistics
          /*--------------------------------------------------------------------*/
       }
       temp_vector.removeAllElements();
-      
-//TODO:>> testLogShoot();                       /* Calculation Log*/
-   }
-
-   /**************************************************************************
-    * Function: saveVectorParameterNearTarget()  
-    * @return (double)  
-    * ***********************************************************************/
-   private void saveVectorParameterNearTarget()
-   {
-      if( (Lng(BulletFlight.Rv)+1) > BulletFlight.targetDistance &&
-          (0 == BulletFlight.Rv_target.get(X)) )
-      {
-         copyVectors(BulletFlight.Rv,
-                     BulletFlight.Rv_target); 
-         
-         Log.e(LOG,">> Save target parameters" + 
-               String.format("[%g][%g][%g]", 
-               BulletFlight.Rv_target.get(X),
-               BulletFlight.Rv_target.get(Y),
-               BulletFlight.Rv_target.get(Z)));
-      }
+      /* testLogShoot();  -> Calculation Log*/
    }
    
-   
    /**************************************************************************
-    * Function: testLogShoot() TODO: RAT Debug 
-    * @return (double)  
-    * ***********************************************************************/
-//   private void testLogShoot()
-//   {
-//      Log.e("Test",String.format("x:[%g] y:[%g] z:[%g]",
-//                                                         BulletFlight.Rv.get(X),
-//                                                         BulletFlight.Rv.get(Y),
-//                                                         BulletFlight.Rv.get(Z)));
-//      /* [ Скорость пули ] */
-//      Log.e("Test",String.format("Vx:[%g] Vy:[%g] Vz:[%g]",
-//                                                         BulletFlight.Vb.get(X),
-//                                                         BulletFlight.Vb.get(Y),
-//                                                         BulletFlight.Vb.get(Z)));
-//      /* [ Скорость пули + скорость ветра ] */
-//      Log.e("Test",String.format("VPx:[%g] VPy:[%g] VPz:[%g]",
-//                                                         BulletFlight.Vp.get(X),
-//                                                         BulletFlight.Vp.get(Y),
-//                                                         BulletFlight.Vp.get(Z)));
-//      /* [ Ускорение ] */
-//      Log.e("Test",String.format("Ax:[%g] Ay:[%g] Az:[%g]",
-//                                                         BulletFlight.A_b.get(X),
-//                                                         BulletFlight.A_b.get(Y),
-//                                                         BulletFlight.A_b.get(Z)));
-//      /* [ Deviation ] */
-//      Log.e("Test",String.format("Vd_x:[%g] Vd_y:[%g] Vd_z:[%g]",
-//                                                         BulletFlight.Vd.get(X),
-//                                                         BulletFlight.Vd.get(Y),
-//                                                         BulletFlight.Vd.get(Z)));
-//
-//      Log.e("Test",String.format("Velocity:[%g]  Enerdy[%g]  Time:[%g]  ",
-//                                                         BulletFlight.mainVelocity,
-//                                                         BulletFlight.EnergyInDjoule,
-//                                                         BulletFlight.flightTime));
-//
-//      Log.e("Test",String.format("R_function:[%g] Accelereation:[%g] MAX:[%g] ",
-//                                                         BulletFlight.R_function,
-//                                                         BulletFlight.acceleration,
-//                                                         BulletFlight.MAXSoundSpeed));
-//      
-//      Log.e("Test",String.format("dencity[%g] preasure[%g] bullet_turn_speed[%g] \n soundSpeed:[%g]" +
-//                                 "mass[%g] koef[%g] deviation[%g] \niterations[%d]",
-//                                                         Parameters.density,
-//                                                         Parameters.preasure,
-//                                                         BulletFlight.bullet_turn_speed,
-//                                                         Parameters.soundSpeed,
-//                                                         BulletFlight.mass,
-//                                                         BulletFlight.balistic_koef,
-//                                                         BulletFlight.Deviation_K,
-//                                                         BulletFlight.stepNumber));
-//      Log.e("Test","===============================================");
-//   }
-   
-   /**************************************************************************
-    * Function: additionalAccelerationCalculateion 
+    * Function: calculateAditionalAcceleration 
     * @param Vector<Double> coord
     * @param Vector<Double> velocity
     * @param Vector<Double> result - return upgraded A_b vector
     * @return None. 
     * ***********************************************************************/
-   public void additionalAccelerationCalculateion(Vector<Double> coord,
-                                                  Vector<Double> velocity,
-                                                  Vector<Double> result)
+   public void calculateAditionalAcceleration(Vector<Double> coord,
+                                              Vector<Double> velocity,
+                                              Vector<Double> result)
    {
       double x1 = (init), AcbX0 = (init); // THIS is for future update Ацб = w*w*R
       double y1 = (init), AcbY0 = (init);
@@ -793,18 +602,18 @@ public class Ballistics
    }
    
    /**************************************************************************
-    * Function: earthSpeedVector() - Calculate earth speed once 
+    * Function: calculateEarthSpeedVector() - Calculate earth speed once 
     * @param double latitude
     * @param double azimuth
     * @param double coordAngle
     * @param Vector<Double> result 
-@Note: Tested - by JUnit
+   @Note: Tested - by JUnit
     * @return None. 
     * ***********************************************************************/
-   public void earthSpeedVector(double latitude, 
-                                double azimuth, 
-                                double coordAngle,
-                                Vector<Double> result )
+   public void calculateEarthSpeedVector(double latitude, 
+                                         double azimuth, 
+                                         double coordAngle,
+                                         Vector<Double> result )
    {
       double Z0 = (init); double Z1  = (init); 
       double X0 = (init); double X1  = (init); 
@@ -834,13 +643,15 @@ public class Ballistics
         result.set(Y, Y1);
         result.set(Z, Z1);
    }
+   
    /**************************************************************************
-    * Function: gravitationTurnVector() 
-    * @param double coordAngle
-@Note: Tested - by JUnit
+    * Function: calculateGravitationTurnVector() 
+    * @param coordAngle - double
+    * @param G          - Vector<Double>
+   @Note: Tested - by JUnit
     * @return None. Set global BulletFlight.G
     * ***********************************************************************/
-   public void gravitationTurnVector(double coordAngle, Vector<Double> G)
+   public void calculateGravitationTurnVector(double coordAngle, Vector<Double> G)
    {
       double x1 = init;  double y1 = init;
 
@@ -867,10 +678,6 @@ public class Ballistics
         
          y1 = (G.get(X) * Math.sin(coordAngle)) + 
                             (G.get(Y) * Math.cos(coordAngle));
-         
-//        x1 = Parameters.gravityAcceleration * Math.sin(coordAngle);
-//        y1 = Parameters.gravityAcceleration * Math.cos(coordAngle);
-         
       }
       G.set(X,x1);
       G.set(Y,y1);
@@ -880,7 +687,7 @@ public class Ballistics
    /**************************************************************************
     * Function: calculateVelocity
     * @param Vector<Double> velocity
-@Note:  Tested - by JUnit 
+   @Note:  Tested - by JUnit 
     * @return Double - Velocity.
     * ***********************************************************************/
    public double calculateVelocity(Vector<Double> velocity)
@@ -894,13 +701,13 @@ public class Ballistics
    }
    
    /**************************************************************************
-    * Function: getLocalG - Set precise gravitation acceleration parameter
+    * Function: calculateLocalG - Set precise gravitation acceleration parameter
     * @param double latitude
     * @param double altitude
-@Note:  Tested - by JUnit 
+   @Note:  Tested - by JUnit 
     * @return Double - Local gravit.acceleration (+).
     * ***********************************************************************/
-   public double getLocalG (double latitude, double altitude)
+   public double calculateLocalG (double latitude, double altitude)
    {
       double G = init;
       latitude  = Math.toRadians(latitude);
@@ -910,249 +717,22 @@ public class Ballistics
          G = 9.780327 *( 1 + Sin1 - Sin2) - temp ;
       return G;
    }
-
+   
    /**************************************************************************
     * Function: caclulateDeviationkoef - Set precise gravitation acceleration parameter
     * @param Lng_Vp  double   Lng_Vp(Vp)
     * @param Lng_Vp0 double   Lng_Vp0(Vp0)
-@Note:  Tested - by JUnit 
+   @Note:  Tested - by JUnit 
     * @return None.
     * ***********************************************************************/
-   public double caclulateDeviationkoef(double Lng_Vp, double Lng_Vp0)
+   public double calculateDeviationkoef(double Lng_Vp, double Lng_Vp0)
    {
       double koef = init;
-      koef = (BulletFlight.bullet_K_param * BulletFlight.bullet_turn_speed) / (Lng_Vp * Lng_Vp0);
+      koef = (BulletFlight.bullet_K_param * BulletFlight.bullet_turn_speed) / 
+                                                         (Lng_Vp * Lng_Vp0);
       return koef;
    }
-   /**************************************************************************
-    * Function: copyVectors  
-    * @param fromVector - Vector<Double> what to copy
-    * @param toVector   - Vector<Double> where to copy
-    * @return None.
-    * ***********************************************************************/
-   private void copyVectors(Vector<Double> fromVector, Vector<Double> toVector)
-   {
-      if( (null != fromVector) && (null != toVector))
-      {
-         if(fromVector.size() == toVector.size())
-         {
-            for(int i = 0; i < toVector.size();i++)
-            {
-               toVector.set(i, fromVector.get(i));
-            }
-         }
-      }
-   }
    
-  /**************************************************************************
-   * Function: VP  - vector multiplicate with vector
-   * @param vect1 Double 1 - Vp
-   * @param vect2 Double 2 - Vb
-   * @param result Double result
-@Test: Tested - by JUnit
-   * @return None.
-   * ***********************************************************************/
-   public void VP (Vector<Double> vect1, Vector<Double> vect2 ,Vector<Double> result)
-   {
-      if ((vect1.size() == 3) && (vect2.size() == 3))
-      {
-         for(int i=0; i < result.size(); i++)
-         {
-            double temp = 0;
-            if (i == X)
-               { temp = ( (vect1.get(Y) * vect2.get(Z)) - (vect1.get(Z) * vect2.get(Y))); } 
-            else if (i == Y)
-               { temp = ( (vect1.get(Z) * vect2.get(X)) - (vect1.get(X) * vect2.get(Z))); } 
-            else if (i == Z)
-               { temp = ( (vect1.get(X) * vect2.get(Y)) - (vect1.get(Y) * vect2.get(X))); }
-            else
-               { Log.e(LOG,"F:[VP] -> ERROR on vectors size"); }
-            result.set(i, temp);
-         } 
-      }
-      else
-      {
-         Log.e(LOG,"F:[VP] -> vectors has wrong length");
-      }
-   }
-  /**************************************************************************
-   * Function: vectorAngle  - calculate angle between vectors
-   * @param Vector<Double> vect1
-   * @param Vector<Double> vect2
-   * @return double Angle in radians.
-   * @Note: 1 оb/sec=6.28 rad/sec also see const value oneTurnInRad
-   * ***********************************************************************/
-   @SuppressWarnings("unused")
-   private static double vectorAngle (Vector<Double> vect1, Vector<Double> vect2)
-   {
-      double sin_angle = 0; double AB   = 0;
-      double angle     = 0; double modA = 0;
-      double temp      = 0; double modB = 0;
-      
-      if ((vect1.size() == 3) && (vect2.size() == 3))
-      {
-         AB = (vect1.get(0) * vect2.get(0)) + (vect1.get(1) * vect2.get(1)) + vect1.get(2) * vect2.get(2);
-            temp = Math.pow(vect1.get(0), 2) + Math.pow(vect1.get(1), 2) + Math.pow(vect1.get(2), 2);
-         modA = Math.sqrt(temp); 
-            temp = 0;
-            temp = Math.pow(vect2.get(0), 2) + Math.pow(vect2.get(1), 2) + Math.pow(vect2.get(2), 2);
-         modB = Math.sqrt(temp);
-   
-         angle = AB / (modA * modB);                     // cos(fi)
-         sin_angle = Math.sqrt(1 - Math.pow(angle, 2));  // sin(fi)
-      }
-      else
-      {
-         Log.e(LOG,"F:[vectorAngle] -> vectors has wrong length");
-      }
-      return sin_angle;
-   }
-   
-   /**************************************************************************
-    * Function: vectorDeduction  - vector deduction of vectors (-)
-    * @param Vector<Double> vect1
-    * @param Vector<Double> vect2
-    * @param Vector<Double> result
-    * @return None.
-    * ***********************************************************************/
-   public void vectorDeduction (Vector<Double> vect1, Vector<Double> vect2, Vector<Double> result)
-   {
-      if ((vect1.size() == 3) && (vect2.size() == 3))
-      {
-         for(int i=0; i < result.size(); i++)
-         {
-            double temp = init;
-            temp = ( vect1.get(i) -  vect2.get(i) ); 
-            result.set(i, roundTo(temp,roundConst));
-         } 
-      }
-      else
-      {
-         Log.e(LOG,"F:[VP] -> vectors has wrong length");
-      }
-   }
-   
-   /**************************************************************************
-    * Function: vectorAddition  - vector addition of vectors (+)
-    * @param Vector<Double> vect1
-    * @param Vector<Double> vect2
-    * @param Vector<Double> result
-    * @return None.
-    * ***********************************************************************/
-   public void vectorAddition (Vector<Double> vect1, Vector<Double> vect2 ,Vector<Double> result)
-   {
-      if ((vect1.size() == 3) && (vect2.size() == 3))
-      {
-         for(int i=0; i < result.size(); i++)
-         {
-            double temp = init;
-            temp = ( vect1.get(i) +  vect2.get(i) ); 
-            result.set(i, roundTo(temp,roundConst));
-         } 
-      }
-      else
-      {
-         Log.e(LOG,"F:[VP] -> vectors has wrong length");
-      }
-   }
-   
-   /**************************************************************************
-    * Function: Lng  - calculate vectors...
-    * @param Vector<Double> vect
-@Note: Tested JUnit
-    * @return (double)  
-    * ***********************************************************************/
-   public double Lng(Vector<Double> vect)
-   {
-      double result  = init;
-      double temp    = init;  
-      for(int i=0; i < vect.size(); i++)
-      {
-         temp = init;
-         temp = vect.get(i);
-         result += Math.pow(temp, 2);
-      }
-      result = Math.sqrt(result);
-      return roundTo(result,11);
-   }
-   
-   /**************************************************************************
-    * Function: Mlt  - multiply vector on some value
-    * @param vect   - Vector<Double> 
-    * @param value  - double 
-    * @param result - Vector<Double> 
-@Note: Tested - JUnit
-    * @return (double)  None.
-    * ***********************************************************************/
-   public void  Mlt(Vector<Double> vect, double value ,Vector<Double> result)
-   {
-      if (vect.size() == result.size())
-      {
-         for(int i=0; i < vect.size(); i++)
-         {
-            Double temp = vect.get(i);
-            temp = temp * value;
-            result.set(i, roundTo(temp,roundConst));
-         }
-      }
-      else
-      {
-         Log.e(LOG,"F:[Mlt] -> Both vectors must be initialized");
-      }
-   }
-
-   /**************************************************************************
-    * Function: setWindInfluence - use to set wind influence vector. For now
-    *    algorithm will be quit simle. North-north, south-south directions are
-    *    ignored. East-east and west-west - full strength. All others - only
-    *    half of strength. Also multiplied by -1, if dirrection is reversed. 
-    * @param (None).
-    * @return (None).
-    * ***********************************************************************/
-   public void setWindInfluence()
-   {
-      /*
-            50%        0%      50%
-                  325  0  45       
-                     \ | /        
-           100%  270 - * - 90 100%
-                     / | \ 
-                 225  180 135
-            50%        0%      50%
-           
-      */
-      double y_result = 0;
-      switch(Parameters.windDirection)
-      {
-         case EAST_EAST:
-            y_result = Parameters.windStrength;
-            break;
-         case WEST_WEST:
-            y_result = (-1) * Parameters.windStrength;
-            break;
-            
-         case NORTH_EAST:
-         case SOUTH_EAST:
-            y_result = Parameters.windStrength/2;
-            break;
-            
-         case NORTH_WEST:
-         case SOUTH_WEST:
-            y_result = Parameters.windStrength/2 * (-1);
-            break;
-            
-         case NORTH_NORTH:
-         case SOUTH_SOUTH:
-         default:
-            y_result = 0;
-            break;
-      }
-      
-      BulletFlight.Vwind.set(X,init); 
-      BulletFlight.Vwind.set(Y,y_result);
-      BulletFlight.Vwind.set(Z,init);
-   }
-                                    /* MAIN CALCULATION FUNCTIONS */
    /**************************************************************************
     * Function: windInfluence
     * @param bulletFlightTime   (double )
@@ -1161,7 +741,7 @@ public class Ballistics
     * @param windSpeed          (double ) 
     * @return result (double)  
     * ***********************************************************************/
-   public double windInfluence(double bulletFlightTime, 
+   public double calculateWindInfluence(double bulletFlightTime, 
                                double lenghtOfTrajectory, 
                                double bulletSpeed, 
                                double windSpeed)
@@ -1178,29 +758,15 @@ public class Ballistics
       @Note: Tested - JUnit
     * @return (double) Energy = (m*v^2)/2 
     * ***********************************************************************/
-   public double caclulateBulletEnergy(double bulletMass, double mainVelocity)
+   public double calculateBulletEnergy(double bulletMass, double mainVelocity)
    {
       double energy = init;
          energy = (bulletMass * Math.pow(mainVelocity, 2))/2000;
       return roundTo(energy,roundConst);
    }
    
-   /**************************************************************************
-    * Function: roundTo
-    * @param (double )- value that must be round
-    * @param (int ) x - number of after dot digits
-      @Note: Tested - [ OK ]
-    * @return (double)- value that was rounded 
-    * ***********************************************************************/
-   public double roundTo(double value , int x)
-   {
-      double result = init;
-         result = (Math.round(value* Math.pow(10,x)) / Math.pow(10,x));
-      return result;
-   }
-   
    /***********************************************************************************************
-    * Function: getSoundSpeedInAir
+    * Function: calculateSoundSpeedInAir
     * @param (double ) currentTemperature - Celsius tempetature 
     * @param (double ) pressure (kPa)
     * @param (double ) humidity (0-100%)
@@ -1209,7 +775,7 @@ public class Ballistics
     *         http://resource.npl.co.uk/acoustics/techguides/speedair/
     *         view-source:http://resource.npl.co.uk/acoustics/techguides/speedair/
     * ********************************************************************************************/
-   public double getSoundSpeedInAir(double currentTemperature, double pressure, double humidity)
+   public double calculateSoundSpeedInAir(double currentTemperature, double pressure, double humidity)
    {
       double soundSpeed = init;
       double T = 0;
@@ -1262,7 +828,7 @@ public class Ballistics
     * @return (double) speed of sound in dry air 
     * @Note 
     * ***********************************************************************/
-   public double getSoundSpeedInDryAir(double currentTemperature)
+   public double calculateSoundSpeedInDryAir(double currentTemperature)
    {
       double soundSpeed = init;
          soundSpeed = soundSpeedCalcConst * Math.sqrt( 1 + (currentTemperature / T0));
@@ -1329,231 +895,9 @@ public class Ballistics
          density = roundTo(density,roundSmallConst);
       return density;
    }
-  
-   /**************************************************************************
-    * Function: convertionInchesToMeters
-    * @param (double) inch
-    * @return (double) meters
-    * ***********************************************************************/
-   public double convertionInchesToMeters(double inch)
-   {
-      double meters = init;
-         meters = (inch * oneInchPerMeter);
-         meters = roundTo(meters,roundSmallConst);
-      return meters;
-   }
    
    /**************************************************************************
-    * Function: convertionInchesToMeters
-    * @param (double) inch
-    * @return (double) meters
-    * ***********************************************************************/
-   public double convertionMetersToInches(double meter)
-   {
-      double inch = init;
-         inch = (meter / oneInchesInMeter); 
-         inch = roundTo(inch,roundSmallConst);
-      return inch;
-   }
-   
-   
-   /**************************************************************************
-    * Function: convertionBarometerToPasal
-    * @param (double) mm in barometer
-    * @return (double)  kPa
-    * ***********************************************************************/
-   public double convertionBarometerToPasal(double barometer)
-   {
-      double kPa = init;
-      double koef = 133.3;
-         kPa = barometer * koef;
-         kPa = roundTo(kPa,roundSmallConst);
-      return kPa;
-   }
-
-   /**************************************************************************
-    * Function: convertionCelciumTOFarenhait
-    * @param (double) F
-@Note: Tested - [ OK ]
-    * @return (double)  temperature
-    * ***********************************************************************/
-   public double convertionFarenheitToCelcium(double F)
-   {
-      double temperature = init;
-      double koef = 1.8000;
-         temperature = (F - 32.0)/koef;
-         temperature = roundTo(temperature,roundSmallConst);
-      return temperature;
-   }
-
-   /**************************************************************************
-    * Function: convertionCelciumTOFarenhait
-    * @param (double) C
-@Note: Tested - [ OK ]
-    * @return (double)  temperature
-    * ***********************************************************************/
-   public double convertionCelciumToFarenheit(double C)
-   {
-      double temperature = init;
-      double koef = 1.8000;
-         temperature = (Math.abs(C) * koef) + 32.0;
-         temperature = roundTo(temperature,roundSmallConst);
-      return temperature;
-   }
-   
-   /**************************************************************************
-    * Function: convertionFpsToMetersPerSec
-    * @param (double) fps
-    * @return (double) Meters per sec
-    * ***********************************************************************/
-   public double convertionFpsToMetersPerSec(double fps)
-   {
-      double metersPerSec = init;
-      double oneMeterPerSecInFPS = 3.28;
-         metersPerSec = (fps/oneMeterPerSecInFPS);
-      return metersPerSec;
-   }
-   
-   /**************************************************************************
-    * Function: convertionGrainsToGrams
-    * @param (double) grain
-@Note: Tested - [ OK ]
-    * @return (double) gramm
-    * ***********************************************************************/
-   public double convertionGrainsToGrams(double grain)
-   {
-      double gramm = init;
-      double oneGrainToMilligram = 15.432;      
-         gramm = (grain * oneGrainToMilligram); 
-         gramm = roundTo(gramm,4);
-      return gramm;
-   }
-   /**************************************************************************
-    * Function: convertionGramsToGrains
-    * @param (double) grams
-@Note: Tested - [ OK ]
-    * @return (double) grans
-    * ***********************************************************************/
-   public double convertionGramsToGrains(double grams)
-   {
-      double grains = init;
-      double oneGrainToMilligram = 15.432;
-         grains = (grams / oneGrainToMilligram); 
-         grains = roundTo(grains,4);
-      return grains;
-   }
-   
-   /**************************************************************************
-    * Function: getRangeInYards
-    * @param (double) targetSize in inches
-    * @param (double) sizeInMiles
-    * @return (double) Range in yards
-    * ***********************************************************************/
-   public double getRangeInYards(double targetSize, double sizeInMiles)
-   {
-      double range = init;
-         range = (targetSize * yardConstant) / sizeInMiles;
-         range = roundTo(range,roundSmallConst);
-      return range;
-   }
-   
-   /**************************************************************************
-    * Function: getMilsFromYardDistance - Question for what scope magnification? 
-    * @param targetSize  - (double)in inches
-    * @param rangeInYard - (double) yards 
-    * @return (double) sizeInMiles in yards
-    * ***********************************************************************/
-   public double getMilsFromYardDistance(double targetSize, double rangeInYard)
-   {
-      double sizeInMiles = init;
-         sizeInMiles = (targetSize * yardConstant) / rangeInYard;
-         sizeInMiles = roundTo(sizeInMiles,roundSmallConst);
-      return sizeInMiles;
-   }
-   
-   /**************************************************************************
-    * Function: getRangeInMeters
-    * @param (double) targetSize in meters
-    * @param (double) sizeInMiles
-    * @return (double) Range in yards
-    * ***********************************************************************/
-   public double getRangeInMeters(double targetSize, double sizeInMiles)
-   {
-      double range = init;
-         range = (targetSize * meterConstant) / sizeInMiles;
-         if(range < 0.001)
-         {
-            range = init;
-         }
-         else
-         {
-            range = roundTo(range,roundSmallConst);
-         }
-      return range;
-   }
-   
-   /**************************************************************************
-   * Function: getMilsFromMetersDistance
-   * @param  targetSize    - (double) in meters
-   * @param  rangeInMeters - (double) sizeInMiles
-   * @return (double) mils
-   * ***********************************************************************/
-  public double getMilsFromMetersDistance(double targetSize, double rangeInMeters)
-  {
-     Double sizeInMiles = init;
-        sizeInMiles = (targetSize * 1000) / rangeInMeters;
-       
-        if(sizeInMiles < 0.0001 || sizeInMiles.isInfinite() || sizeInMiles.isNaN() || sizeInMiles > 50)
-        {
-           sizeInMiles = init;
-        }
-        else
-        {
-           sizeInMiles = roundTo(sizeInMiles,roundSmallConst);
-        }
-     return sizeInMiles;
-  }
-   
-  /**************************************************************************
-   * Function: getSantimetersDeviationPerClickSet - TODO: getSantimetersDeviationPerClickSet
-   * @param rangeInMeters (double) 
-   * @param clickOnScope  (int)
-   * @param isNegative    (boolean) 
-   * @param clickPrice    (double) 
-   * @return sizeInSantimeters (double)
-   * ***********************************************************************/
-  public double getMetricDeviationPerClickSet(double  rangeInMeters, 
-                                              int     clickOnScope,
-                                              double  clickPrice,
-                                              boolean returnInMeters)
-  {
-     double sizeInSantimeters = init;
-                    //            4            0.25               2.9089   
-        sizeInSantimeters = (clickOnScope * clickPrice) * oneMOAonHundredMeters;
-        if (false == returnInMeters)
-        {
-           sizeInSantimeters *= (rangeInMeters/100);
-        }
-     return sizeInSantimeters;
-  }
-  
-  /**************************************************************************
-   * Function: getMOAFromMils
-   * @param mils  - double 
-   * @return dRet - double
-   * ***********************************************************************/
-  public double getMOAFromMils(double  mils)
-  {
-     double dRet = init;
-            dRet = ( mils * oneMillToMOA );
-            if(50 > dRet)
-            {
-               dRet = init;
-            }
-     return dRet;
-  }
-   /**************************************************************************
-    * Function: getAmmoAcceleration -
+    * Function: calculationAmmoAcceleration -
     * @param R_function used MAX speed
     * @param ballistikKoeff - [ballistik koeff.]
     * @param soundSpeed     - meters per seconds 
@@ -1561,7 +905,7 @@ public class Ballistics
     * @return (double) Meters per sec
     * @ Note: table R for Max values in feets // K0 = ~142859.6748596518
     * ***********************************************************************/
-   public double getAmmoAcceleration(double R_function, 
+   public double calculationAmmoAcceleration(double R_function, 
                                      double ballistikKoeff, 
                                      double soundSpeed, 
                                      double dencity)
@@ -1582,7 +926,7 @@ public class Ballistics
    * @return (double) R koef.
    * @ Note: table R for Max values in feets
    * ***********************************************************************/
-   public double getR_Function(double MAX, double W1Const)
+   public double calculationR_Function(double MAX, double W1Const)
    {
       double R = init;
                                           // this data for speed in MAX
@@ -1613,6 +957,7 @@ public class Ballistics
       }
       return R;
    }
+   
    /**************************************************************************
     * Function: getG1AccelerationKoef  - other varian of getAmmoAcceleration function,
     * but this one can be used if no ballistik koef. is available
@@ -1631,7 +976,7 @@ public class Ballistics
 // G1=(0,5*P*S*Cx(M)*V*V)/m
 // V = (V/a)*a = M*a; (V^2) = (M^2)*(a^2)
 // G1=[(P*S*a*a)/(2*m)]*Cx(M)*(M^2)
-   public double getG1AccelerationKoef(double sectional_bullets)
+   public double calculationG1AccelerationKoef(double sectional_bullets)
    {
       double A_WithkoefG1 = init;
       
@@ -1647,7 +992,7 @@ public class Ballistics
       double K1 = (P * Math.pow(a,2));                     // current
       double C  = (K1/K0);
       
-         Cx = forceOfHeadResistance(M,V,a);
+         Cx = calculationOfForceOfHeadResistance(M,V,a);
          M = V/a;
          A_WithkoefG1 = ( P * S * Math.pow(a,2) / (2*m) ) * Cx * Math.pow(M,2);
          A_WithkoefG1 = A_WithkoefG1 * C; // ускорение пули для данной атмосферы и скорости пули.
@@ -1655,15 +1000,15 @@ public class Ballistics
       return A_WithkoefG1;
    }
    
-/*************************************************************************************************
-    * Function: forceOfHeadResistance() - McCoy function for getG1AccelerationKoef() function
+   /*************************************************************************************************
+    * Function: calculationOfForceOfHeadResistance() - McCoy function for getG1AccelerationKoef() function
     * @param double ammoSpeed
     * @param double speedOfSound
     * @return (double) Cx
     * @Note: this function is for precise calculations
     * http://www.jbmballistics.com/cgi-bin/jbmdrag-5.1.cgi - this is for test 
-***** *******************************************************************************************/
-   public double forceOfHeadResistance(double MAX, double ammoSpeed, double speedOfSound)
+    *******************************************************************************************/
+   public double calculationOfForceOfHeadResistance(double MAX, double ammoSpeed, double speedOfSound)
    {
       double CD0  = init;
       double Max  = init;
@@ -1694,7 +1039,7 @@ public class Ballistics
 //                                 BulletSpecifications.bulletRadiusOjivalo,
 //                                 BulletSpecifications.bulletTailDiameter);
       
-      calculatePreParametersOfMcCoy();
+      calculationPreParametersOfMcCoy();
       /*************************************** Example *****************************/
       
 //            800 М/С Cx = 0,342349055954777 
@@ -1892,7 +1237,7 @@ public class Ballistics
     * @param double Cg - коэффициента сопротивления аэродинамических сил стандартной пули (G1)
     * @return (double) Range in yards
     * ***********************************************************************/
-    public double calculateBalisticKoef(BulletSpecifications bullet, double Cb, double Cg)
+    public double calculationBalisticKoef(BulletSpecifications bullet, double Cb, double Cg)
     {
        double koef = init;
        double SD = bullet.bulletWeight / bullet.ammo_crossSection;
@@ -1909,82 +1254,309 @@ public class Ballistics
      * @return (double) Range in yards
      * @Note:  i_form_factor take from G1 or G7
      * ***********************************************************************/
-     public double calculateBalisticKoef1(BulletSpecifications bullet, double calibre, double i_form_factor)
+     public double calculationBalisticKoef1(BulletSpecifications bullet, double calibre, double i_form_factor)
      {
         double koef = init;
         double SD = bullet.bulletWeight / bullet.ammo_crossSection;
            koef = SD / i_form_factor * Math.pow(calibre,2);
         return koef;
      }
-       
-   /**************************************************************************
-    * Function: getAmmoEnergy
-    * @param (double) mass of bullet in gram
-    * @param (double) speed of ammo in m\sec
-    * @return (double) AmmoStrengs energy ammo in J (Joule)
-    * @Note: Tested [ OK ]
-    * ***********************************************************************/
-   public double getAmmoEnergy(double ammoWeight, double ammoSpeed)
-   {
-      double AmmoEnergy = init;  
-         ammoWeight /= 1000; // because must be it Kg 
-         AmmoEnergy = ( ammoWeight * Math.pow(ammoSpeed,2) ) / 2;
-         AmmoEnergy = roundTo(AmmoEnergy,roundConst);
-      return AmmoEnergy;
-   }
    
-   /**************************************************************************
-    * Function: getAmmoStrength
-    * @param (double) mass of bullet in kg
-    * @param (double) energy ammo in J (Joule)
-    * @param (double) speed of ammo in m\sec
-    * @return (double) AmmoStrengs
-    * ***********************************************************************/
-   public double getAmmoStrength(double ammoWeight, double ammoEnergy, double ammoSpeed)
-   {
-      double AmmoStrengs = init;
-         AmmoStrengs = ( ammoWeight * (ammoEnergy * ammoSpeed) ) / 2; //1.96????
-      return AmmoStrengs;
-   }
    
-   /**************************************************************************
-    * Function: getAmmoSpeedNearTarget
-    * @param (double) ammoStartSpeed - m/sec
-    * @param (double) targetDistance - meters (yards?)
-    * @return (double) AmmoSpeedNearTarget
-    * ***********************************************************************/
-   public double getAmmoSpeedNearTarget(double ammoStartSpeed, double targetDistance)
-   {
-      double AmmoSpeedNearTarget = init;
-      if (targetDistance == 0)
+     /**************************************************************************
+      * Function: calculatePreParametersOfMcCoy() 
+      * 
+      * @return (void) 
+      * @Note:
+      * ***********************************************************************/
+      public void calculationPreParametersOfMcCoy()
       {
-         targetDistance = 0.0001;
+         /** Some data sheets has no parameters... It's not an error. Conversion must be done */
+         if(null != bullet)
+         {
+            if (0 ==  bullet.bulletLengthsOfBoatTail)
+            {
+               bullet.bulletDiameterOfBoatTail = bullet.bulletDiametr;
+            }
+            else if (bullet.bulletNoseDiameter == bullet.bulletDiametr)
+            {
+               bullet.bulletLengthsOfBoatTail = 0; 
+            }
+   
+            /* Вариант вычисления радиуса*/
+            if(0 == bullet.bulletRadius)
+            {
+               if( (0 != bullet.radiusOjivInCalibre) && 
+                   (0 != bullet.bulletDiametr)           )
+               {
+                  bullet.bulletRadius = (bullet.radiusOjivInCalibre * bullet.bulletDiametr);
+               }
+            }
+            
+            /* Вычисляем радиус тангенциального оживала */
+            if (bullet.RtR == 0)
+            {
+               double DifD     = (bullet.bulletDiametr - bullet.bulletNoseDiameter);
+               bullet.radiusTang = ( Math.pow((bullet.bulletNoseLength / DifD),2) + 0.25) * bullet.bulletDiametr;
+               bullet.RtR        = bullet.radiusTang / bullet.bulletRadius; //'Для конической головной части равно нулю
+            }
+         }
+         else
+         {
+            Log.e(LOG,"F;[calculationPreParametersOfMcCoy] >> Data error");
+         }
       }
-      AmmoSpeedNearTarget = ( ammoStartSpeed / e * 0.012 * targetDistance);
-         //AmmoSpeedNearTarget = ( ammoStartSpeed / 0.012 * targetDistance);
-      return AmmoSpeedNearTarget;
+         
+      /**************************************************************************
+       * Function: calculateBKfromSpeed() 
+       * @param double speed_point_1 for example 100m
+       * @param double speed_point_2             400m
+       * @param double distance_point_1          850m/s
+       * @param double distance_point_2          750m/s
+       * @return (double) result - ballistic koeff
+       * @Note:
+       * ***********************************************************************/
+       public double calculationBKfromSpeed(double speed_point_1, double speed_point_2,
+                                          double distance_point_1, double distance_point_2)
+       {
+          double result = 0;
+          double koeff  = (0.0052834); 
+          
+          double Distance       = distance_point_2 - distance_point_1;
+          double sqrtSpeedParam = Math.sqrt(speed_point_1) - Math.sqrt(speed_point_2);
+             result = Math.round( ((Distance * koeff) / (sqrtSpeedParam * 1000 )) / 1000 );
+          return result;
+       }
+       
+       
+       /**************************************************************************
+        * Function: calculationAmmoEnergy
+        * @param (double) mass of bullet in gram
+        * @param (double) speed of ammo in m\sec
+        * @return (double) AmmoStrengs energy ammo in J (Joule)
+        * @Note: Tested [ OK ]
+        * ***********************************************************************/
+       public double calculationAmmoEnergy(double ammoWeight, double ammoSpeed)
+       {
+          double AmmoEnergy = init;  
+             ammoWeight /= 1000; // because must be it Kg 
+             AmmoEnergy = ( ammoWeight * Math.pow(ammoSpeed,2) ) / 2;
+             AmmoEnergy = roundTo(AmmoEnergy,roundConst);
+          return AmmoEnergy;
+       }
+       
+       /**************************************************************************
+        * Function: calculationAmmoStrength
+        * @param (double) mass of bullet in kg
+        * @param (double) energy ammo in J (Joule)
+        * @param (double) speed of ammo in m\sec
+        * @return (double) AmmoStrengs
+        * ***********************************************************************/
+       public double calculationAmmoStrength(double ammoWeight, double ammoEnergy, double ammoSpeed)
+       {
+          double AmmoStrengs = init;
+             AmmoStrengs = ( ammoWeight * (ammoEnergy * ammoSpeed) ) / 2; //1.96????
+          return AmmoStrengs;
+       }
+       
+       /**************************************************************************
+        * Function: calculationAmmoSpeedNearTarget
+        * @param (double) ammoStartSpeed - m/sec
+        * @param (double) targetDistance - meters (yards?)
+        * @return (double) AmmoSpeedNearTarget
+        * ***********************************************************************/
+       public double calculationAmmoSpeedNearTarget(double ammoStartSpeed, double targetDistance)
+       {
+          double AmmoSpeedNearTarget = init;
+          if (targetDistance == 0)
+          {
+             targetDistance = 0.0001;
+          }
+          AmmoSpeedNearTarget = ( ammoStartSpeed / e * 0.012 * targetDistance);
+             //AmmoSpeedNearTarget = ( ammoStartSpeed / 0.012 * targetDistance);
+          return AmmoSpeedNearTarget;
+       }
+       
+       /**************************************************************************
+        * Function: calculationAngleGunJumpDuringShot - this will be very positive 
+        * update for functionality. But for now it's just 'future' improve.  
+        * @param None.
+        * @return None. 
+        * ***********************************************************************/
+       public double calculationAngleGunJumpDuringShot()
+       {
+          double Angle = init;
+          
+          double gunPowderWeight  = init;   //масса пороха
+          double bulletWeight     = init;   //масса пули
+          double gunWeight        = init;   //масса винтовки
+          double gubBarelLenght    = init;  //длина ствола
+          double angleH = init; // расстояние "по вертикали" (т.е. вбок на 90 градусов от направления ствола) 
+                             //от середины приклада 
+                             //(в том месте, где в плечо упирают, конечно же) до центра ствола, 
+          double К = init;      //какой-то коэффициент... >> ??? 
+             Angle = К * angleH * gubBarelLenght *( (bulletWeight + gunPowderWeight/2 ) / gunWeight);
+          return Angle;
+       }
+       
+       /**************************************************************************
+        * Function: calculationAeroDinamicKoeff_Cd() 
+        * @param double speed_point_1 for example 100m
+        * @param double speed_point_2             400m
+        * @param double distance_point_1          850m/s
+        * @param double distance_point_2          750m/s
+        * @param double mass                      10 kg
+        * @param double ammo_crossSection         0.024 m2 
+        * @return (double) result - // аэродинамический безразмерный коэффициент
+        * @Note:
+        * ***********************************************************************/
+        public double calculationAeroDinamicKoeff_Cd(double speed_point_1, double speed_point_2,
+                                           double distance_point_1, double distance_point_2,
+                                           double mass, double ammo_crossSection)
+        {
+           double result = 0;
+           double ro_air_density  = (1.225); 
+           double Distance = (distance_point_2 - distance_point_1);
+           
+           double r1 = (-Math.log(1-speed_point_1))/speed_point_1;
+           double r2 = (-Math.log(1-speed_point_2))/speed_point_2;
+              result = ( (2 * (r1 - r2)) / (Distance *  ro_air_density) )  * ( mass / ammo_crossSection);  
+           return result;
+        }
+   
+   /** ================================================================================================
+    * ==================================== SETTERS =====================================================
+    *  ================================================================================================ */
+
+   
+   /**************************************************************************
+    * Function: setBulletInfo  
+    * @param info - BulletInfo
+    * @return None.
+    * ***********************************************************************/
+   public void setBulletInfo(BulletSpecifications info)
+   {
+      if(null != info)
+      {
+         bullet = info;
+         BulletFlight.mass                 = bullet.bulletWeight * 1000; //(for 9.10)
+         BulletFlight.balistic_koef        = bullet.bulletBallisticsKoefficient;  
+         BulletFlight.bulletStartSpeed     = bullet.ammo_startSpeed;
+         BulletFlight.W1Const              = bullet.bullet_W1Const;
+         BulletFlight.bullet_turn_speed    = bullet.bullet_turn_speed;
+         BulletFlight.bullet_K_param       = bullet.bullet_K_param;
+      }
+      else
+      {
+         Log.e(LOG,"Information was not parsed");
+         bullet = null;
+      }
    }
    
    /**************************************************************************
-    * Function: getAngleGunJumpDuringShot - this will be very positive 
-    * update for functionality. But for now it's just 'future' improve.  
-    * @param None.
+    * Function: setBulletFlightPrivates  
+    * @param mass             - double in grams/grains TODO
+    * @param bulletStartSpeed - double 
+    * @param balistic_koef    - double 
+    * @param W1Const          - double
+    * @param barrel_rifling   - double 
+    * @param bullet_K_param   - double 
+    * @return None.
+    * ***********************************************************************/
+   public void setBulletFlightPrivates(double mass,
+                                       boolean isInGramms,
+                                       double bulletStartSpeed,
+                                       double balistic_koef,
+                                       double W1Const,
+                                       double barrel_rifling,
+                                       double bullet_K_param)
+   {
+      if(null != BulletFlight)
+      {
+         if(true == isInGramms)
+         {
+            BulletFlight.mass                 = mass / 1000;
+         }
+         else
+         {
+            BulletFlight.mass                 = mass;
+         }
+         BulletFlight.bulletStartSpeed     = bulletStartSpeed;
+         BulletFlight.balistic_koef        = balistic_koef;  
+         BulletFlight.W1Const              = W1Const;
+         BulletFlight.barrel_rifling       = barrel_rifling;
+         BulletFlight.bullet_K_param       = bullet_K_param;
+      }
+   }
+   
+   /**************************************************************************
+    * Function: setWindInfluence - use to set wind influence vector. For now
+    *    algorithm will be quit simle. North-north, south-south directions are
+    *    ignored. East-east and west-west - full strength. All others - only
+    *    half of strength. Also multiplied by -1, if dirrection is reversed. 
+    * @param (None).
+    * @return (None).
+    * ***********************************************************************/
+   public void setWindInfluence()
+   {
+      /*
+            50%        0%      50%
+                  325  0  45       
+                     \ | /        
+           100%  270 - * - 90 100%
+                     / | \ 
+                 225  180 135
+            50%        0%      50%
+           
+      */
+      double y_result = 0;
+      switch(Parameters.windDirection)
+      {
+         case EAST_EAST:
+            y_result = Parameters.windStrength;
+            break;
+         case WEST_WEST:
+            y_result = (-1) * Parameters.windStrength;
+            break;
+            
+         case NORTH_EAST:
+         case SOUTH_EAST:
+            y_result = Parameters.windStrength/2;
+            break;
+            
+         case NORTH_WEST:
+         case SOUTH_WEST:
+            y_result = Parameters.windStrength/2 * (-1);
+            break;
+            
+         case NORTH_NORTH:
+         case SOUTH_SOUTH:
+         default:
+            y_result = 0;
+            break;
+      }
+      
+      BulletFlight.Vwind.set(X,init); 
+      BulletFlight.Vwind.set(Y,y_result);
+      BulletFlight.Vwind.set(Z,init);
+   }
+
+   
+   /**************************************************************************
+    * Function: setMaxTargetDistance - 
+    * @param dmaxDistance - Double.
     * @return None. 
     * ***********************************************************************/
-   public double getAngleGunJumpDuringShot()
+   public void setMaxTargetDistance(Double dmaxDistance)
    {
-      double Angle = init;
-      
-      double gunPowderWeight  = init;   //масса пороха
-      double bulletWeight     = init;   //масса пули
-      double gunWeight        = init;   //масса винтовки
-      double gubBarelLenght    = init;  //длина ствола
-      double angleH = init; // расстояние "по вертикали" (т.е. вбок на 90 градусов от направления ствола) 
-                         //от середины приклада 
-                         //(в том месте, где в плечо упирают, конечно же) до центра ствола, 
-      double К = init;      //какой-то коэффициент... >> ??? 
-         Angle = К * angleH * gubBarelLenght *( (bulletWeight + gunPowderWeight/2 ) / gunWeight);
-      return Angle;
+      if( null != BulletFlight)
+      {
+         BulletFlight.maxDistance = dmaxDistance;
+      }
+      else
+      {
+         Log.e(LOG,"[setTargetDistance] Error");
+      }
    }
    
    /**************************************************************************
@@ -1995,120 +1567,601 @@ public class Ballistics
    public void setTargetDistance(Double dDistance)
    {
       if( null != BulletFlight)
+      {
          BulletFlight.targetDistance = dDistance;
+      }
+      else
+      {
+         Log.e(LOG,"F:[setTargetDistance] >> ERROR NULL");
+      }
+   }
+
+   /**************************************************************************
+    * Function: saveVectorParameterNearTarget() - save x,y,z parameters
+    * on target distance
+    * @return (double)  
+    * ***********************************************************************/
+   private void setVectorParameterNearTarget()
+   {
+      if( ((Lng(BulletFlight.Rv)+1) > BulletFlight.targetDistance) &&
+                                    (0 == BulletFlight.Rv_target.get(X)) )
+      {
+         copyVectors(BulletFlight.Rv,
+                     BulletFlight.Rv_target); 
+         
+//         Log.e(LOG,">> Save target parameters" + 
+//               String.format("[%g][%g][%g]", 
+//               BulletFlight.Rv_target.get(X),  BulletFlight.Rv_target.get(Y), BulletFlight.Rv_target.get(Z)));
+      }
+   }
+   
+   /** ================================================================================================
+    * ==================================== GETTERS =====================================================
+    *  ================================================================================================ */
+   
+   
+
+   /**************************************************************************
+    * Function: getBulletVectorsInfo  
+    * @param Type - VECTOR_TYPE enum
+    * @param result - Vector<Double>
+    * @return None.
+    * ***********************************************************************/
+   public void getBulletVectorsInfo( VECTOR_TYPE Type, Vector<Double> result)
+   {
+      if(null == BulletFlight)
+      {
+         Log.e(LOG,"Some issues with BulletFlight init values == null");
+         return;
+      }
+      
+      switch(Type)
+      {
+         case VECTOR_TYPE_RV:
+            copyVectors(BulletFlight.Rv,result);
+            break;
+            
+         case VECTOR_TYPE_VB:
+            copyVectors(BulletFlight.Vb,result);
+            break;
+            
+         case VECTOR_TYPE_VD:
+            copyVectors(BulletFlight.Vd,result);
+            break;
+            
+         case VECTOR_TYPE_VP:
+            copyVectors(BulletFlight.Vp,result);
+            break;
+            
+         case VECTOR_TYPE_Ab:
+            copyVectors(BulletFlight.A_b,result);
+            break;
+            
+         case VECTOR_TYPE_RV_TARGERT:
+            copyVectors(BulletFlight.Rv_target,result);
+            break;
+            
+         default:
+            break;
+      }
    }
    
    /**************************************************************************
-    * Function: getTargetDistance
-    * @param  None.
-    * @return None. 
+    * Function: getRangeInYards
+    * @param (double) targetSize in inches
+    * @param (double) sizeInMiles
+    * @return (double) Range in yards
     * ***********************************************************************/
+   public double getRangeInYards(double targetSize, double sizeInMiles)
+   {
+      double range = init;
+         range = (targetSize * yardConstant) / sizeInMiles;
+         range = roundTo(range,roundSmallConst);
+      return range;
+   }
+   
+   /**************************************************************************
+    * Function: getMilsFromYardDistance - Question for what scope magnification? 
+    * @param targetSize  - (double)in inches
+    * @param rangeInYard - (double) yards 
+    * @return (double) sizeInMiles in yards
+    * ***********************************************************************/
+   public double getMilsFromYardDistance(double targetSize, double rangeInYard)
+   {
+      double sizeInMiles = init;
+         sizeInMiles = (targetSize * yardConstant) / rangeInYard;
+         sizeInMiles = roundTo(sizeInMiles,roundSmallConst);
+      return sizeInMiles;
+   }
+   
+   /**************************************************************************
+    * Function: getRangeInMeters
+    * @param (double) targetSize in meters
+    * @param (double) sizeInMiles
+    * @return (double) Range in yards
+    * ***********************************************************************/
+   public double getRangeInMeters(double targetSize, double sizeInMiles)
+   {
+      double range = init;
+         range = (targetSize * meterConstant) / sizeInMiles;
+         if(range < 0.001)
+         {
+            range = init;
+         }
+         else
+         {
+            range = roundTo(range,roundSmallConst);
+         }
+      return range;
+   }
+   
+   /**************************************************************************
+   * Function: getMilsFromMetersDistance
+   * @param  targetSize    - (double) in meters
+   * @param  rangeInMeters - (double) sizeInMiles
+   * @return (double) mils
+   * ***********************************************************************/
+  public double getMilsFromMetersDistance(double targetSize, double rangeInMeters)
+  {
+     Double sizeInMiles = init;
+        sizeInMiles = (targetSize * 1000) / rangeInMeters;
+       
+        if(sizeInMiles < 0.0001 || sizeInMiles.isInfinite() || sizeInMiles.isNaN() || sizeInMiles > 50)
+        {
+           sizeInMiles = init;
+        }
+        else
+        {
+           sizeInMiles = roundTo(sizeInMiles,roundSmallConst);
+        }
+     return sizeInMiles;
+  }
+   
+  /**************************************************************************
+   * Function: getSantimetersDeviationPerClickSet - TODO: getSantimetersDeviationPerClickSet
+   * @param rangeInMeters (double) 
+   * @param clickOnScope  (int)
+   * @param isNegative    (boolean) 
+   * @param clickPrice    (double) 
+   * @return sizeInSantimeters (double)
+   * ***********************************************************************/
+   public double getMetricDeviationPerClickSet(double  rangeInMeters, 
+                                              int     clickOnScope,
+                                              double  clickPrice,
+                                              boolean returnInMeters)
+   {
+     double sizeInSantimeters = init;
+                    //            4            0.25               2.9089   
+        sizeInSantimeters = (clickOnScope * clickPrice) * oneMOAonHundredMeters;
+        if (false == returnInMeters)
+        {
+           sizeInSantimeters *= (rangeInMeters/100);
+        }
+     return sizeInSantimeters;
+   }
+  
+  /**************************************************************************
+   * Function: getMOAFromMils
+   * @param mils  - double 
+   * @return dRet - double
+   * ***********************************************************************/
+   public double getMOAFromMils(double  mils)
+   {
+     double dRet = init;
+            dRet = ( mils * oneMillToMOA );
+            if(50 > dRet)
+            {
+               dRet = init;
+            }
+     return dRet;
+   }
+  
+  /**************************************************************************
+   * Function: getTargetDistance
+   * @param  None.
+   * @return None. 
+   * ***********************************************************************/
    public double getTargetDistance()
    {
-      double dRet = (600.0); // TODO: Random! 
-      if( null != BulletFlight)
+     double dRet = (600.0); // TODO: Random! 
+     if( null != BulletFlight)
+     {
+        if(0 !=  BulletFlight.targetDistance)
+        {
+           dRet = BulletFlight.targetDistance;
+        }
+        else
+        {
+           //Log.e(LOG,"F:[getTargetDistance] >> Error for target distance - set 600m");
+           BulletFlight.targetDistance = dRet;
+        }
+     }
+     return dRet;
+   }
+
+   
+   /** ================================================================================================
+    * ==================================== MATH =====================================================
+    *  ================================================================================================ */
+
+   
+   /**************************************************************************
+    * Function: copyVectors  
+    * @param fromVector - Vector<Double> what to copy
+    * @param toVector   - Vector<Double> where to copy
+    * @return None.
+    * ***********************************************************************/
+   private void copyVectors(Vector<Double> fromVector, Vector<Double> toVector)
+   {
+      if( (null != fromVector) && (null != toVector))
       {
-         if(0 !=  BulletFlight.targetDistance)
+         if(fromVector.size() == toVector.size())
          {
-            dRet = BulletFlight.targetDistance;
+            for(int i = 0; i < toVector.size();i++)
+            {
+               toVector.set(i, fromVector.get(i));
+            }
          }
       }
-      return dRet;
    }
    
-   /**************************************************************************
-    * Function: setMaxTargetDistance - 
-    * @param dmaxDistance - Double.
-    * @return None. 
-    * ***********************************************************************/
-   public void setMaxTargetDistance(Double dmaxDistance)
+  /**************************************************************************
+   * Function: VP  - vector multiplicate with vector
+   * @param vect1 Double 1 - Vp
+   * @param vect2 Double 2 - Vb
+   * @param result Double result
+   @Test: Tested - by JUnit
+   * @return None.
+   * ***********************************************************************/
+   public void VP (Vector<Double> vect1, Vector<Double> vect2 ,Vector<Double> result)
    {
-      if( null != BulletFlight)
-         BulletFlight.maxDistance = dmaxDistance;
+      if ((vect1.size() == 3) && (vect2.size() == 3))
+      {
+         for(int i=0; i < result.size(); i++)
+         {
+            double temp = 0;
+            if (i == X)
+               { temp = ( (vect1.get(Y) * vect2.get(Z)) - (vect1.get(Z) * vect2.get(Y))); } 
+            else if (i == Y)
+               { temp = ( (vect1.get(Z) * vect2.get(X)) - (vect1.get(X) * vect2.get(Z))); } 
+            else if (i == Z)
+               { temp = ( (vect1.get(X) * vect2.get(Y)) - (vect1.get(Y) * vect2.get(X))); }
+            else
+               { Log.e(LOG,"F:[VP] -> ERROR on vectors size"); }
+            result.set(i, temp);
+         } 
+      }
       else
-         Log.e(LOG,"[setTargetDistance]");
+      {
+         Log.e(LOG,"F:[VP] -> vectors has wrong length");
+      }
+   }
+   
+  /**************************************************************************
+   * Function: vectorAngle  - calculate angle between vectors
+   * @param Vector<Double> vect1
+   * @param Vector<Double> vect2
+   * @return double Angle in radians.
+   * @Note: 1 оb/sec=6.28 rad/sec also see const value oneTurnInRad
+   * ***********************************************************************/
+   @SuppressWarnings("unused")
+   private static double vectorAngle (Vector<Double> vect1, Vector<Double> vect2)
+   {
+      double sin_angle = 0; double AB   = 0;
+      double angle     = 0; double modA = 0;
+      double temp      = 0; double modB = 0;
+      
+      if ((vect1.size() == 3) && (vect2.size() == 3))
+      {
+         AB = (vect1.get(0) * vect2.get(0)) + (vect1.get(1) * vect2.get(1)) + vect1.get(2) * vect2.get(2);
+            temp = Math.pow(vect1.get(0), 2) + Math.pow(vect1.get(1), 2) + Math.pow(vect1.get(2), 2);
+         modA = Math.sqrt(temp); 
+            temp = 0;
+            temp = Math.pow(vect2.get(0), 2) + Math.pow(vect2.get(1), 2) + Math.pow(vect2.get(2), 2);
+         modB = Math.sqrt(temp);
+   
+         angle = AB / (modA * modB);                     // cos(fi)
+         sin_angle = Math.sqrt(1 - Math.pow(angle, 2));  // sin(fi)
+      }
+      else
+      {
+         Log.e(LOG,"F:[vectorAngle] -> vectors has wrong length");
+      }
+      return sin_angle;
    }
    
    /**************************************************************************
-    * Function: calculatePreParametersOfMcCoy() 
-    * 
-    * @return (void) 
-    * @Note:
+    * Function: vectorDeduction  - vector deduction of vectors (-)
+    * @param Vector<Double> vect1
+    * @param Vector<Double> vect2
+    * @param Vector<Double> result
+    * @return None.
     * ***********************************************************************/
-    public void calculatePreParametersOfMcCoy()
-    {
-       /** Some data sheets has no parameters... It's not an error. Conversion must be done */
-       if (0 ==  bullet.bulletLengthsOfBoatTail)
-       {
-          bullet.bulletDiameterOfBoatTail = bullet.bulletDiametr;
-       }
-       else if (bullet.bulletNoseDiameter == bullet.bulletDiametr)
-       {
-          bullet.bulletLengthsOfBoatTail = 0; 
-       }
-
-       /* Вариант вычисления радиуса*/
-       if(0 == bullet.bulletRadius)
-       {
-          if( (0 != bullet.radiusOjivInCalibre) && 
-              (0 != bullet.bulletDiametr)           )
-          {
-             bullet.bulletRadius = (bullet.radiusOjivInCalibre * bullet.bulletDiametr);
-          }
-       }
-       
-       /* Вычисляем радиус тангенциального оживала */
-       if (bullet.RtR == 0)
-       {
-          double DifD     = (bullet.bulletDiametr - bullet.bulletNoseDiameter);
-          bullet.radiusTang = ( Math.pow((bullet.bulletNoseLength / DifD),2) + 0.25) * bullet.bulletDiametr;
-          bullet.RtR        = bullet.radiusTang / bullet.bulletRadius; //'Для конической головной части равно нулю
-       }
-    }
-       
-    /**************************************************************************
-     * Function: calculateBKfromSpeed() 
-     * @param double speed_point_1 for example 100m
-     * @param double speed_point_2             400m
-     * @param double distance_point_1          850m/s
-     * @param double distance_point_2          750m/s
-     * @return (double) result - ballistic koeff
-     * @Note:
-     * ***********************************************************************/
-     public double calculateBKfromSpeed(double speed_point_1, double speed_point_2,
-                                        double distance_point_1, double distance_point_2)
-     {
-        double result = 0;
-        double koeff  = (0.0052834); 
-        
-        double Distance       = distance_point_2 - distance_point_1;
-        double sqrtSpeedParam = Math.sqrt(speed_point_1) - Math.sqrt(speed_point_2);
-           result = Math.round( ((Distance * koeff) / (sqrtSpeedParam * 1000 )) / 1000 );
-        return result;
-     }
-     
-     /**************************************************************************
-      * Function: aeroDinamicKoeff_Cd() 
-      * @param double speed_point_1 for example 100m
-      * @param double speed_point_2             400m
-      * @param double distance_point_1          850m/s
-      * @param double distance_point_2          750m/s
-      * @param double mass                      10 kg
-      * @param double ammo_crossSection         0.024 m2 
-      * @return (double) result - // аэродинамический безразмерный коэффициент
-      * @Note:
-      * ***********************************************************************/
-      public double aeroDinamicKoeff_Cd(double speed_point_1, double speed_point_2,
-                                         double distance_point_1, double distance_point_2,
-                                         double mass, double ammo_crossSection)
+   public void vectorDeduction (Vector<Double> vect1, Vector<Double> vect2, Vector<Double> result)
+   {
+      if ((vect1.size() == 3) && (vect2.size() == 3))
       {
-         double result = 0;
-         double ro_air_density  = (1.225); 
-         double Distance = (distance_point_2 - distance_point_1);
-         
-         double r1 = (-Math.log(1-speed_point_1))/speed_point_1;
-         double r2 = (-Math.log(1-speed_point_2))/speed_point_2;
-            result = ( (2 * (r1 - r2)) / (Distance *  ro_air_density) )  * ( mass / ammo_crossSection);  
-         return result;
+         for(int i=0; i < result.size(); i++)
+         {
+            double temp = init;
+            temp = ( vect1.get(i) -  vect2.get(i) ); 
+            result.set(i, roundTo(temp,roundConst));
+         } 
       }
+      else
+      {
+         Log.e(LOG,"F:[VP] -> vectors has wrong length");
+      }
+   }
+   
+   /**************************************************************************
+    * Function: vectorAddition  - vector addition of vectors (+)
+    * @param Vector<Double> vect1
+    * @param Vector<Double> vect2
+    * @param Vector<Double> result
+    * @return None.
+    * ***********************************************************************/
+   public void vectorAddition (Vector<Double> vect1, 
+                               Vector<Double> vect2,
+                               Vector<Double> result)
+   {
+      if ((vect1.size() == 3) && (vect2.size() == 3))
+      {
+         double temp = init;
+         for(int i=0; i < result.size(); i++)
+         {
+            temp = init;
+            temp = ( vect1.get(i) +  vect2.get(i) ); 
+            result.set(i, roundTo(temp,roundConst));
+         } 
+      }
+      else
+      {
+         Log.e(LOG,"F:[VP] -> vectors has wrong length");
+      }
+   }
+   
+   /**************************************************************************
+    * Function: Lng  - calculate vectors...
+    * @param Vector<Double> vect
+   @Note: Tested JUnit
+    * @return (double)  
+    * ***********************************************************************/
+   public double Lng(Vector<Double> vect)
+   {
+      double result  = init;
+      double temp    = init;  
+      for(int i = 0; i < vect.size(); i++)
+      {
+         temp = init;
+         temp = vect.get(i);
+         result += Math.pow(temp, 2);
+      }
+      result = Math.sqrt(result);
+      return roundTo(result,11);
+   }
+   
+   /**************************************************************************
+    * Function: Mlt  - multiply vector on some value
+    * @param vect   - Vector<Double> 
+    * @param value  - double 
+    * @param result - Vector<Double> 
+   @Note: Tested - JUnit
+    * @return (double)  None.
+    * ***********************************************************************/
+   public void  Mlt(Vector<Double> vect, double value ,Vector<Double> result)
+   {
+      if (vect.size() == result.size())
+      {
+         Double temp = init;
+         for(int i=0; i < vect.size(); i++)
+         {
+            //Double temp = vect.get(i);
+            //temp = temp * value;
+            temp = init;
+            temp = vect.get(i) * value;
+            result.set(i, roundTo(temp,roundConst));
+         }
+      }
+      else
+      {
+         Log.e(LOG,"F:[Mlt] -> Both vectors must be initialized");
+      }
+   }
+
+   /**************************************************************************
+    * Function: roundTo
+    * @param (double )- value that must be round
+    * @param (int ) x - number of after dot digits
+      @Note: Tested - [ OK ]
+    * @return (double)- value that was rounded 
+    * ***********************************************************************/
+   public double roundTo(double value , int x)
+   {
+      double result = init;
+      result = (Math.round(value* Math.pow(10,x)) / Math.pow(10,x));
+      return result;
+   }
+
+   
+   
+   /** ================================================================================================
+    * ==================================== CONVERTION =====================================================
+    *  ================================================================================================ */
+     
+
+   /**************************************************************************
+    * Function: convertionInchesToMeters
+    * @param (double) inch
+    * @return (double) meters
+    * ***********************************************************************/
+   public double convertionInchesToMeters(double inch)
+   {
+      double meters = init;
+         meters = (inch * oneInchPerMeter);
+         meters = roundTo(meters,roundSmallConst);
+      return meters;
+   }
+   
+   /**************************************************************************
+    * Function: convertionInchesToMeters
+    * @param (double) inch
+    * @return (double) meters
+    * ***********************************************************************/
+   public double convertionMetersToInches(double meter)
+   {
+      double inch = init;
+         inch = (meter / oneInchesInMeter); 
+         inch = roundTo(inch,roundSmallConst);
+      return inch;
+   }
+   
+   
+   /**************************************************************************
+    * Function: convertionBarometerToPasal
+    * @param (double) mm in barometer
+    * @return (double)  kPa
+    * ***********************************************************************/
+   public double convertionBarometerToPasal(double barometer)
+   {
+      double kPa = init;
+      double koef = 133.3;
+         kPa = barometer * koef;
+         kPa = roundTo(kPa,roundSmallConst);
+      return kPa;
+   }
+
+   /**************************************************************************
+    * Function: convertionCelciumTOFarenhait
+    * @param (double) F
+   @Note: Tested - [ OK ]
+    * @return (double)  temperature
+    * ***********************************************************************/
+   public double convertionFarenheitToCelcium(double F)
+   {
+      double temperature = init;
+      double koef = 1.8000;
+         temperature = (F - 32.0)/koef;
+         temperature = roundTo(temperature,roundSmallConst);
+      return temperature;
+   }
+
+   /**************************************************************************
+    * Function: convertionCelciumTOFarenhait
+    * @param (double) C
+   @Note: Tested - [ OK ]
+    * @return (double)  temperature
+    * ***********************************************************************/
+   public double convertionCelciumToFarenheit(double C)
+   {
+      double temperature = init;
+      double koef = 1.8000;
+         temperature = (Math.abs(C) * koef) + 32.0;
+         temperature = roundTo(temperature,roundSmallConst);
+      return temperature;
+   }
+   
+   /**************************************************************************
+    * Function: convertionFpsToMetersPerSec
+    * @param (double) fps
+    * @return (double) Meters per sec
+    * ***********************************************************************/
+   public double convertionFpsToMetersPerSec(double fps)
+   {
+      double metersPerSec = init;
+      double oneMeterPerSecInFPS = 3.28;
+         metersPerSec = (fps/oneMeterPerSecInFPS);
+      return metersPerSec;
+   }
+   
+   /**************************************************************************
+    * Function: convertionGrainsToGrams
+    * @param (double) grain
+   @Note: Tested - [ OK ]
+    * @return (double) gramm
+    * ***********************************************************************/
+   public double convertionGrainsToGrams(double grain)
+   {
+      double gramm = init;
+      double oneGrainToMilligram = 15.432;      
+         gramm = (grain * oneGrainToMilligram); 
+         gramm = roundTo(gramm,4);
+      return gramm;
+   }
+   /**************************************************************************
+    * Function: convertionGramsToGrains
+    * @param (double) grams
+   @Note: Tested - [ OK ]
+    * @return (double) grans
+    * ***********************************************************************/
+   public double convertionGramsToGrains(double grams)
+   {
+      double grains = init;
+      double oneGrainToMilligram = 15.432;
+         grains = (grams / oneGrainToMilligram); 
+         grains = roundTo(grains,4);
+      return grains;
+   }
+   
+   
+   
+   /** ================================================================================================
+    * ==================================== DEBUG =======================================================
+    *  ================================================================================================ */
+   
+   
+   /**************************************************************************
+    * Function: testLogShoot() 
+    * @return (double)  
+    * ***********************************************************************/
+//   private void testLogShoot()
+//   {
+//      Log.e("Test",String.format("x:[%g] y:[%g] z:[%g]",
+//                                                         BulletFlight.Rv.get(X),
+//                                                         BulletFlight.Rv.get(Y),
+//                                                         BulletFlight.Rv.get(Z)));
+//      /* [ Скорость пули ] */
+//      Log.e("Test",String.format("Vx:[%g] Vy:[%g] Vz:[%g]",
+//                                                         BulletFlight.Vb.get(X),
+//                                                         BulletFlight.Vb.get(Y),
+//                                                         BulletFlight.Vb.get(Z)));
+//      /* [ Скорость пули + скорость ветра ] */
+//      Log.e("Test",String.format("VPx:[%g] VPy:[%g] VPz:[%g]",
+//                                                         BulletFlight.Vp.get(X),
+//                                                         BulletFlight.Vp.get(Y),
+//                                                         BulletFlight.Vp.get(Z)));
+//      /* [ Ускорение ] */
+//      Log.e("Test",String.format("Ax:[%g] Ay:[%g] Az:[%g]",
+//                                                         BulletFlight.A_b.get(X),
+//                                                         BulletFlight.A_b.get(Y),
+//                                                         BulletFlight.A_b.get(Z)));
+//      /* [ Deviation ] */
+//      Log.e("Test",String.format("Vd_x:[%g] Vd_y:[%g] Vd_z:[%g]",
+//                                                         BulletFlight.Vd.get(X),
+//                                                         BulletFlight.Vd.get(Y),
+//                                                         BulletFlight.Vd.get(Z)));
+//
+//      Log.e("Test",String.format("Velocity:[%g]  Enerdy[%g]  Time:[%g]  ",
+//                                                         BulletFlight.mainVelocity,
+//                                                         BulletFlight.EnergyInDjoule,
+//                                                         BulletFlight.flightTime));
+//
+//      Log.e("Test",String.format("R_function:[%g] Accelereation:[%g] MAX:[%g] ",
+//                                                         BulletFlight.R_function,
+//                                                         BulletFlight.acceleration,
+//                                                         BulletFlight.MAXSoundSpeed));
+//      
+//      Log.e("Test",String.format("dencity[%g] preasure[%g] bullet_turn_speed[%g] \n soundSpeed:[%g]" +
+//                                 "mass[%g] koef[%g] deviation[%g] \niterations[%d]",
+//                                                         Parameters.density,
+//                                                         Parameters.preasure,
+//                                                         BulletFlight.bullet_turn_speed,
+//                                                         Parameters.soundSpeed,
+//                                                         BulletFlight.mass,
+//                                                         BulletFlight.balistic_koef,
+//                                                         BulletFlight.Deviation_K,
+//                                                         BulletFlight.stepNumber));
+//      Log.e("Test","===============================================");
+//   }
+   
 }

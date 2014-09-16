@@ -14,21 +14,21 @@ public class JUnitBallistics extends TestCase
    private final static int Z = (2);
   
    /*****************************************************************************************/
-   @Test
-   public void testCaclulateMcCoy() 
-   {
-      Ballistics tB = new Ballistics(); 
-      
-      double MAX = 0;  //Cx = 0,342349055954777
-      
-      //double must_be = 0.3423491;             // as it is in example
-      double must_be = 0.3119086138138161;
-      double res = tB.forceOfHeadResistance(MAX,
-                                            800,
-                                            340.28);
-      
-      assertEquals("McCoy: ",must_be, res);
-   }
+//   @Test
+//   public void testCaclulateMcCoy() 
+//   {
+//      Ballistics tB = new Ballistics(); 
+//      
+//      double MAX = 0;  //Cx = 0,342349055954777
+//      
+//      //double must_be = 0.3423491;             // as it is in example
+//      double must_be = 0.3119086138138161;
+//      double res = tB.calculationOfForceOfHeadResistance(MAX,
+//                                            800,
+//                                            340.28);
+//      
+//      assertEquals("McCoy: ",must_be, res);
+//   }
    
    
    /*****************************************************************************************/
@@ -46,7 +46,7 @@ public class JUnitBallistics extends TestCase
       double must_be = 0.00002479527;
       
       assertEquals("Deviation: ",must_be,testBallistics.roundTo(
-                        testBallistics.caclulateDeviationkoef(Vp, Vp0),11));
+                        testBallistics.calculateDeviationkoef(Vp, Vp0),11));
    }
    
    /*****************************************************************************************/
@@ -69,7 +69,7 @@ public class JUnitBallistics extends TestCase
 
       //(4.63E-5,3.52E-5,-3.90E-5) with w earth=0.00007
       //tB.WearthSpeed = (7.29212)* Math.pow(10,-5);
-      tB.earthSpeedVector(latitude, 
+      tB.calculateEarthSpeedVector(latitude, 
                                       azimuth, 
                                       coordAngle,
                                       testVector);
@@ -86,7 +86,7 @@ public class JUnitBallistics extends TestCase
       azimuth    = (135.0);
       coordAngle = (-60.0);
 
-      tB.earthSpeedVector(latitude, 
+      tB.calculateEarthSpeedVector(latitude, 
             azimuth, 
             coordAngle,
             testVector);
@@ -103,7 +103,7 @@ public class JUnitBallistics extends TestCase
       azimuth    = (135.0);
       coordAngle = (60.0);
 
-      tB.earthSpeedVector(latitude, 
+      tB.calculateEarthSpeedVector(latitude, 
             azimuth, 
             coordAngle,
             testVector);
@@ -138,7 +138,7 @@ public class JUnitBallistics extends TestCase
       testBallistics.Parameters.gravityAcceleration = 9.8;
       /* In function it will be set to *=-1 */
       
-      testBallistics.gravitationTurnVector(angle,
+      testBallistics.calculateGravitationTurnVector(angle,
                                            testVectorG);
       
       assertEquals("gx: ",must_gx, testBallistics.roundTo(testVectorG.get(X).doubleValue(),2));
@@ -156,14 +156,14 @@ public class JUnitBallistics extends TestCase
       double must_G = 9.7803; 
       
       assertEquals("Local G: ",must_G, testBallistics.roundTo(
-                                             testBallistics.getLocalG(latitude, altitude),4));
+                                             testBallistics.calculateLocalG(latitude, altitude),4));
    
       latitude = 45.05;
       altitude = 500.0;
       must_G =  9.8047;
       
       assertEquals("Local G: ",must_G, testBallistics.roundTo(
-                     testBallistics.getLocalG(latitude, altitude),4));
+                     testBallistics.calculateLocalG(latitude, altitude),4));
    }
    /*****************************************************************************************/
    @Test
@@ -171,7 +171,7 @@ public class JUnitBallistics extends TestCase
    {
       Ballistics testBallistics = new Ballistics(); 
       double must_be = 2912.0;
-      double result = testBallistics.caclulateBulletEnergy(9.10, 800.0);
+      double result = testBallistics.calculateBulletEnergy(9.10, 800.0);
       assertEquals("Energy: ",must_be, testBallistics.roundTo(result,1));
    }
    
