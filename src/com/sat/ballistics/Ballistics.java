@@ -97,11 +97,11 @@ public class Ballistics
       public double koef_wind_resistance = (init);// calculated   
       public double MAXSoundSpeed        = (init);// calculated   
       public double R_function           = (init);// calculated   
-      public double dt                   = 0.001; 
       public double mainVelocity         = (init);// calculated   
       public double flightTime           = (init);// calculated   
       public double acceleration         = (init);// calculated   
       public int    stepNumber           = (0);
+      public double dt                   = (0.001); 
 
       /* Geographical parameters */
       public double latitude    = (init); 
@@ -110,21 +110,15 @@ public class Ballistics
       
       /* Calculated vectors */
       private Vector<Double> Rv        = new Vector<Double>(); // start coordinate of bullet (x,y,z)
-      private Vector<Double> Rv_target = new Vector<Double>(); // start coordinate of bullet (x,y,z)
-      /* Velocity in space */
-      private Vector<Double> Vb = new Vector<Double>(); // start velocity   of bullet (Vx,Vy,Vz)
-      /* Velocity of wind in space */
-      private Vector<Double> Vwind  = new Vector<Double>(); // vector of wind influence (Vwx,Vwy,Vwz)
-      /* Velocity with wind influence */
-      private Vector<Double> Vp0 = new Vector<Double>(); // vector of previous speed of the flow
-      private Vector<Double> Vp  = new Vector<Double>(); // vector of speed of the flow (VPx,VPy,VPz)
-      /* Acceleration in space*/
-      private Vector<Double> A_b = new Vector<Double>(); // vector of bullet acceleration depending on atmosphere (Ax,Ay,Az)  
-      private Vector<Double> G   = new Vector<Double>(); // acceleration of gravity
-      /* Deviation */
-      private Vector<Double> Vd  = new Vector<Double>(); // vector of deviation
-      /* Earth spin */
-      private Vector<Double> Wearth = new Vector<Double>(); // this is for earth movement
+      private Vector<Double> Rv_target = new Vector<Double>(); // coordinate of bullet on target distance (x,y,z)
+      private Vector<Double> Vb        = new Vector<Double>(); // start velocity   of bullet (Vx,Vy,Vz)
+      private Vector<Double> Vwind     = new Vector<Double>(); // vector of wind influence (Vwx,Vwy,Vwz)
+      private Vector<Double> Vp0       = new Vector<Double>(); // Velocity with wind influence 
+      private Vector<Double> Vp        = new Vector<Double>(); // vector of speed of the flow (VPx,VPy,VPz)
+      private Vector<Double> A_b       = new Vector<Double>(); // vector of bullet acceleration depending on atmosphere (Ax,Ay,Az)  
+      private Vector<Double> G         = new Vector<Double>(); // acceleration of gravity
+      private Vector<Double> Vd        = new Vector<Double>(); // vector of deviation
+      private Vector<Double> Wearth    = new Vector<Double>(); // this is for earth movement
    }
    public bulletFlightParams BulletFlight = null;
    

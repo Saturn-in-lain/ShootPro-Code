@@ -363,28 +363,7 @@ public class MainZoomShoot extends Activity implements InitializerPerClass, OnCl
       }
    }
    
-   /**************************************************************************
-    * Function: setUIOffsetsBeWindowSize() 
-    * @return  None.
-    * ***********************************************************************/
-   private void setUIOffsetsByWindowSize()
-   {
-Log.e(LOG,"F:[setUIOffsetsByWindowSize]");
-      
-      Point windowCenter            = MainActivity.getWindowsCenter();
-      RelativeLayout.LayoutParams L = (RelativeLayout.LayoutParams) imgScopeGrid.getLayoutParams();
-      
-      L.topMargin    = windowCenter.y - MainActivity.UICustom.ScopeSize/2 + MainActivity.UICustom.ScopeGridMargin;
-      L.bottomMargin = windowCenter.y + MainActivity.UICustom.ScopeSize   + MainActivity.UICustom.ScopeSize/2 - MainActivity.UICustom.ScopeGridMargin;
-      
-      L.leftMargin   = windowCenter.x - MainActivity.UICustom.ScopeSize/2;
-      L.rightMargin  = windowCenter.x - MainActivity.UICustom.ScopeSize + MainActivity.UICustom.ScopeSize/2;
-
-      L.height = (MainActivity.UICustom.ScopeSize);
-      L.width  = (MainActivity.UICustom.ScopeSize);
-      
-      imgScopeGrid.setLayoutParams(L);
-   }
+  
    
    /**************************************************************************
     * Function: setScopeGrid() - choose correct scope grid and set
@@ -936,6 +915,30 @@ Log.e(LOG,String.format("Clicks meters + deviation meters [%g][%g]",
     }
     
     /**************************************************************************
+     * Function: setUIOffsetsBeWindowSize() - TODO
+     * @return  None.
+     * ***********************************************************************/
+    private void setUIOffsetsByWindowSize()
+    {
+       
+       Point windowCenter            = MainActivity.getWindowsCenter();
+       RelativeLayout.LayoutParams L = (RelativeLayout.LayoutParams) imgScopeGrid.getLayoutParams();
+       
+       L.topMargin    = windowCenter.y - MainActivity.UICustom.ScopeSize/2 + MainActivity.UICustom.ScopeGridMargin;
+       L.bottomMargin = windowCenter.y + MainActivity.UICustom.ScopeSize   + MainActivity.UICustom.ScopeSize/2 - MainActivity.UICustom.ScopeGridMargin;
+       
+       L.leftMargin   = windowCenter.x - MainActivity.UICustom.ScopeSize/2;
+       L.rightMargin  = windowCenter.x - MainActivity.UICustom.ScopeSize + MainActivity.UICustom.ScopeSize/2;
+
+       L.height = (MainActivity.UICustom.ScopeSize);
+       L.width  = (MainActivity.UICustom.ScopeSize);
+       
+       imgScopeGrid.setLayoutParams(L);
+
+Log.e(LOG,String.format("F:[setUIOffsetsByWindowSize] [%d][%d]",L.bottomMargin,L.rightMargin));
+    }
+    
+    /**************************************************************************
      * Function: setScopeClickMargin() TODO This is dirty huck
      * @param   (VL) ScrollView 
      * @return  None.
@@ -945,6 +948,8 @@ Log.e(LOG,String.format("Clicks meters + deviation meters [%g][%g]",
        RelativeLayout.LayoutParams LP  = (android.widget.RelativeLayout.LayoutParams) VL.getLayoutParams();
        LP.rightMargin   = (LP.rightMargin + MainActivity.UICustom.VerticalClickMargin);
        VL.setLayoutParams(LP);
+       
+Log.e(LOG,String.format("F:[setScopeClickMargin]!"));
     }
     
     /***************************************************************************

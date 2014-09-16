@@ -72,12 +72,11 @@ public class MainActivity extends Activity implements InitializerPerClass,OnClic
       shootButton               = (ImageButton) findViewById(R.id.btn_shoot);
       txtWindSpeed              = (TextView)    findViewById(R.id.txtWindSpeed); 
       imageTargetScoped         = (ImageView)   findViewById(R.id.imageTarget);
-      
-      UICustom                  = new UIHardCode(getWindowsSize());
-      
       scrollMainVerticalImage.setVerticalScrollBarEnabled(false);
       scrollMainHorizontalImage.setHorizontalScrollBarEnabled(false);
+      
       windowGabarites           = setImageCenterCoordinates();
+      UICustom                  = new UIHardCode(windowGabarites);
    } 
    
    /**************************************************************************

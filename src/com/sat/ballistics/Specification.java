@@ -7,7 +7,7 @@ import android.content.Context;
  * @Name:       Specification
  * @Desciption: Specification interface for weapon, bullet and scope data
  * @category:  
- * @version:    0.0.1
+ * @version:    1.0.0
  *****************************************************************/
 public interface Specification
 {
