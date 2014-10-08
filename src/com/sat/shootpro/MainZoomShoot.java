@@ -343,7 +343,7 @@ public class MainZoomShoot extends Activity implements InitializerPerClass, OnCl
    }   
    
    /**************************************************************************
-    * Function: shotTargetShotResults() - Function for showing
+    * Function: showTargetShotResults() - Function for showing
     * target with bullet hits on it. Please notice, that current implementation
     * does not accurate as much, as I want. One px on 600 meters = 61 px 
     * on resized large target picture. This will be reworked on next sprint.   
@@ -351,7 +351,7 @@ public class MainZoomShoot extends Activity implements InitializerPerClass, OnCl
     * ***********************************************************************/   
    private void showTargetShotResults()
    {
-      if(null != TargetClass)
+      if( null != TargetClass )
       {
          imgDialog = new ImageInDialogView(ctx, getResources());
          imgDialog.showTargetPictureDialog(R.drawable.target_main,
@@ -362,8 +362,6 @@ public class MainZoomShoot extends Activity implements InitializerPerClass, OnCl
          StartMenuActivity.Interf.showToastMsg("No target!", ctx);
       }
    }
-   
-  
    
    /**************************************************************************
     * Function: setScopeGrid() - choose correct scope grid and set
@@ -389,6 +387,8 @@ public class MainZoomShoot extends Activity implements InitializerPerClass, OnCl
    
    /**************************************************************************
     * Function: setCloudMargins() 
+    * @param x_deviation double margin step value
+    * @param y_deviation double
     * @return  None.
     * ***********************************************************************/
    private void setCloudMargins(double x_deviation, double y_deviation) 
@@ -409,10 +409,11 @@ public class MainZoomShoot extends Activity implements InitializerPerClass, OnCl
       cloudLayoutParams.width        = MainActivity.UICustom.cloudSizeZoomAct;
       cloudAnimation.setLayoutParams(cloudLayoutParams);
       
-      cloudLayoutParams              = (RelativeLayout.LayoutParams) cloudAnimation.getLayoutParams();
-      cloudLayoutParams.topMargin    = (windowCenterCoordinates.y + MainActivity.UICustom.cloudTopMarginZoomAct);
-      cloudLayoutParams.leftMargin   = (windowCenterCoordinates.x + MainActivity.UICustom.cloudLeftMarginZoomAct);
-      cloudAnimation.setLayoutParams(cloudLayoutParams);
+      /*????? RAT ???? TODO*/
+      //cloudLayoutParams              = (RelativeLayout.LayoutParams) cloudAnimation.getLayoutParams();
+      //cloudLayoutParams.topMargin    = (windowCenterCoordinates.y + MainActivity.UICustom.cloudTopMarginZoomAct);
+      //cloudLayoutParams.leftMargin   = (windowCenterCoordinates.x + MainActivity.UICustom.cloudLeftMarginZoomAct);
+      //cloudAnimation.setLayoutParams(cloudLayoutParams);
    }
    
    /**************************************************************************
@@ -525,7 +526,7 @@ public class MainZoomShoot extends Activity implements InitializerPerClass, OnCl
          Log.e(LOG,"Resource issue was NOT found");
       }
 
-      iRet = getParametersFromOtherActivities(); //???? Is this still needed or RAT?
+      iRet = getParametersFromOtherActivities();
       switch(iRet)
       {
          case 1:
@@ -834,16 +835,16 @@ public class MainZoomShoot extends Activity implements InitializerPerClass, OnCl
          scopeDeviationSet_X = ShootClass.shootTogetherWithScopeSets(scopeClickSetsXY.x,true); 
          scopeDeviationSet_Y = ShootClass.shootTogetherWithScopeSets(scopeClickSetsXY.y,true); 
 /*-----------------------------------------------------------------------------------------------------------------*/         
-Log.e(LOG,String.format("Clicks equals meters x,y[%g][%g]",
-      scopeDeviationSet_X, 
-      scopeDeviationSet_Y));
+//Log.e(LOG,String.format("Clicks equals meters x,y[%g][%g]",
+//      scopeDeviationSet_X, 
+//      scopeDeviationSet_Y));
 /*-----------------------------------------------------------------------------------------------------------------*/                                                                                    /**3**/
          scopeDeviationSet_X += ( ShootClass.deviationShot.get(UIHardCode.zVal) );
          scopeDeviationSet_Y += ( ShootClass.deviationShot.get(UIHardCode.yVal) );
 /*-----------------------------------------------------------------------------------------------------------------*/
-Log.e(LOG,String.format("Clicks meters + deviation meters [%g][%g]", 
-      scopeDeviationSet_X, 
-      scopeDeviationSet_Y));
+//Log.e(LOG,String.format("Clicks meters + deviation meters [%g][%g]", 
+//      scopeDeviationSet_X, 
+//      scopeDeviationSet_Y));
 /*-----------------------------------------------------------------------------------------------------------------*/
          if( true == isTargetWasHit(windowCenterCoordinates, 
                                     scopeDeviationSet_X, 
@@ -881,16 +882,15 @@ Log.e(LOG,String.format("Clicks meters + deviation meters [%g][%g]",
        scopeCenter = MainActivity.getImageCenterInScreenContent(imgScopeGrid);
 
        TargetClass.setSmallTargetCoordinates(StartMenuActivity.Interf.getImageLeftTopCoordinates(imageZoomedTargetScoped)); 
-       //-------------------------------------------------------------------
        xVal =  (double)TargetClass.getMilsAndMeterKoeff() * xVal;     
        yVal =  (double)TargetClass.getMilsAndMeterKoeff() * yVal; 
-       //-------------------------------------------------------------------
+
        int sizeX = (int) (xVal * MainActivity.UICustom.pixelSizeEvalution);
        int sizeY = (int) (yVal * MainActivity.UICustom.pixelSizeEvalution);
-       //-------------------------------------------------------------------
+       
        bulletHit.x = ( scopeCenter.x + sizeX );
        bulletHit.y = ( scopeCenter.y + sizeY );
-       //-------------------------------------------------------------------
+       
        fRet = TargetClass.isBulletHitTheTarget(bulletHit);
        return fRet;
     }
@@ -937,7 +937,8 @@ Log.e(LOG,String.format("Clicks meters + deviation meters [%g][%g]",
     }
     
     /**************************************************************************
-     * Function: setScopeClickMargin() TODO This is dirty huck
+     * Function: setScopeClickMargin() This is dirty huck in order
+     * not to create screen per HDPI resolution on this screen.
      * @param   (VL) ScrollView 
      * @return  None.
      * ***********************************************************************/

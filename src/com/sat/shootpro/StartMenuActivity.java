@@ -32,7 +32,7 @@ public class StartMenuActivity extends Activity implements InitializerPerClass,O
    private static TextView              exitButtonText   = null;
    /** Global class instances which will be used all over the place */
    public static Ballistics            Engine            = null;
-   public static PesonalGlobalParamsInteface Interf      = null;
+   public static AllSettingsManager Interf      = null;
    
    public static ScopeSpecification   ScopeInformation   = null;
    public static WeaponSpecification  WeaponInformation  = null;
@@ -60,7 +60,7 @@ public class StartMenuActivity extends Activity implements InitializerPerClass,O
       informButtonText  = (TextView)findViewById(R.id.txtOption);
       exitButtonText    = (TextView)findViewById(R.id.txtExit);
       
-      Interf            = new PesonalGlobalParamsInteface(ctx);
+      Interf            = new AllSettingsManager(ctx);
       
       /** Initialize main ballistics classes */
       updateBulletClass(this);

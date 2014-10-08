@@ -1,5 +1,6 @@
 package com.sat.ballistics;
 
+import java.util.Random;
 import java.util.Vector;
 import android.util.Log;
 
@@ -70,7 +71,7 @@ public class Ballistics
    public class bulletFlightParams
    {
       /* Started parameters */                                  // parsed params now are duplicate
-      private double mass                 = (init);             // parsed params TODO: must be in kg ???
+      private double mass_in_kg           = (init);             // parsed params TODO: must be in kg ???
       private double balistic_koef        = (init);             // parsed params   
       private  double bulletStartSpeed    = (init);             // parsed params
       /* Deviation parameters */
@@ -78,7 +79,8 @@ public class Ballistics
       /* Weapon parameter */
       private double bullet_turn_speed    = (init);             // parsed params
       public double barrel_rifling        = (init);   //0.24    // parsed params //0.02313; 
-      public double Deviation_K           = (init);             // calculated             
+      public double Deviation_K           = (init);       
+      // calculated             
       /* Additional bullet parameters*/
       public double sectional_bullets     = (init); 
       private double targetDistance       = (init);
@@ -476,10 +478,10 @@ public class Ballistics
          BulletFlight.R_function    = calculationR_Function(BulletFlight.MAXSoundSpeed,
                                                     BulletFlight.W1Const);
          
-         BulletFlight.EnergyInDjoule = calculateBulletEnergy(BulletFlight.mass,
+         BulletFlight.EnergyInDjoule = calculateBulletEnergy(BulletFlight.mass_in_kg,
                                                              BulletFlight.mainVelocity); 
          /*-----------------------------------------------------------------------------------------------*/          
-         if (BulletFlight.sectional_bullets != 0)
+         if (0 != BulletFlight.sectional_bullets )
          {
             BulletFlight.acceleration = calculationG1AccelerationKoef(BulletFlight.sectional_bullets);
          }
@@ -979,7 +981,7 @@ public class Ballistics
       double a  = Parameters.soundSpeed;      // скорость звука при даной температуре.
       double V  = BulletFlight.mainVelocity;  // скорость пули в м/с
       double M  = BulletFlight.MAXSoundSpeed; // скорость пули в Махах, М=V/а
-      double m  = BulletFlight.mass;          // масса пули
+      double m  = BulletFlight.mass_in_kg;          // масса пули
       double Cx = init;                          // Cx(M) - коэффициент лобового сопротивления;
       
       double K0 = (airPresureOnSeaLevel * Math.pow(constSoundSpeed,2)); 
@@ -1418,6 +1420,24 @@ public class Ballistics
            return result;
         }
    
+        
+        /**************************************************************************
+         * Function: calculationRandomTargetDistance -  
+         * min and max borders
+         * @param None.
+         * @return (Double) random distance n meters 
+         * ***********************************************************************/
+        private static double calculationRandomTargetDistance()
+        {
+           int min = 250;
+           int max = 950;
+           double dRet = 0.0;
+              Random r = new Random();
+              dRet = r.nextInt(max - min + 1) + min;
+           return dRet;
+        }
+        
+        
    /** ================================================================================================
     * ==================================== SETTERS =====================================================
     *  ================================================================================================ */
@@ -1433,7 +1453,7 @@ public class Ballistics
       if(null != info)
       {
          bullet = info;
-         BulletFlight.mass                 = bullet.bulletWeight * 1000; //(for 9.10)
+         BulletFlight.mass_in_kg                 = bullet.bulletWeight * 1000; //(for 9.10)
          BulletFlight.balistic_koef        = bullet.bulletBallisticsKoefficient;  
          BulletFlight.bulletStartSpeed     = bullet.ammo_startSpeed;
          BulletFlight.W1Const              = bullet.bullet_W1Const;
@@ -1449,7 +1469,7 @@ public class Ballistics
    
    /**************************************************************************
     * Function: setBulletFlightPrivates  
-    * @param mass             - double in grams/grains TODO
+    * @param mass             - double in grams/grains 
     * @param bulletStartSpeed - double 
     * @param balistic_koef    - double 
     * @param W1Const          - double
@@ -1469,11 +1489,11 @@ public class Ballistics
       {
          if(true == isInGramms)
          {
-            BulletFlight.mass                 = mass / 1000;
+            BulletFlight.mass_in_kg                 = mass / 1000; //TODO: --> here can be bug
          }
          else
          {
-            BulletFlight.mass                 = mass;
+            BulletFlight.mass_in_kg                 = mass;
          }
          BulletFlight.bulletStartSpeed     = bulletStartSpeed;
          BulletFlight.balistic_koef        = balistic_koef;  
@@ -1757,7 +1777,8 @@ public class Ballistics
    * ***********************************************************************/
    public double getTargetDistance()
    {
-     double dRet = (600.0); // TODO: Random! 
+     double dRet = calculationRandomTargetDistance();  
+     
      if( null != BulletFlight)
      {
         if(0 !=  BulletFlight.targetDistance)
@@ -1766,7 +1787,7 @@ public class Ballistics
         }
         else
         {
-           //Log.e(LOG,"F:[getTargetDistance] >> Error for target distance - set 600m");
+           Log.e(LOG,"F:[getTargetDistance] >> Distance is random now: " + dRet);
            BulletFlight.targetDistance = dRet;
         }
      }
@@ -1777,7 +1798,7 @@ public class Ballistics
    /** ================================================================================================
     * ==================================== MATH =====================================================
     *  ================================================================================================ */
-
+   
    
    /**************************************************************************
     * Function: copyVectors  

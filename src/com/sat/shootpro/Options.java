@@ -65,8 +65,8 @@ public class Options extends Activity implements InitializerPerClass
             @Override
             public void onClick(View v)
             {
-               StartMenuActivity.Interf.NewGameParameters(setRandomWindParam(0,15),
-                                       (int)setRandomWindParam(0,7));
+               StartMenuActivity.Interf.NewGameParameters(getRandomWindParam(0,15),
+                                       (int)getRandomWindParam(0,7));
                FileInterf.deleteSavedGame();
             }
        });
@@ -110,7 +110,7 @@ public class Options extends Activity implements InitializerPerClass
     * @param max - int
     * @return (Double) random number 
     * ***********************************************************************/
-   private static double setRandomWindParam(int min,int max)
+   private static double getRandomWindParam(int min,int max)
    {
       double dRet = init;
          Random r = new Random();

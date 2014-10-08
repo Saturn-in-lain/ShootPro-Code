@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.sat.shootpro"
     android:versionCode="2"
-    android:versionName="1.2.1" >
+    android:versionName="1.3.0" >
 		<!-- Release | Features | BugFix  -->
  <compatible-screens>
         <!-- all small size screens -->

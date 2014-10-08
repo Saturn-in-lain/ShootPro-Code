@@ -1,5 +1,7 @@
 package com.sat.shootpro;
 
+import java.util.Random;
+
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
@@ -108,8 +110,13 @@ public class MainActivity extends Activity implements InitializerPerClass,OnClic
 		setSavedParameters();
 		
 		/** Target ************************/
-/* TODO Generate scenario for target placement - some function with predefined params, or random*/
-		targetCoord =  StartMenuActivity.Interf.getImageCenterCoordinates(imageTargetScoped,null);
+		
+		/* TODO Generate scenario for target placement - some function with predefined params, or random*/
+		targetCoord = generateRandomTargetCoordinated();
+		/* Save coordinates*/
+		//targetCoord =  StartMenuActivity.Interf.getImageCenterCoordinates(imageTargetScoped,null);
+
+		
 		
 	   /** Initialize image font **************************************************************/
 		backgroundView = (ImageView) findViewById(R.id.imagePolygon);
@@ -227,6 +234,51 @@ public class MainActivity extends Activity implements InitializerPerClass,OnClic
       scroolActivated = !fCanScroll;
       scrollMainVerticalImage.setScrollable(scroolActivated);
       scrollMainHorizontalImage.setScrollable(scroolActivated);
+   }
+   
+   /**************************************************************************
+    * Function: generateRandomTargetCoordinated TODO
+    * @param None.
+    * @return pRet Point.
+    *************************************************************************/
+   private Point generateRandomTargetCoordinated()
+   {
+      Point pRet = new Point(10,10);
+      //15px 5px
+      
+      pRet = StartMenuActivity.Interf.getImageCenterCoordinates(imageTargetScoped,null);
+      
+      Log.e(LOG,"Current target coordinates:[" + pRet.x + "][" + pRet.y + "]" );
+      
+      
+      RelativeLayout.LayoutParams params = 
+         (RelativeLayout.LayoutParams) imageTargetScoped.getLayoutParams();
+      
+      pRet.x =  getRandom(50,windowGabarites.x - 100);
+      pRet.y =  getRandom(50,windowGabarites.y - 100 );
+
+      params.topMargin = pRet.y; 
+      params.leftMargin = pRet.x;
+      
+      imageTargetScoped.setLayoutParams(params);
+            
+      Log.e(LOG,"Upgrade target coordinates:[" + pRet.x + "][" + pRet.y + "]" );
+      
+      return pRet; 
+   }
+   
+   /**************************************************************************
+    * Function: returnRandom() - TODO: Remove doubling
+    * @param min - int
+    * @param max - int
+    * @return (None) 
+    * ***********************************************************************/
+   private int getRandom(int min, int max)
+   {
+      int randomNumber = 0;
+      Random r = new Random();
+      randomNumber = r.nextInt(max - min + 1) + min;
+      return randomNumber;
    }
    
 	/**************************************************************************

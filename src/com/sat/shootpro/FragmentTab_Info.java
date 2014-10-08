@@ -17,7 +17,7 @@ import android.widget.TextView;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.ToggleButton;
 
-import com.sat.shootpro.PesonalGlobalParamsInteface.SAVE_PARAMS_STRUCTURE;
+import com.sat.shootpro.AllSettingsManager.SAVE_PARAMS_STRUCTURE;
 
 public class FragmentTab_Info extends Fragment implements InitializerPerClass,OnClickListener
 {

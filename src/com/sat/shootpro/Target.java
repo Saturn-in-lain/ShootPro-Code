@@ -32,6 +32,10 @@ public class Target
    private int shotsForLargeCounters          = (0);
    private Vector<Integer>  holeImages        = null;
 
+   
+   /******************************************************
+    * Constructor of class BULLET_SHOT_STRUCTURE
+    ******************************************************/
    public class BULLET_SHOT_STRUCTURE
    {
       private Integer  imageBulletHoleId;
@@ -63,7 +67,7 @@ public class Target
    private Vector<BULLET_SHOT_STRUCTURE>  bulletLargeTargetShotsList  = null;
    
    /******************************************************
-    * Constructor of class 
+    * Constructor of class Target
     ******************************************************/
    public Target()
    {
