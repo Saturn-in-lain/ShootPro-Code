@@ -88,8 +88,15 @@ public class MainActivity extends Activity implements InitializerPerClass,OnClic
     *************************************************************************/
     private void setSavedParameters()
     {
-       txtWindSpeed.setText(String.format("%.2g",
-                            StartMenuActivity.Engine.Parameters.windStrength));
+       if(null != StartMenuActivity.Engine.Parameters)
+       {
+          txtWindSpeed.setText(String.format("%.2g",
+                               StartMenuActivity.Engine.Parameters.windStrength));
+       }
+       else
+       {
+          txtWindSpeed.setText("none");  
+       }
     }
     
    /**************************************************************************
@@ -109,15 +116,6 @@ public class MainActivity extends Activity implements InitializerPerClass,OnClic
 		/** Set saved parameters **********/
 		setSavedParameters();
 		
-		/** Target ************************/
-		
-		/* TODO Generate scenario for target placement - some function with predefined params, or random*/
-		targetCoord = generateRandomTargetCoordinated();
-		/* Save coordinates*/
-		//targetCoord =  StartMenuActivity.Interf.getImageCenterCoordinates(imageTargetScoped,null);
-
-		
-		
 	   /** Initialize image font **************************************************************/
 		backgroundView = (ImageView) findViewById(R.id.imagePolygon);
 		loadBitmap(task,
@@ -125,6 +123,7 @@ public class MainActivity extends Activity implements InitializerPerClass,OnClic
 		           backgroundView,
 		           getResources(),
 		           false);
+		
 		
 		/** Sniper scope ***********************************************************************/
 		sniperScope.setOnTouchListener(new OnTouchListener()
@@ -152,8 +151,10 @@ public class MainActivity extends Activity implements InitializerPerClass,OnClic
 		shootButton.setOnClickListener(this);
 		/** Sniper note book **********************************************************/
 		sniperNotebookButton.setOnClickListener(this); 
-		/** Compass scroll disable ****************************************************/
+		/** Compass - scope movement disable ****************************************************/
 		compasView.setOnClickListener(this); 
+		/** Target ************************/
+		targetCoord = generateRandomTargetCoordinated();
 	}
 
    /*************************************************************************
@@ -168,7 +169,7 @@ public class MainActivity extends Activity implements InitializerPerClass,OnClic
       switch (view.getId()) 
       {
          case R.id.btn_shoot:
-            performZoomShootPreparation(myIntent);
+            startMainZoomShootActivity(myIntent);
             break;
             
          case R.id.btn_sniper_notebook:
@@ -186,41 +187,58 @@ public class MainActivity extends Activity implements InitializerPerClass,OnClic
    }
    
    /**************************************************************************
-    * Function: performZoomShootPreparation - compare coordinates of target
+    * Function: startMainZoomShootActivity - compare coordinates of target
     * and scope. Send this coordinates to Zoomed View.  And start Zoomed view.
     * @param myIntent - Intent
     * @return None.
     *************************************************************************/
-   private void performZoomShootPreparation(Intent myIntent)
+   private void startMainZoomShootActivity(Intent myIntent)
    {
-      int selectedImageSliceId = DEADBEAF;
+      int   selectedImageSliceId = 0;
+      Point detectCoordiates     = new Point(0,0);
+
+      myIntent             = new Intent(getApplicationContext(), 
+                                        MainZoomShoot.class);
+      
+      detectCoordiates     = calculateTargetCoordinatesForDetection();
+      selectedImageSliceId = detectImageSliceIdDependence(detectCoordiates);
+      
+      myIntent.putExtra("imageLocation", selectedImageSliceId );
+      myIntent.putExtra(strLocation_x,  detectCoordiates.x);
+      myIntent.putExtra(strLocation_y,  detectCoordiates.y);
+     
+      startActivity(myIntent);
+      beforeDestroy();
+   }
+
+   /**************************************************************************
+    * Function: calculateTargetCoordinatesForDetection - compare coordinates of target
+    * and scope. If they are one under another, then return true.
+    * @param None.
+    * @return detectCoordiates - Point.
+    *************************************************************************/
+   private Point calculateTargetCoordinatesForDetection()
+   {
+      Point detectCoordiates  = new Point(0,0);
+      
       if( (0 == centerCoord.x) && (0 == centerCoord.y) )
       {
          centerCoord = setScopeCenterCoordinate();
       }
       moveCoord.x    = scrollMainHorizontalImage.getScrollCoordinates();
       moveCoord.y    = scrollMainVerticalImage.getScrollCoordinates();
+      
       targetCoord    =  StartMenuActivity.Interf.getImageCenterCoordinates(imageTargetScoped,null);
       targetCoord.x  =  targetCoord.x - (moveCoord.x + UICustom.scopeAdaptMainActX); 
       targetCoord.y  =  targetCoord.y - (moveCoord.y + UICustom.scopeAdaptMainActY); 
-      
-      fullwindowGabarites.x = backgroundView.getWidth();
-      fullwindowGabarites.y = backgroundView.getHeight();
 
-      if( isTargetAndScopeOverlap(centerCoord,targetCoord) )
+      if(true == isTargetAndScopeOverlap(centerCoord,targetCoord) )
       {
-         targetCoord.x  +=  (moveCoord.x + UICustom.scopeAdaptMainActX); 
-         targetCoord.y  +=  (moveCoord.y + UICustom.scopeAdaptMainActY);
-         selectedImageSliceId = detectImageSliceIdDependence(targetCoord);
+         detectCoordiates.x =  (targetCoord.x  + moveCoord.x + UICustom.scopeAdaptMainActX);
+         detectCoordiates.y =  (targetCoord.x  + moveCoord.x + UICustom.scopeAdaptMainActX);
       }
       
-      myIntent = new Intent(getApplicationContext(), MainZoomShoot.class);
-      myIntent.putExtra("imageLocation", selectedImageSliceId );
-      myIntent.putExtra(strLocation_x,  targetCoord.x);
-      myIntent.putExtra(strLocation_y,  targetCoord.y);
- 
-      startActivity(myIntent);
-      beforeDestroy();
+      return detectCoordiates;
    }
    
    /**************************************************************************
@@ -239,23 +257,23 @@ public class MainActivity extends Activity implements InitializerPerClass,OnClic
    /**************************************************************************
     * Function: generateRandomTargetCoordinated TODO
     * @param None.
+    * @Note. Size of background picture currently can't be calculated in this
+    * moment.
     * @return pRet Point.
     *************************************************************************/
    private Point generateRandomTargetCoordinated()
    {
       Point pRet = new Point(10,10);
-      //15px 5px
       
       pRet = StartMenuActivity.Interf.getImageCenterCoordinates(imageTargetScoped,null);
-      
-      Log.e(LOG,"Current target coordinates:[" + pRet.x + "][" + pRet.y + "]" );
-      
       
       RelativeLayout.LayoutParams params = 
          (RelativeLayout.LayoutParams) imageTargetScoped.getLayoutParams();
       
-      pRet.x =  getRandom(50,windowGabarites.x - 100);
-      pRet.y =  getRandom(50,windowGabarites.y - 100 );
+      Log.e(LOG,"Current target coordinates:[" + pRet.x + "][" + pRet.y + "]" );
+            
+      pRet.x =  getRandom(50,UICustom.backgroundPictureX - 200);
+      pRet.y =  getRandom(50,UICustom.backgroundPictureY - 100 );
 
       params.topMargin = pRet.y; 
       params.leftMargin = pRet.x;
@@ -277,6 +295,12 @@ public class MainActivity extends Activity implements InitializerPerClass,OnClic
    {
       int randomNumber = 0;
       Random r = new Random();
+      if(min > max)
+      {
+         min = 0;
+         max = 100;
+         Log.e(LOG,"F:[getRandom]>>Errors min/max");
+      }
       randomNumber = r.nextInt(max - min + 1) + min;
       return randomNumber;
    }
@@ -434,6 +458,8 @@ public class MainActivity extends Activity implements InitializerPerClass,OnClic
     {
        super.onDestroy();
        beforeDestroy();
+       scrollMainHorizontalImage.onDestroy();
+       scrollMainVerticalImage.onDestroy();
     }
     
     /**************************************************************************
@@ -485,7 +511,11 @@ public class MainActivity extends Activity implements InitializerPerClass,OnClic
        int start_y    = imageTargetScoped.getHeight()/2;
        
 //       int end_x      = windowGabarites.x - imageTargetScoped.getWidth()/2;  
-//       int end_y      = windowGabarites.y - imageTargetScoped.getHeight()/2; 
+//       int end_y      = windowGabarites.y - imageTargetScoped.getHeight()/2;
+       
+       fullwindowGabarites.x = backgroundView.getWidth();
+       fullwindowGabarites.y = backgroundView.getHeight();
+       
        int end_x      = fullwindowGabarites.x - imageTargetScoped.getWidth()/2;  
        int end_y      = fullwindowGabarites.y - imageTargetScoped.getHeight()/2; 
        

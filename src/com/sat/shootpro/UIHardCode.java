@@ -12,7 +12,10 @@ import android.util.Log;
  *****************************************************************/
 public class UIHardCode
 {
-/*                   MainActivity                                */           
+/*                   MainActivity                                */
+   public int backgroundPictureX             = (2500);
+   public int backgroundPictureY             = (690);
+ //---------------------------------------------------------------//
    public int scopeAdaptMainActX             = (15);
    public int scopeAdaptMainActY             = (30);
 //---------------------------------------------------------------//

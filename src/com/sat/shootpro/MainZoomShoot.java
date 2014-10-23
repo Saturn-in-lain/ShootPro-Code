@@ -460,7 +460,7 @@ public class MainZoomShoot extends Activity implements InitializerPerClass, OnCl
    
    /**************************************************************************
     * Function: parallelImageLoading()  Funny, because in separate thread I 
-    * launch two AsyncTask's :) This is experiment
+    * launch two AsyncTask's :) This is experiment [RAT]
     * @param   None.
     * @return  None.
     * ***********************************************************************/

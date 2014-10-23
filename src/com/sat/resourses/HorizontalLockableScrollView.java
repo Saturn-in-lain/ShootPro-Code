@@ -1,6 +1,7 @@
 package com.sat.resourses;
 
 import android.content.Context;
+import android.os.Handler;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.widget.HorizontalScrollView;
@@ -9,13 +10,16 @@ public class HorizontalLockableScrollView extends HorizontalScrollView
 {
    private boolean scrollable = false;
    
+   
    private OnScrollStoppedListener onScrollStoppedListener = null;
    private Runnable                scrollerTask            = null;
    
-   private int initialPosition   = 0;
-   private int newCheck          = 100;
-   
-   private int lastPoint       = 0;
+   private static int initialPosition   = 0;
+   private static int lastPoint         = 0;
+   private static int newCheckDelay     = 100;
+
+   private static Handler mHandler = new Handler();
+     
    /*************************************************************************
     * Function: HorizontalLockableScrollView
     * @param context Context
@@ -26,7 +30,7 @@ public class HorizontalLockableScrollView extends HorizontalScrollView
    {
        super(context, attrs);
        scrollable = true;
-
+       
        scrollerTask = new Runnable() 
        {
          public void run() 
@@ -43,10 +47,23 @@ public class HorizontalLockableScrollView extends HorizontalScrollView
            else 
            {
              initialPosition = getScrollY();
-             HorizontalLockableScrollView.this.postDelayed(scrollerTask, newCheck);
+             //HorizontalLockableScrollView.this.postDelayed(scrollerTask, newCheckDelay);
+             mHandler.postDelayed(scrollerTask, newCheckDelay);             
            }
          }
        };
+       
+   }
+   
+   /*************************************************************************
+    * Function: onDestroy for memory safe
+    * @param None.
+    * @Note: https://ss-proxy.appspot.com/habrahabr.ru/company/badoo/blog/240479/
+    * @return None. 
+    * ***********************************************************************/
+   public void onDestroy()
+   {
+      mHandler.removeCallbacksAndMessages(null);
    }
    
    /*************************************************************************
@@ -138,7 +155,7 @@ public class HorizontalLockableScrollView extends HorizontalScrollView
    public void startScrollerTask() 
    {
      initialPosition = getScrollY();
-     HorizontalLockableScrollView.this.postDelayed(scrollerTask, newCheck);
+     HorizontalLockableScrollView.this.postDelayed(scrollerTask, newCheckDelay);
    }
    
    /*************************************************************************
